@@ -9,5 +9,15 @@ namespace InventarizatorBL.Model
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public Ingredient(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("The name of ingredient can not be null", nameof(name));
+            }
+            else
+                Name = name;
+        }
     }
 }

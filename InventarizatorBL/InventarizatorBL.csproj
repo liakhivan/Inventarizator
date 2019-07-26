@@ -49,10 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ComponentOfProduct.cs" />
+    <Compile Include="Model\ElementOfStorage.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Package.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StorageDbContext.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
