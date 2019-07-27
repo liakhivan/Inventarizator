@@ -11,9 +11,9 @@ namespace InventarizatorBL.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
-
         public virtual ICollection<ComponentOfProduct> Component { get; set; }
-        //TODO: create relationship with entity package
+        public virtual ICollection<Package> Packages { get; set; }
+
         public Product(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
