@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29025.244
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventarizatorBL", "InventarizatorBL\InventarizatorBL.csproj", "{3186420B-DA3E-403B-987B-D346320B48DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventarizatorLI", "InventarizatorLI\InventarizatorLI.csproj", "{F83BA03B-E53F-4E75-BB46-8067CA2457D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventarizatorUI", "InventarizatorUI\InventarizatorUI.csproj", "{C20666A6-FDFD-4E6F-A771-D12F371E4292}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventarizatorUI", "InventarizatorUI\InventarizatorUI.csproj", "{5D38B578-FF47-4B10-9207-756BB0B34ED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3186420B-DA3E-403B-987B-D346320B48DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3186420B-DA3E-403B-987B-D346320B48DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3186420B-DA3E-403B-987B-D346320B48DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3186420B-DA3E-403B-987B-D346320B48DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C20666A6-FDFD-4E6F-A771-D12F371E4292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C20666A6-FDFD-4E6F-A771-D12F371E4292}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C20666A6-FDFD-4E6F-A771-D12F371E4292}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C20666A6-FDFD-4E6F-A771-D12F371E4292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83BA03B-E53F-4E75-BB46-8067CA2457D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83BA03B-E53F-4E75-BB46-8067CA2457D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83BA03B-E53F-4E75-BB46-8067CA2457D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83BA03B-E53F-4E75-BB46-8067CA2457D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D38B578-FF47-4B10-9207-756BB0B34ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D38B578-FF47-4B10-9207-756BB0B34ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D38B578-FF47-4B10-9207-756BB0B34ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D38B578-FF47-4B10-9207-756BB0B34ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
