@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InventarizatorLI.Model
 {
-    public class StorageDbContext: DbContext
+    class StorageDbContext: DbContext
     {
         public StorageDbContext() : base("StorageDBConnection") { }
 

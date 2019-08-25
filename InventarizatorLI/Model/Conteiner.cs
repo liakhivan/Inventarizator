@@ -12,10 +12,10 @@ namespace InventarizatorLI.Model
         public int ProductId { get; set; }
         public Product Product { get; set; }
         public double Weight { get; set; }
-        public double Amount { get; set; }
+        public int Amount { get; set; }
 
 
-        public Conteiner(int productId, double weight, double amount)
+        public Conteiner(int productId, double weight, int amount)
         {
             if (productId > 0)
                 ProductId = productId;

@@ -49,16 +49,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comparators\ConteinerEqualityComparer.cs" />
+    <Compile Include="Comparators\PackageEqualityComparer.cs" />
     <Compile Include="Model\Conteiner.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\IngredientsForProduct.cs" />
     <Compile Include="Model\Package.cs" />
     <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\StorageDbContext.cs" />
+    <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\TableJoin\IngredientPackage.cs" />
+    <Compile Include="Repositories\TableJoin\ProductConteiner.cs" />
+    <Compile Include="StorageDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ConteinerRepository.cs" />
     <Compile Include="Repositories\IConteinerRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\IIngredientRepository.cs" />
+    <Compile Include="Repositories\IngredientRepository.cs" />
+    <Compile Include="Repositories\IPackageRepository.cs" />
+    <Compile Include="Repositories\PackageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

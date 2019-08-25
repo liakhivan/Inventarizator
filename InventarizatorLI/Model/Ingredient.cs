@@ -10,13 +10,15 @@ namespace InventarizatorLI.Model
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        //public Dictionary<Product, double> Products { get; set; }
-        //public List<IngredientsForProduct> IngredientsForProducts { get; set; }
         public Ingredient() => Name = null;
-        public Ingredient(string name, double weight)
+
+        public Ingredient(string name)
         {
-            // Products = new Dictionary<Product, double>();
             Name = name ?? throw new ArgumentNullException("The name of Ingredient can't be null.", nameof(name));
+        }
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

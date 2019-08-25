@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace InventarizatorLI.Model
 {
@@ -14,14 +15,13 @@ namespace InventarizatorLI.Model
         public Package (int ingredientId, double weight)
         {
             if (ingredientId > 0)
-                IngredientId = IngredientId;
-            else
-                throw new ArgumentException("Id of product can't equals zero or below it.", nameof(IngredientId));
+                IngredientId = ingredientId;
+            else throw new ArgumentException("Package can't be empty.", nameof(IngredientId));
 
             if (weight > 0)
                 Weight = weight;
             else
-                throw new ArgumentException("amount of conteiner can't equals zero or below it.", nameof(weight));
+                throw new ArgumentException("Amount of conteiner can't equals zero or below it.", nameof(weight));
         }
     }
 }

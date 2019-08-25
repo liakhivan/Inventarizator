@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Data.Entity; 
+using System.ComponentModel;
 using InventarizatorLI.Model;
 using InventarizatorLI.Comparators;
 
@@ -8,43 +9,41 @@ namespace InventarizatorLI.Repositories
 {
     public class ConteinerRepository : IConteinerRepository
     {
-        public StorageDbContext context = new StorageDbContext();
-        public void Create(Conteiner conteiner)
+        public void Create(Conteiner newConteiner)
         {
-            using (var transaction = context.Database.BeginTransaction())
+            using (StorageDbContext context = new StorageDbContext())
             {
-                try
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    //Find conteiner with this characteristic
-                    if (context.Conteiners.Contains(conteiner, new ConteinerEqualityComparer()))
+                    try
                     {
-                        //if conteiner was found, incremented Amount
-                        Conteiner dbconteiner = context.Conteiners.Where(n => n.Weight == conteiner.Weight).FirstOrDefault();
-                        dbconteiner.Amount++;
-                    }
-                    else
+                        if (context.Conteiners.Contains(newConteiner, new ConteinerEqualityComparer()))
+                        {
+                            Conteiner dbconteiner = context.Conteiners.Where(n => n.Weight == newConteiner.Weight).FirstOrDefault();
+                            dbconteiner.Amount += newConteiner.Amount;
+                        }
+                        else
+                        {
+                            context.Conteiners.Add(newConteiner);
+                        }
+
+                        var recept = context.IngredientsForProducts.Where(element => element.ProductId == newConteiner.ProductId);
+                        foreach (var oneIngredientOfRecept in recept)
+                        {
+                            foreach (var onePackage in context.Packages)
+                            {
+                                if (oneIngredientOfRecept.IngredientId == onePackage.IngredientId)
+                                {
+                                    onePackage.Weight -= (oneIngredientOfRecept.Weight * newConteiner.Weight * newConteiner.Amount);
+                                }
+                            }
+                        }
+                        context.SaveChanges();
+                        transaction.Commit();
+                    } catch (Exception)
                     {
-                        //Else create new conteiner
-                        context.Conteiners.Add(conteiner);
+                        transaction.Rollback();
                     }
-
-                    //foreach (var oneIngredientOfRecept in conteiner.Product.Recept)
-                    //{
-                    //    //context.Ingredients.Find(oneIngredientOfRecept.Name).Weight
-                    //    foreach (var oneIngredient in context.Ingredients)
-                    //    {
-                    //        if (oneIngredientOfRecept.Key.Id == oneIngredient.Id)
-                    //        {
-                    //            oneIngredient.Weight -= (oneIngredientOfRecept.Value * conteiner.Weight);
-                    //        }
-                    //    }
-                    //}
-
-                    context.SaveChanges();
-                    transaction.Commit();
-                } catch (Exception e)
-                {
-                    transaction.Rollback();
                 }
             }
         }
@@ -65,7 +64,21 @@ namespace InventarizatorLI.Repositories
 
         public Conteiner GetById(int index)
         {
-            return context.Conteiners.Find(index);
+            Conteiner elem;
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                elem = context.Conteiners.Find(index);
+            }
+            return elem;
+        }
+
+        BindingList<Conteiner> IGenericRepository<Conteiner, int>.GetDataSource()
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Conteiners.Load();
+                return context.Conteiners.Local.ToBindingList();
+            }
         }
     }
 }
