@@ -13,6 +13,7 @@ namespace InventarizatorLI.Repositories
 {
     public class ProductRepository : IProductRepository
     {
+
         public void Create(Product newProduct)
         {
             using (StorageDbContext context = new StorageDbContext())

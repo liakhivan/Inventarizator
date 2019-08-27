@@ -49,15 +49,15 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 133);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 118);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.TableLayoutPanel1_Paint);
             // 
@@ -131,7 +131,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(3, 90);
+            this.button1.Location = new System.Drawing.Point(3, 76);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(123, 40);
             this.button1.TabIndex = 5;
@@ -147,17 +147,17 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(132, 73);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(212, 60);
+            this.label2.Size = new System.Drawing.Size(212, 46);
             this.label2.TabIndex = 6;
             // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 133);
+            this.ClientSize = new System.Drawing.Size(347, 118);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MaximumSize = new System.Drawing.Size(365, 180);
-            this.MinimumSize = new System.Drawing.Size(365, 180);
+            this.MaximumSize = new System.Drawing.Size(365, 165);
+            this.MinimumSize = new System.Drawing.Size(365, 165);
             this.Name = "Create";
             this.Text = "Create";
             this.tableLayoutPanel1.ResumeLayout(false);

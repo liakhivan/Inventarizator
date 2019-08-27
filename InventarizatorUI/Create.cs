@@ -36,7 +36,9 @@ namespace InventarizatorUI
                 if (radioButton1.Checked)
                 {
                     ProductRepository repos = new ProductRepository();
+                    Product product = new Product(textBox1.Text);
                     repos.Create(new Product(textBox1.Text));
+                    CreateRecept form3 = new CreateRecept(product);
                 }
                 else
                 {
