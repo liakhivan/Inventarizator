@@ -64,12 +64,6 @@
     <Compile Include="Create.Designer.cs">
       <DependentUpon>Create.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateRecept.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CreateRecept.Designer.cs">
-      <DependentUpon>CreateRecept.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,9 +77,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Create.resx">
       <DependentUpon>Create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CreateRecept.resx">
-      <DependentUpon>CreateRecept.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

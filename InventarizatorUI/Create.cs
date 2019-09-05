@@ -63,7 +63,6 @@ namespace InventarizatorUI
                     ProductRepository repos = new ProductRepository();
                     Product product = new Product(textBox1.Text);
                     repos.Create(new Product(textBox1.Text), recept);
-                    CreateRecept form3 = new CreateRecept(product);
                 }
                 else
                 {

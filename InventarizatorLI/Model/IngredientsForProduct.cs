@@ -18,8 +18,10 @@ namespace InventarizatorLI.Model
 
         public IngredientsForProduct(Product product, Ingredient ingredient, double weight)
         {
-            Ingredient = ingredient ?? throw new ArgumentNullException("Ingredient can't be null.", nameof(ingredient));
-            Product = product ?? throw new ArgumentNullException("Product can't be null.", nameof(product));
+            if (ingredient == null)
+                throw new ArgumentNullException("Ingredient can't be null.", nameof(ingredient));
+            if (product == null)
+                throw new ArgumentNullException("Product can't be null.", nameof(product));
             IngredientId = ingredient.Id;
             ProductId = product.Id;
             if (weight <= 0 | weight > 9)
