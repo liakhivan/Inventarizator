@@ -14,17 +14,37 @@ namespace InventarizatorLI.Repositories
     public class ProductRepository : IProductRepository
     {
 
-        public void Create(Product newProduct)
+        public void Create(Product newProduct, Dictionary<Ingredient, double> recept)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
-               var product = context.Products.Where(element => element.Name == newProduct.Name);
-                if (product.Count() == 0)
+                context.Configuration.AutoDetectChangesEnabled = false;
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    context.Products.Add(newProduct);
-                    context.SaveChanges();
+                    try
+                    {
+                        var product = context.Products.Where(element => element.Name == newProduct.Name);
+                        if (product.Count() == 0)
+                        {
+                            context.Products.Add(newProduct);
+                            context.ChangeTracker.DetectChanges();
+                            context.SaveChanges();
+                            var currentProduct = context.Products.Where(buffProduct => buffProduct.Name == newProduct.Name).FirstOrDefault(); ;
+                            foreach (var element in recept)
+                            {
+                                context.IngredientsForProducts.Add(new IngredientsForProduct(currentProduct, element.Key, element.Value));
+                            }
+                            context.ChangeTracker.DetectChanges();
+                            context.SaveChanges();
+                            transaction.Commit();
+                        }
+                        else throw new ArgumentException("This product already exist.", nameof(newProduct));
+                    }
+                    catch(Exception)
+                    {
+                        transaction.Rollback();
+                    }
                 }
-                else throw new ArgumentException("This product already exist.", nameof(newProduct));
             }
         }
 

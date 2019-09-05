@@ -10,7 +10,7 @@ namespace InventarizatorLI.Model
         [Key]
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public double Weight { get; set; }
         public int Amount { get; set; }
 
@@ -31,6 +31,10 @@ namespace InventarizatorLI.Model
                 Amount = amount;
             else
                 throw new ArgumentException("amount of conteiner can't equals zero or below it.", nameof(amount));
+        }
+        public Conteiner()
+        {
+
         }
     }
 }

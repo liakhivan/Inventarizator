@@ -13,8 +13,8 @@ namespace InventarizatorLI.Repositories
         {
             using (StorageDbContext context = new StorageDbContext())
             {
-                var ingredient = context.Ingredients.Where(element => element.Name == newIngredient.Name);
-                if (ingredient.Count() == 0)
+                var ingredient = context.Ingredients.FirstOrDefault(element => element.Name == newIngredient.Name);
+                if (ingredient == null)
                 {
                     context.Ingredients.Add(newIngredient);
                     context.SaveChanges();

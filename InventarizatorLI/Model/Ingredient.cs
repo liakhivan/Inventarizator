@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventarizatorLI.Model
 {
@@ -9,6 +10,7 @@ namespace InventarizatorLI.Model
     {
         [Key]
         public int Id { get; set; }
+        [Index(IsUnique = true)]
         public string Name { get; set; }
         public Ingredient() => Name = null;
 
@@ -19,6 +21,10 @@ namespace InventarizatorLI.Model
         public override string ToString()
         {
             return Name;
+        }
+        public override bool Equals(object obj)
+        {
+            return Name == obj.ToString();
         }
     }
 }

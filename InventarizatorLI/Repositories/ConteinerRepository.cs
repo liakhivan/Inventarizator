@@ -15,9 +15,9 @@ namespace InventarizatorLI.Repositories
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
-                    try
-                    {
-                        if (context.Conteiners.Contains(newConteiner, new ConteinerEqualityComparer()))
+                    //try
+                    //{
+                        if (context.Conteiners.AsEnumerable().Contains(newConteiner, new ConteinerEqualityComparer()))
                         {
                             Conteiner dbconteiner = context.Conteiners.Where(n => n.Weight == newConteiner.Weight).FirstOrDefault();
                             dbconteiner.Amount += newConteiner.Amount;
@@ -27,7 +27,8 @@ namespace InventarizatorLI.Repositories
                             context.Conteiners.Add(newConteiner);
                         }
 
-                        var recept = context.IngredientsForProducts.Where(element => element.ProductId == newConteiner.ProductId);
+                       context.SaveChanges();
+                    var recept = context.IngredientsForProducts.Where(element => element.ProductId == newConteiner.ProductId);
                         foreach (var oneIngredientOfRecept in recept)
                         {
                             foreach (var onePackage in context.Packages)
@@ -39,8 +40,8 @@ namespace InventarizatorLI.Repositories
                             }
                         }
                         context.SaveChanges();
-                        transaction.Commit();
-                    } catch (Exception)
+                    //    transaction.Commit();
+                    //} catch (Exception)
                     {
                         transaction.Rollback();
                     }

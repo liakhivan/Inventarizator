@@ -11,9 +11,9 @@ namespace InventarizatorLI.Model
         [Key]
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public int IngredientId { get; set; }
-        public Ingredient Ingredient { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
         public double Weight { get; set; }
 
         public IngredientsForProduct(Product product, Ingredient ingredient, double weight)
@@ -27,5 +27,8 @@ namespace InventarizatorLI.Model
             else
                 Weight = weight;
         }
+        
+        public IngredientsForProduct()
+        { }
     }
 }

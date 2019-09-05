@@ -9,9 +9,13 @@ namespace InventarizatorLI.Model
     {
         public int Id { get; set; }
         public int IngredientId { get; set; }
-        public Ingredient Ingredient { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
         public double Weight { get; set; }
 
+        public Package()
+        {
+
+        }
         public Package (int ingredientId, double weight)
         {
             if (ingredientId > 0)
