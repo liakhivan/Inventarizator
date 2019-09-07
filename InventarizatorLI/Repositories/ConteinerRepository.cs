@@ -15,8 +15,8 @@ namespace InventarizatorLI.Repositories
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
-                    //try
-                    //{
+                    try
+                    {
                         if (context.Conteiners.AsEnumerable().Contains(newConteiner, new ConteinerEqualityComparer()))
                         {
                             Conteiner dbconteiner = context.Conteiners.Where(n => n.Weight == newConteiner.Weight).FirstOrDefault();
@@ -40,8 +40,8 @@ namespace InventarizatorLI.Repositories
                             }
                         }
                         context.SaveChanges();
-                    //    transaction.Commit();
-                    //} catch (Exception)
+                       transaction.Commit();
+                    } catch (Exception)
                     {
                         transaction.Rollback();
                     }
@@ -80,6 +80,11 @@ namespace InventarizatorLI.Repositories
                 context.Conteiners.Load();
                 return context.Conteiners.Local.ToBindingList();
             }
+        }
+
+        public void Delete(int Id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

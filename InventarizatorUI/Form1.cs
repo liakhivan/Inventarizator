@@ -58,5 +58,11 @@ namespace InventarizatorUI
             Add form3 = new Add();
             form3.Show();
         }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Delete form4 = new Delete();
+            form4.Show();
+        }
     }
 }

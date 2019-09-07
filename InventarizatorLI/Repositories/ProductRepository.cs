@@ -94,5 +94,17 @@ namespace InventarizatorLI.Repositories
             return dataSource;
         }
 
+        public void Delete(int Id)
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Configuration.AutoDetectChangesEnabled = false;
+                var product = context.Products.Find(Id);
+                 //context.Products.AsNoTracking().First(element => element.Id == Id);
+                context.Products.Remove(product);
+                context.ChangeTracker.DetectChanges();
+                context.SaveChanges();
+            }
+        }
     }
 }

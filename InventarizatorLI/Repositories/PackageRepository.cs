@@ -22,6 +22,11 @@ namespace InventarizatorLI.Repositories
             }
         }
 
+        public void Delete(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Package GetById(int index)
         {
             Package elem;

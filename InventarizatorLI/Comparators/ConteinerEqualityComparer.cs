@@ -8,7 +8,7 @@ namespace InventarizatorLI.Comparators
     {
         public bool Equals(Conteiner x, Conteiner y)
         {
-            if ((x.Weight == y.Weight) & (x.Product.Id == y.Product.Id))
+            if ((x.Weight == y.Weight) & (x.ProductId == y.ProductId))
             {
                 return true;
             }

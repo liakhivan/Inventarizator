@@ -23,7 +23,11 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-       
+        public void Delete(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IngredientsForProduct GetById(int index)
         {
             throw new NotImplementedException();

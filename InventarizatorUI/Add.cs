@@ -71,12 +71,12 @@ namespace InventarizatorUI
         {
             try
             {
-                if (numericUpDown1.Value <= 0)
-                {
-                    throw new FormatException();
-                }
                 if (radioButton1.Checked)
                 {
+                    if (numericUpDown1.Value <= 0)
+                    {
+                        throw new FormatException();
+                    }
                     label1.Text = $"Назва продукту:";
                     double weight;
                     Double.TryParse(maskedTextBox1.Text, out weight);
