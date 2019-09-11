@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 
 namespace InventarizatorLI.Model
 {
@@ -15,13 +12,14 @@ namespace InventarizatorLI.Model
         public int IngredientId { get; set; }
         public virtual Ingredient Ingredient { get; set; }
         public double Weight { get; set; }
-
+        public IngredientsForProduct()
+        { }
         public IngredientsForProduct(Product product, Ingredient ingredient, double weight)
         {
             if (ingredient == null)
-                throw new ArgumentNullException("Ingredient can't be null.", nameof(ingredient));
+                throw new ArgumentNullException($"Ingredient can't be null.", nameof(ingredient));
             if (product == null)
-                throw new ArgumentNullException("Product can't be null.", nameof(product));
+                throw new ArgumentNullException($"Product can't be null.", nameof(product));
             IngredientId = ingredient.Id;
             ProductId = product.Id;
             if (weight <= 0 | weight > 9)
@@ -30,7 +28,5 @@ namespace InventarizatorLI.Model
                 Weight = weight;
         }
         
-        public IngredientsForProduct()
-        { }
     }
 }

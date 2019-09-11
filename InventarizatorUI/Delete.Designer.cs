@@ -110,6 +110,8 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Delete";
             this.Text = "Delete";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Delete_MouseMove);
+            this.Move += new System.EventHandler(this.Delete_Move);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

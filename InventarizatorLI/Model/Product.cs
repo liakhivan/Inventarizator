@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 
 namespace InventarizatorLI.Model
@@ -13,7 +11,7 @@ namespace InventarizatorLI.Model
         public Product() { }
         public Product(string name)
         {
-            Name = name ?? throw new ArgumentNullException("The name of product can't be null.", nameof(name));
+            Name = name ?? throw new ArgumentNullException($"The name of product can't be null.", nameof(name));
         }
         public override string ToString()
         {

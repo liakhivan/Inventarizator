@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace InventarizatorLI.Repositories
 {
@@ -7,7 +6,6 @@ namespace InventarizatorLI.Repositories
     {
         void Update();
         void Remove(int index, int amount);
-        void Delete(int Id);
         T GetById(int index);
         BindingList<T> GetDataSource();
     }

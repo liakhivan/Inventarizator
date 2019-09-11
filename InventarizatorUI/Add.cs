@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using InventarizatorLI.Model;
 using InventarizatorLI.Repositories;
@@ -40,31 +34,25 @@ namespace InventarizatorUI
             {
                 ProductRepository repos = new ProductRepository();
                 comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
-                label1.Text = $"Назва продукту:";
+                label1.Text = @"Назва продукту:";
                 panel1.Visible = panel1.Enabled = true;
                 panel2.Visible = panel2.Enabled = true;
+                this.maskedTextBox1.Mask = @"0.00";
             }
             else
             {
                 IngredientRepository repos = new IngredientRepository();
                 comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
-                label1.Text = $"Назва інгредієнта";
+                label1.Text = @"Назва інгредієнта";
                 panel1.Visible = panel1.Enabled = false;
                 panel2.Visible = panel2.Enabled = false;
+                this.maskedTextBox1.Mask = @"000.00";
             }
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked == true)
-            {
-                comboBox2.Enabled = true;
-            }
-            else
-            {
-                comboBox2.Enabled = false;
-            }
-
+            comboBox2.Enabled = checkBox1.Checked;
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -77,25 +65,43 @@ namespace InventarizatorUI
                     {
                         throw new FormatException();
                     }
-                    label1.Text = $"Назва продукту:";
                     double weight;
                     Double.TryParse(maskedTextBox1.Text, out weight);
-                    ConteinerRepository repository = new ConteinerRepository();
-                    repository.Create(new Conteiner(comboBox1.SelectedIndex + 1, weight, Decimal.ToInt32(numericUpDown1.Value)));
+                    ConteinerRepository conteinerRepository = new ConteinerRepository();
+                    ProductRepository productRepository = new ProductRepository();
+                    int id = productRepository.GetDataSource()
+                        .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
+                    conteinerRepository.Create(new Conteiner(id, weight, Decimal.ToInt32(numericUpDown1.Value)));
                 }
                 else
                 {
-                    label1.Text = $"Назва інгредієнту:";
-                    double weight;
-                    Double.TryParse(maskedTextBox1.Text, out weight);
+                    Double.TryParse(maskedTextBox1.Text, out var weight);
                     PackageRepository repository = new PackageRepository();
-                    repository.Create(new Package(comboBox1.SelectedIndex + 1, weight));
+                    IngredientRepository ingredientRepository = new IngredientRepository();
+                    int id = ingredientRepository.GetDataSource()
+                        .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
+                    repository.Create(new Package(id, weight));
                 }
+
+                label5.ForeColor = System.Drawing.Color.Green;
+                label5.Text = @"Об'єкт було успішно додано.";
             }
             catch (FormatException)
             {
-                label5.Text = $"Введено некоректні дані.";
+                label5.ForeColor = System.Drawing.Color.Red;
+                label5.Text = @"Введено некоректні дані.";
             }
+        }
+
+        private void GroupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Add_MouseMove(object sender, MouseEventArgs e)
+        {
+            label5.ForeColor = System.Drawing.Color.Black;
+            label5.Text = @"Інформація про додавання.";
         }
     }
 }

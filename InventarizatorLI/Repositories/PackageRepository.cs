@@ -13,7 +13,7 @@ namespace InventarizatorLI.Repositories
         {
             using (StorageDbContext context = new StorageDbContext())
             {
-                Package findPackage = context.Packages.Where(n => n.IngredientId == newPackage.IngredientId).FirstOrDefault();
+                var findPackage = context.Packages.FirstOrDefault(n => n.IngredientId == newPackage.IngredientId);
                 if(findPackage != null)
                     findPackage.Weight += newPackage.Weight;
                 else
@@ -22,9 +22,29 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Delete(int Id)
+        public void Delete(Ingredient ingredient)
         {
-            throw new NotImplementedException();
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                try
+                {
+                    context.Configuration.ValidateOnSaveEnabled = false;
+                    context.Configuration.AutoDetectChangesEnabled = false;
+                    var conteiner = context.Packages.FirstOrDefault(element =>
+                        element.IngredientId == ingredient.Id);
+                    if (conteiner != null)
+                    {
+                        context.Packages.Attach(conteiner);
+                        context.Entry(conteiner).State = EntityState.Deleted;
+                        context.ChangeTracker.DetectChanges();
+                        context.SaveChanges();
+                    }
+                }
+                finally
+                {
+                    context.Configuration.ValidateOnSaveEnabled = true;
+                }
+            }
         }
 
         public Package GetById(int index)

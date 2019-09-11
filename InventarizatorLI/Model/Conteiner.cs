@@ -1,6 +1,4 @@
 ﻿ using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 
 namespace InventarizatorLI.Model
@@ -32,9 +30,6 @@ namespace InventarizatorLI.Model
             else
                 throw new ArgumentException("amount of conteiner can't equals zero or below it.", nameof(amount));
         }
-        public Conteiner()
-        {
-
-        }
+        public Conteiner() {}
     }
 }

@@ -19,13 +19,40 @@ namespace InventarizatorLI.Repositories
                     context.Ingredients.Add(newIngredient);
                     context.SaveChanges();
                 }
-                else throw new ArgumentException("This ingredient already exist.", nameof(newIngredient));
+                else throw new ArgumentException($"This ingredient already exist.", nameof(newIngredient));
             }
         }
 
-        public void Delete(int Id)
+        public void Delete(Ingredient element)
         {
-            throw new NotImplementedException();
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Configuration.AutoDetectChangesEnabled = false;
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        PackageRepository package = new PackageRepository();
+                        package.Delete(element);
+
+                        context.Configuration.ValidateOnSaveEnabled = false;
+                        context.Ingredients.Attach(element);
+                        context.Entry(element).State = EntityState.Deleted;
+                        context.ChangeTracker.DetectChanges();
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch(Exception)
+                    {
+                        transaction.Rollback();
+                        throw new InvalidOperationException("Помилка видалення.");
+                    }
+                    finally
+                    {
+                        context.Configuration.ValidateOnSaveEnabled = true;
+                    }
+                }
+            }
         }
 
         public Ingredient GetById(int index)

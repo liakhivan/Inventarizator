@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InventarizatorLI.Model;
-using InventarizatorLI;
 using System.ComponentModel;
 using InventarizatorLI.Repositories.TableJoin;
 using System.Data.Entity;
@@ -24,12 +21,12 @@ namespace InventarizatorLI.Repositories
                     try
                     {
                         var product = context.Products.Where(element => element.Name == newProduct.Name);
-                        if (product.Count() == 0)
+                        if (!product.Any())
                         {
                             context.Products.Add(newProduct);
                             context.ChangeTracker.DetectChanges();
                             context.SaveChanges();
-                            var currentProduct = context.Products.Where(buffProduct => buffProduct.Name == newProduct.Name).FirstOrDefault(); ;
+                            var currentProduct = context.Products.FirstOrDefault(buffProduct => buffProduct.Name == newProduct.Name); 
                             foreach (var element in recept)
                             {
                                 context.IngredientsForProducts.Add(new IngredientsForProduct(currentProduct, element.Key, element.Value));
@@ -94,16 +91,39 @@ namespace InventarizatorLI.Repositories
             return dataSource;
         }
 
-        public void Delete(int Id)
+        public void Delete(Product element)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
                 context.Configuration.AutoDetectChangesEnabled = false;
-                var product = context.Products.Find(Id);
-                 //context.Products.AsNoTracking().First(element => element.Id == Id);
-                context.Products.Remove(product);
-                context.ChangeTracker.DetectChanges();
-                context.SaveChanges();
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        ConteinerRepository conteiner = new ConteinerRepository();
+                        conteiner.DeleteAll(element);
+
+                        IngredientsForProductRepository recept = new IngredientsForProductRepository();
+                        recept.Delete(element);
+
+                        context.Configuration.ValidateOnSaveEnabled = false;
+                        context.Products.Attach(element);
+                        context.Entry(element).State = EntityState.Deleted;
+
+                        context.ChangeTracker.DetectChanges();
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch(Exception)
+                    {
+                        transaction.Rollback();
+                        throw new InvalidOperationException("Помилка видалення.");
+                    }
+                    finally
+                    {
+                        context.Configuration.ValidateOnSaveEnabled = true;
+                    }
+                }
             }
         }
     }

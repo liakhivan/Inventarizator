@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using InventarizatorLI.Model;
-using System.ComponentModel;
-using InventarizatorLI.Repositories.TableJoin;
+﻿using InventarizatorLI.Model;
 
 namespace InventarizatorLI.Repositories
 {

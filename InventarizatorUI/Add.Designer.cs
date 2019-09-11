@@ -69,6 +69,7 @@
             this.groupBox1.Size = new System.Drawing.Size(154, 65);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter);
             // 
             // radioButton2
             // 
@@ -218,6 +219,7 @@
             this.Controls.Add(this.comboBox1);
             this.Name = "Add";
             this.Text = "Add";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Add_MouseMove);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);

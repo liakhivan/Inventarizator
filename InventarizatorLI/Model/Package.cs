@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
 
 namespace InventarizatorLI.Model
 {
@@ -12,10 +9,7 @@ namespace InventarizatorLI.Model
         public virtual Ingredient Ingredient { get; set; }
         public double Weight { get; set; }
 
-        public Package()
-        {
-
-        }
+        public Package() {}
         public Package (int ingredientId, double weight)
         {
             if (ingredientId > 0)

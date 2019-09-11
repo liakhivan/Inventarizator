@@ -1,5 +1,4 @@
-﻿using System;
-using InventarizatorLI.Model;
+﻿using InventarizatorLI.Model;
 
 namespace InventarizatorLI.Repositories
 {
