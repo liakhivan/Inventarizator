@@ -31,5 +31,9 @@ namespace InventarizatorLI.Model
                 throw new ArgumentException("amount of conteiner can't equals zero or below it.", nameof(amount));
         }
         public Conteiner() {}
+        public override string ToString()
+        {
+            return Weight.ToString();
+        }
     }
 }

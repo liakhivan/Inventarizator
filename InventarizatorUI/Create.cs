@@ -32,7 +32,7 @@ namespace InventarizatorUI
                 panel3.Location = position;
                 IngredientRepository source = new IngredientRepository();
                 comboBox1.DataSource = source.GetDataSource();
-                label2.Text = @"Повідомлення про збереження.";
+                label2.Text = @"Інформація про створення.";
                 textBox1.Text = "";
             }
             else
@@ -41,7 +41,7 @@ namespace InventarizatorUI
                 panel2.Enabled = false;
                 panel2.Visible = false;
                 panel3.Location = panel2.Location;
-                label2.Text = @"Повідомлення про збереження.";
+                label2.Text = @"Інформація про створення.";
                 textBox1.Text = "";
             }
         }
@@ -66,14 +66,19 @@ namespace InventarizatorUI
                     IngredientRepository repos = new IngredientRepository();
                     repos.Create(new Ingredient(textBox1.Text));
                 }
+
+                label2.ForeColor = System.Drawing.Color.Green;
                 label2.Text = @"Об'єкт було успішно створено.";
             }
             catch (ArgumentNullException)
             {
+
+                label2.ForeColor = System.Drawing.Color.Red;
                 label2.Text = @"Не всі поля заповнені.";
             }
             catch (ArgumentException)
             {
+                label2.ForeColor = System.Drawing.Color.Red;
                 label2.Text = @"Цей об'єкт неможливо створити.";
             }
         }
@@ -93,6 +98,8 @@ namespace InventarizatorUI
                 }
             } catch(FormatException)
             {
+
+                label2.ForeColor = System.Drawing.Color.Red;
                 label2.Text = @"Не всі поля заповнені.";
             }
         }
@@ -104,6 +111,13 @@ namespace InventarizatorUI
             var removeElement = recept.First(n => n.Key.Name == element.Name);
             recept.Remove(removeElement.Key);
             listBox1.DataSource = recept.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+        }
+
+        private void Label2_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            label2.ForeColor = System.Drawing.Color.Black;
+            label2.Text = @"Інформація про створення.";
         }
     }
 }

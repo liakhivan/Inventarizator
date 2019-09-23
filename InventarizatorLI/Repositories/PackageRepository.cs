@@ -3,6 +3,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.ComponentModel;
 using InventarizatorLI.Model;
+using System.Collections.Generic;
 
 namespace InventarizatorLI.Repositories
 {
@@ -57,18 +58,48 @@ namespace InventarizatorLI.Repositories
             return elem;
         }
 
-        public BindingList<Package> GetDataSource()
+        public List<Package> GetDataSource()
         {
             using (StorageDbContext context = new StorageDbContext())
             {
                 context.Packages.Load();
-                return context.Packages.Local.ToBindingList();
+                return context.Packages.Local.ToList();
             }
         }
 
-        public void Remove(int index, int amount)
+        public void Remove(int index, double amount)
         {
-            throw new NotImplementedException();
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.Configuration.AutoDetectChangesEnabled = false;
+                        if (context.Packages.Find(index).Weight < amount)
+                            throw new ArgumentOutOfRangeException();
+                        if ((context.Packages.Find(index).Weight -= amount) == 0)
+                        {
+                            var somePackage = context.Packages.Find(index);
+                            context.Configuration.ValidateOnSaveEnabled = false;
+                            context.Packages.Attach(somePackage);
+                            context.Entry(somePackage).State = EntityState.Deleted;
+                        }
+                        context.ChangeTracker.DetectChanges();
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw new ArgumentException();
+                    }
+                    finally
+                    {
+                        context.Configuration.ValidateOnSaveEnabled = true;
+                    }
+                }
+            }
         }
 
         public void Update()

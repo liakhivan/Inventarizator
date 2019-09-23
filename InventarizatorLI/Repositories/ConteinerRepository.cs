@@ -3,12 +3,13 @@ using System.Linq;
 using System.Data.Entity; 
 using System.ComponentModel;
 using InventarizatorLI.Model;
+using System.Collections.Generic;
 
 namespace InventarizatorLI.Repositories
 {
     public class ConteinerRepository : IConteinerRepository
     {
-        public void Create(Conteiner newConteiner)
+        public void Create(Conteiner newConteiner, double remake = 0, bool washer = false)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -26,6 +27,13 @@ namespace InventarizatorLI.Repositories
                         }
 
                         context.SaveChanges();
+
+                        if (remake != 0)
+                            newConteiner.Weight -= remake;
+
+                        if (washer)
+                            newConteiner.Weight += 0.6;
+
                         var recept =
                             context.IngredientsForProducts.Where(element =>
                                 element.ProductId == newConteiner.ProductId);
@@ -51,12 +59,46 @@ namespace InventarizatorLI.Repositories
                     catch (Exception)
                     {
                         transaction.Rollback();
+                        throw new ArgumentException();
                     }
                 }
             }
         }
-        public void Remove(int index, int amount)
+        public void Remove(int index, int amount = 1)
         {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.Configuration.AutoDetectChangesEnabled = false;
+                        context.Conteiners.Find(index).Amount -= amount;
+                        var res = context.Conteiners.Find(index).Amount;
+                        if (res < 0) throw new ArgumentOutOfRangeException();
+                        if (res == 0)
+                        {
+                            var someConteiner = context.Conteiners.Find(index);
+                            context.Configuration.ValidateOnSaveEnabled = false;
+                            context.Conteiners.Attach(someConteiner);
+                            context.Entry(someConteiner).State = EntityState.Deleted;
+
+                        }
+                        context.ChangeTracker.DetectChanges();
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw new ArgumentException();
+                    }
+                    finally
+                    {
+                        context.Configuration.ValidateOnSaveEnabled = true;
+                    }
+                }
+            }
         }
 
         public void DeleteAll(Product product)
@@ -123,12 +165,12 @@ namespace InventarizatorLI.Repositories
             return elem;
         }
 
-        BindingList<Conteiner> IGenericRepository<Conteiner, int>.GetDataSource()
+        public List<Conteiner> GetDataSource()
         {
             using (StorageDbContext context = new StorageDbContext())
             {
                 context.Conteiners.Load();
-                return context.Conteiners.Local.ToBindingList();
+                return context.Conteiners.Local.ToList();
             }
         }
     }

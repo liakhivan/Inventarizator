@@ -21,6 +21,33 @@ namespace InventarizatorLI.Repositories
             }
         }
 
+        public void RemoveIngredientsForProduct(Conteiner newConteiner)
+        {
+            using(var context = new StorageDbContext())
+            {
+                var recept =
+                    context.IngredientsForProducts.Where(element =>
+                        element.ProductId == newConteiner.ProductId);
+                foreach (var oneIngredientOfRecept in recept)
+                {
+                    foreach (var onePackage in context.Packages)
+                    {
+                        if (oneIngredientOfRecept.IngredientId == onePackage.IngredientId)
+                        {
+                            var weight = oneIngredientOfRecept.Weight * newConteiner.Weight *
+                                         newConteiner.Amount;
+                            if (weight <= onePackage.Weight)
+                                onePackage.Weight -= weight;
+                            else
+                                throw new ArgumentOutOfRangeException();
+                        }
+                    }
+                }
+
+                context.SaveChanges();
+            }
+        }
+
         public void Delete(Product product)
         {
             using (StorageDbContext context = new StorageDbContext())
@@ -51,7 +78,7 @@ namespace InventarizatorLI.Repositories
             throw new NotImplementedException();
         }
 
-        public BindingList<IngredientsForProduct> GetDataSource()
+        public List<IngredientsForProduct> GetDataSource()
         {
             throw new NotImplementedException();
         }

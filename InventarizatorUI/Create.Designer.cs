@@ -118,9 +118,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(123, 11);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(213, 17);
+            this.label2.Size = new System.Drawing.Size(187, 17);
             this.label2.TabIndex = 13;
-            this.label2.Text = "Повідомлення про збереження.";
+            this.label2.Text = "Інформація про створення.";
+            this.label2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Label2_MouseMove);
             // 
             // button1
             // 

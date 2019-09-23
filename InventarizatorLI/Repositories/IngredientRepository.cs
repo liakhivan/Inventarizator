@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
@@ -60,21 +61,21 @@ namespace InventarizatorLI.Repositories
             throw new NotImplementedException();
         }
 
-        public BindingList<Ingredient> GetDataSource()
+        public List<Ingredient> GetDataSource()
         {
             using (StorageDbContext context = new StorageDbContext())
             {
                 context.Ingredients.Load();
-                return context.Ingredients.Local.ToBindingList();
+                return context.Ingredients.Local.ToList();
             }
         }
 
-        public BindingList<IngredientPackage> GetIngredientPackageDataSource()
+        public List<IngredientPackage> GetIngredientPackageDataSource()
         {
-            BindingList<IngredientPackage> dataSource;
+            List<IngredientPackage> dataSource;
             using (var dbcontext = new StorageDbContext())
             {
-                var ingredientPackages = dbcontext.Packages.
+                dataSource = dbcontext.Packages.
                 Join(
                 dbcontext.Ingredients,
                 package => package.IngredientId,
@@ -84,7 +85,6 @@ namespace InventarizatorLI.Repositories
                     Name = ingredient.Name,
                     Weight = package.Weight
                 }).ToList();
-                dataSource = new BindingList<IngredientPackage>(ingredientPackages);
             }
             return dataSource;
         }

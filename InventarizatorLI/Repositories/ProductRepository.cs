@@ -50,12 +50,12 @@ namespace InventarizatorLI.Repositories
             throw new NotImplementedException();
         }
 
-        public BindingList<Product> GetDataSource()
+        public List<Product> GetDataSource()
         {
             using (StorageDbContext context = new StorageDbContext())
             {
                 context.Products.Load();
-                return context.Products.Local.ToBindingList();
+                return context.Products.Local.ToList();
             }
         }
 
@@ -69,13 +69,13 @@ namespace InventarizatorLI.Repositories
             throw new NotImplementedException();
         }
 
-        public BindingList<ProductConteiner> GetProductConteinerDataSource()
+        public List<ProductConteiner> GetProductConteinerDataSource()
         {
 
-            BindingList<ProductConteiner> dataSource;
+            List<ProductConteiner> dataSource;
             using (var dbcontext = new StorageDbContext())
             {
-                var productConteiners = dbcontext.Conteiners.
+                dataSource = dbcontext.Conteiners.
                 Join(
                 dbcontext.Products,
                 conteiner => conteiner.ProductId,
@@ -86,7 +86,6 @@ namespace InventarizatorLI.Repositories
                     Weight = conteiner.Weight,
                     Amount = conteiner.Amount
                 }).ToList();
-                dataSource = new BindingList<ProductConteiner>(productConteiners);
             }
             return dataSource;
         }
