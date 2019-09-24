@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Data.Entity;
-using System.ComponentModel;
 using InventarizatorLI.Model;
 using System.Collections.Generic;
 
@@ -100,11 +99,6 @@ namespace InventarizatorLI.Repositories
                     }
                 }
             }
-        }
-
-        public void Update()
-        {
-            throw new NotImplementedException();
         }
     }
 }

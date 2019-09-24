@@ -11,8 +11,11 @@ namespace InventarizatorUI
     public partial class Add : Form
     {
         Point panel1Position1, panel1Position2, infoPosition1, infoPosition2;
-        public Add()
+        public delegate void Upd();
+        private event Upd updateInformation;
+        public Add(Upd eventUpdate)
         {
+            updateInformation += eventUpdate;
             InitializeComponent();
             ProductRepository repos = new ProductRepository();
             comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
@@ -24,7 +27,7 @@ namespace InventarizatorUI
             infoPosition2 = label5.Location;
             infoPosition2.Y -= 20;
         }
-        
+
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
@@ -88,7 +91,7 @@ namespace InventarizatorUI
                         var conteiner = conteinerRepository.GetDataSource().First(elem => elem.ProductId == product.Id & elem.Weight == recreate);
                         conteinerRepository.Remove(conteiner.Id);
                     }
-                    
+
                     int id = productRepository.GetDataSource()
                         .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
                     conteinerRepository.Create(
@@ -109,6 +112,7 @@ namespace InventarizatorUI
 
                 label5.ForeColor = System.Drawing.Color.Green;
                 label5.Text = @"Об'єкт було успішно додано.";
+                updateInformation();
             }
             catch (Exception)
             {

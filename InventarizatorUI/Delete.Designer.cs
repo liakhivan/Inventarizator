@@ -46,7 +46,6 @@
             this.groupBox1.Size = new System.Drawing.Size(190, 68);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter);
             // 
             // radioButton2
             // 
@@ -111,7 +110,6 @@
             this.Name = "Delete";
             this.Text = "Delete";
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Delete_MouseMove);
-            this.Move += new System.EventHandler(this.Delete_Move);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

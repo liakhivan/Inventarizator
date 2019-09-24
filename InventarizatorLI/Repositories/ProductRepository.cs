@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using InventarizatorLI.Model;
-using System.ComponentModel;
-using InventarizatorLI.Repositories.TableJoin;
 using System.Data.Entity;
+using InventarizatorLI.Model;
+using System.Collections.Generic;
+using InventarizatorLI.Repositories.TableJoin;
 
 namespace InventarizatorLI.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-
         public void Create(Product newProduct, Dictionary<Ingredient, double> recept)
         {
             using (StorageDbContext context = new StorageDbContext())
@@ -57,16 +55,6 @@ namespace InventarizatorLI.Repositories
                 context.Products.Load();
                 return context.Products.Local.ToList();
             }
-        }
-
-        public void Remove(int index, int amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update()
-        {
-            throw new NotImplementedException();
         }
 
         public List<ProductConteiner> GetProductConteinerDataSource()

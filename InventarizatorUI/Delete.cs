@@ -7,17 +7,14 @@ namespace InventarizatorUI
 {
     public partial class Delete : Form
     {
-        public Delete()
+        public delegate void Upd();
+        private event Upd updateInformation;
+        public Delete(Upd updateEvent)
         {
+            updateInformation += updateEvent;
             InitializeComponent();
-
             ProductRepository repos = new ProductRepository();
             listBox1.DataSource = repos.GetDataSource();
-        }
-
-        private void GroupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
@@ -54,17 +51,13 @@ namespace InventarizatorUI
                 }
                 label1.ForeColor = System.Drawing.Color.Green;
                 label1.Text = @"Видалення успішне.";
+                updateInformation();
             }
             catch(InvalidOperationException exeption)
             {
                 label1.ForeColor = System.Drawing.Color.Red;
                 label1.Text = exeption.Message;
             }
-        }
-
-        private void Delete_Move(object sender, EventArgs e)
-        {
-
         }
 
         private void Delete_MouseMove(object sender, MouseEventArgs e)

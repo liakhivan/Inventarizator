@@ -41,19 +41,19 @@ namespace InventarizatorUI
         private void CreateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Create form2 = new Create();
-            form2.Show();
+            form2.ShowDialog();
         }
 
         private void AddToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Add form3 = new Add();
-            form3.Show();
+            Add form3 = new Add(UpdateDataGridWiew);
+            form3.ShowDialog();
         }
 
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Delete form4 = new Delete();
-            form4.Show();
+            Delete form4 = new Delete(UpdateDataGridWiew);
+            form4.ShowDialog();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -99,8 +99,24 @@ namespace InventarizatorUI
         private void EliminationToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            var form5 = new Remove();
-            form5.Show();
+            var form5 = new Remove(UpdateDataGridWiew);
+            form5.ShowDialog();
+        }
+
+        public void UpdateDataGridWiew()
+        {
+            if(radioButton1.Checked)
+            {
+                ProductRepository repository = new ProductRepository();
+                dataGridView1.DataSource = repository.GetProductConteinerDataSource();
+                dataGridView1.AutoResizeColumns();
+            }
+            else
+            {
+                IngredientRepository repos = new IngredientRepository();
+                dataGridView1.DataSource = repos.GetIngredientPackageDataSource();
+                dataGridView1.AutoResizeColumns();
+            }
         }
     }
 }

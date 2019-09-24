@@ -108,6 +108,7 @@
     <EmbeddedResource Include="Remove.resx">
       <DependentUpon>Remove.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\InventarizatorLI.Model.Conteiner.datasource" />
     <None Include="Properties\DataSources\InventarizatorLI.Model.Ingredient1.datasource" />

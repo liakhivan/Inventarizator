@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using InventarizatorLI.Repositories;
-using System.Linq;
 
 namespace InventarizatorUI
 {
     public partial class Remove : Form
     {
-        public Remove()
+        public delegate void Upd();
+        private event Upd updateInformation;
+        public Remove(Upd eventUpdate)
         {
+            updateInformation += eventUpdate;
             var productRepository = new ProductRepository();
             InitializeComponent();
             comboBox1.DataSource = productRepository.GetProductConteinerDataSource().
@@ -33,7 +36,6 @@ namespace InventarizatorUI
                 }
                 else
                 {
-
                     var ingredientRepository = new IngredientRepository();
                     var packageRepository = new PackageRepository();
                     var ingredientPackage = ingredientRepository.GetIngredientPackageDataSource().
@@ -44,6 +46,7 @@ namespace InventarizatorUI
                 }
                 label3.ForeColor = System.Drawing.Color.Green;
                 label3.Text = @"Об'єкт успішно списано.";
+                updateInformation();
 
             }  catch(Exception)
             {
@@ -64,7 +67,6 @@ namespace InventarizatorUI
             }
             else
             {
-
                 var ingredientRepository = new IngredientRepository();
                 comboBox1.DataSource = ingredientRepository.GetIngredientPackageDataSource().
                 Select(elem => $"{elem.Name} {elem.Weight}").ToList();
@@ -75,7 +77,6 @@ namespace InventarizatorUI
 
         private void Label3_MouseMove(object sender, MouseEventArgs e)
         {
-
             label3.ForeColor = System.Drawing.Color.Black;
             label3.Text = @"Інформація про списання.";
         }
