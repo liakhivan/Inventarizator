@@ -7,7 +7,7 @@ using InventarizatorLI.Model;
 
 namespace InventarizatorLI.Repositories
 {
-    class IngredientsForProductRepository : IIngredientsForProductRepository
+    public class IngredientsForProductRepository : IIngredientsForProductRepository
     {
         public void Create(List<IngredientsForProduct> newIngredientsForProduct)
         {
@@ -80,7 +80,11 @@ namespace InventarizatorLI.Repositories
 
         public List<IngredientsForProduct> GetDataSource()
         {
-            throw new NotImplementedException();
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.IngredientsForProducts.Load();
+                return context.IngredientsForProducts.Local.ToList();
+            }
         }
 
         public void Remove(int index, int amount)

@@ -27,31 +27,34 @@ namespace InventarizatorLI.Repositories
                         }
 
                         context.SaveChanges();
-
+                        double weightNewConteiner = newConteiner.Weight;
                         if (remake != 0)
-                            newConteiner.Weight -= remake;
+                            weightNewConteiner -= remake;
 
                         if (washer)
-                            newConteiner.Weight += 0.6;
+                            weightNewConteiner += 0.6;
 
-                        var recept =
-                            context.IngredientsForProducts.Where(element =>
-                                element.ProductId == newConteiner.ProductId);
+                        var recept = context.IngredientsForProducts.
+                            Where(element => element.ProductId == newConteiner.ProductId);
+                        int amountOfDontRemovedIngredients = recept.Count();
                         foreach (var oneIngredientOfRecept in recept)
                         {
                             foreach (var onePackage in context.Packages)
                             {
                                 if (oneIngredientOfRecept.IngredientId == onePackage.IngredientId)
                                 {
-                                    var weight = oneIngredientOfRecept.Weight * newConteiner.Weight *
+                                    var weight = oneIngredientOfRecept.Weight * weightNewConteiner *
                                                  newConteiner.Amount;
                                     if (weight <= onePackage.Weight)
                                         onePackage.Weight -= weight;
                                     else
-                                        throw new ArgumentOutOfRangeException();
+                                        throw new ArgumentException();
+                                    amountOfDontRemovedIngredients--;
                                 }
                             }
                         }
+                        if (amountOfDontRemovedIngredients != 0)
+                            throw new ArgumentException();
 
                         context.SaveChanges();
                         transaction.Commit();
@@ -59,11 +62,13 @@ namespace InventarizatorLI.Repositories
                     catch (Exception)
                     {
                         transaction.Rollback();
-                        throw new ArgumentException();
+                        throw new ArgumentException("Немає/недостатньо інгредієнтів.");
                     }
                 }
             }
         }
+
+        
         public void Remove(int index, int amount = 1)
         {
             using (StorageDbContext context = new StorageDbContext())
@@ -150,6 +155,7 @@ namespace InventarizatorLI.Repositories
                 }
             }
         }
+
         public void Update()
         {
             throw new NotImplementedException();

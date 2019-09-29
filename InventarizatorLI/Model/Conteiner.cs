@@ -12,7 +12,7 @@ namespace InventarizatorLI.Model
         public double Weight { get; set; }
         public int Amount { get; set; }
 
-
+        public Conteiner() {}
         public Conteiner(int productId, double weight, int amount)
         {
             if (productId > 0)
@@ -30,7 +30,6 @@ namespace InventarizatorLI.Model
             else
                 throw new ArgumentException("amount of conteiner can't equals zero or below it.", nameof(amount));
         }
-        public Conteiner() {}
         public override string ToString()
         {
             return Weight.ToString();

@@ -44,6 +44,7 @@ namespace InventarizatorUI
                     var conteiner = packageRepository.GetDataSource().First(elem => elem.IngredientId == ingredient.Id & elem.Weight == ingredientPackage.Weight);
                     packageRepository.Remove(conteiner.Id, Double.Parse(maskedTextBox1.Text));
                 }
+                RadioButton1_CheckedChanged(null, null);
                 label3.ForeColor = System.Drawing.Color.Green;
                 label3.Text = @"Об'єкт успішно списано.";
                 updateInformation();
@@ -79,6 +80,20 @@ namespace InventarizatorUI
         {
             label3.ForeColor = System.Drawing.Color.Black;
             label3.Text = @"Інформація про списання.";
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                var productRepository = new ProductRepository();
+                var conteinerRepository = new ConteinerRepository();
+                var productConteiner = productRepository.GetProductConteinerDataSource().
+                       First(element => $"{element.Name} {element.Weight}" == comboBox1.SelectedItem.ToString());
+                var product = productRepository.GetDataSource().First(element => element.Name == productConteiner.Name);
+                var conteiner = conteinerRepository.GetDataSource().First(elem => elem.ProductId == product.Id & elem.Weight == productConteiner.Weight);
+                numericUpDown1.Maximum = conteiner.Amount;
+            }
         }
     }
 }

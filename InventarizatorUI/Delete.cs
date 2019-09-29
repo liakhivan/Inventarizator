@@ -1,4 +1,5 @@
-﻿using InventarizatorLI.Repositories;
+﻿using InventarizatorLI.Model;
+using InventarizatorLI.Repositories;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -44,8 +45,22 @@ namespace InventarizatorUI
                 }
                 else
                 {
-                    IngredientRepository repos = new IngredientRepository();
-                    var ingredient = repos.GetDataSource().First(element => element.Name == listBox1.SelectedItem.ToString());
+                    var repos = new IngredientRepository();
+                    var ingredientsForProductRepository = new IngredientsForProductRepository();
+                    Ingredient ingredient;
+                    IngredientsForProduct ingredientForProduct = null;
+                    do
+                    {
+                        ingredient = repos.GetDataSource().First(element => element.Name == listBox1.SelectedItem.ToString());
+                        ingredientForProduct = ingredientsForProductRepository.GetDataSource().
+                            FirstOrDefault(element => element.IngredientId == ingredient.Id);
+                        if (ingredientForProduct != null)
+                        {
+                            ProductRepository productRepository = new ProductRepository();
+                            var product = productRepository.GetDataSource().First(element => element.Id == ingredientForProduct.ProductId);
+                            productRepository.Delete(product);
+                        }
+                    } while (ingredientForProduct != null);
                     repos.Delete(ingredient);
                     listBox1.DataSource = repos.GetDataSource();
                 }

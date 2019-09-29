@@ -38,6 +38,7 @@ namespace InventarizatorLI.Repositories
                     catch(Exception)
                     {
                         transaction.Rollback();
+                        throw new ArgumentException();
                     }
                 }
             }
