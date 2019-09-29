@@ -10,11 +10,12 @@ namespace InventarizatorUI
         public Form1()
         {
             InitializeComponent();
-            ProductRepository repository = new ProductRepository();
-            dataGridView1.DataSource = repository.GetProductConteinerDataSource();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UpdateDataGridWiew();
+            //ProductRepository repository = new ProductRepository();
+            //dataGridView1.DataSource = repository.GetProductConteinerDataSource();
+            //dataGridView1.AutoResizeColumns();
             comboBox1.SelectedIndex = 0;
-            dataGridView1.AutoResizeColumns();
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
         }
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace InventarizatorUI
             dataGridView1.AutoResizeColumns();
             panel2.Visible = true;
             comboBox1.SelectedIndex = 0;
-            dataGridView1.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).DefaultCellStyle.Format = "##.00";
+            dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
