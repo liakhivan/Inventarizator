@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using Microsoft.SqlServer;
 using System.ComponentModel.DataAnnotations;
 
 namespace InventarizatorLI.Model
 {
-    class StorageDbContext: DbContext
+    public class StorageDbContext: DbContext
     {
-        public StorageDbContext() : base("StorageDBConnection") { }
+        public StorageDbContext() : base("StorageDBConnection")
+        {
+            Database.SetInitializer<StorageDbContext>(new SampleInitializer());
+        }
 
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Package> Packages { get; set; }

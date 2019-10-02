@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initializer.cs" />
     <Compile Include="Model\Conteiner.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\IngredientsForProduct.cs" />
