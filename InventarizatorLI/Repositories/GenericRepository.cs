@@ -8,28 +8,25 @@ namespace InventarizatorLI.Repositories
     public abstract class GenericRepository<T> where T: class
     {
         public abstract List<T> GetDataSource();
-        public bool BackupData(string patch)
+        public void BackupData(string patch)
         {
-            try
+            using (var context = new StorageDbContext())
             {
-                using (var context = new StorageDbContext())
+                patch = patch + "Backup-" + DateTime.Today.ToShortDateString() + ".bak";
+                if (!File.Exists(patch))
                 {
-                    patch = patch + "Backup-" + DateTime.Today.ToShortDateString() + ".bak";
-                    if (!File.Exists(patch))
-                    {
-                        var file = File.Create(patch);
-                        file.Close();
-                    }
-                    context.Database.ExecuteSqlCommand(
-                        System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction,
-                        "BACKUP DATABASE " + context.Database.Connection.Database + " TO DISK = \'" + patch + "\' WITH INIT;");
+                    var file = File.Create(patch);
+                    file.Close();
                 }
-                return true;
+                context.Database.ExecuteSqlCommand(
+                    System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction,
+                    "BACKUP DATABASE " + context.Database.Connection.Database + " TO DISK = \'" + patch + "\' WITH INIT;");
             }
-            catch(Exception)
-            {
-                return false;
-            }
+        }
+
+        public void RecoveryData(string patch)
+        {
+
         }
     }
 }

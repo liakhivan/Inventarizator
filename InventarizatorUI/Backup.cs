@@ -18,6 +18,7 @@ namespace InventarizatorUI
         {
             InitializeComponent();
             patch = textBox1.Text = AppDomain.CurrentDomain.BaseDirectory;
+            label3.Text = @"Інформація про створення.";
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -25,7 +26,18 @@ namespace InventarizatorUI
             if (patch != null)
             {
                 var repository = new ConteinerRepository();
-                repository.BackupData(patch);
+                try
+                {
+                    repository.BackupData(patch);
+
+                    label3.ForeColor = System.Drawing.Color.Green;
+                    label3.Text = @"Локальна копія створена.";
+                }
+                catch (Exception exception)
+                {
+                    label3.ForeColor = System.Drawing.Color.Red;
+                    label3.Text = exception.Message;
+                }
             }
         }
 
@@ -35,6 +47,12 @@ namespace InventarizatorUI
             fbd.ShowDialog();
             textBox1.Text = fbd.SelectedPath;
             patch = textBox1.Text + "\\";
+        }
+
+        private void Label3_MouseMove(object sender, MouseEventArgs e)
+        {
+            label3.ForeColor = System.Drawing.Color.Black;
+            label3.Text = @"Інформація про створення.";
         }
     }
 }
