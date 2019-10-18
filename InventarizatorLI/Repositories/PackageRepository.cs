@@ -6,9 +6,8 @@ using System.Collections.Generic;
 
 namespace InventarizatorLI.Repositories
 {
-    public class PackageRepository : IPackageRepository
+    public class PackageRepository : GenericRepository<Package>
     {
-
         public void Create(Package newPackage)
         {
             using (StorageDbContext context = new StorageDbContext())
@@ -47,25 +46,6 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public Package GetById(int index)
-        {
-            Package elem;
-            using (StorageDbContext context = new StorageDbContext())
-            {
-                elem = context.Packages.Find(index);
-            }
-            return elem;
-        }
-
-        public List<Package> GetDataSource()
-        {
-            using (StorageDbContext context = new StorageDbContext())
-            {
-                context.Packages.Load();
-                return context.Packages.Local.ToList();
-            }
-        }
-
         public void Remove(int index, double amount)
         {
             using (StorageDbContext context = new StorageDbContext())
@@ -98,6 +78,15 @@ namespace InventarizatorLI.Repositories
                         context.Configuration.ValidateOnSaveEnabled = true;
                     }
                 }
+            }
+        }
+
+        public override List<Package> GetDataSource()
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Packages.Load();
+                return context.Packages.Local.ToList();
             }
         }
     }

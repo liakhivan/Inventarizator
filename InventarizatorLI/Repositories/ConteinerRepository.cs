@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace InventarizatorLI.Repositories
 {
-    public class ConteinerRepository : IConteinerRepository
+    public class ConteinerRepository : GenericRepository<Conteiner>
     {
         public void Create(Conteiner newConteiner, double remake = 0, bool washer = false)
         {
@@ -68,7 +68,6 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        
         public void Remove(int index, int amount = 1)
         {
             using (StorageDbContext context = new StorageDbContext())
@@ -156,22 +155,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Conteiner GetById(int index)
-        {
-            Conteiner elem;
-            using (StorageDbContext context = new StorageDbContext())
-            {
-                elem = context.Conteiners.Find(index);
-            }
-            return elem;
-        }
-
-        public List<Conteiner> GetDataSource()
+        public override List<Conteiner> GetDataSource()
         {
             using (StorageDbContext context = new StorageDbContext())
             {

@@ -7,7 +7,7 @@ using InventarizatorLI.Model;
 
 namespace InventarizatorLI.Repositories
 {
-    public class IngredientsForProductRepository : IIngredientsForProductRepository
+    public class IngredientsForProductRepository : GenericRepository<IngredientsForProduct>
     {
         public void Create(List<IngredientsForProduct> newIngredientsForProduct)
         {
@@ -21,7 +21,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void RemoveIngredientsForProduct(Conteiner newConteiner)
+        public void Remove(Conteiner newConteiner)
         {
             using(var context = new StorageDbContext())
             {
@@ -73,12 +73,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public IngredientsForProduct GetById(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<IngredientsForProduct> GetDataSource()
+        public override List<IngredientsForProduct> GetDataSource()
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -87,14 +82,5 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Remove(int index, int amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

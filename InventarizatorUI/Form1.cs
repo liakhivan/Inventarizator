@@ -123,5 +123,13 @@ namespace InventarizatorUI
                 dataGridView1.AutoResizeColumns();
             }
         }
+
+
+        private void BackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var form6 = new Backup();
+            form6.ShowDialog();
+        }
     }
 }

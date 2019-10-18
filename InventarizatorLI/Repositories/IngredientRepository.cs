@@ -8,7 +8,7 @@ using InventarizatorLI.Repositories.TableJoin;
 
 namespace InventarizatorLI.Repositories
 {
-    public class IngredientRepository : IIngredientRepository
+    public class IngredientRepository : GenericRepository<Ingredient>
     {
         public void Create(Ingredient newIngredient)
         {
@@ -56,12 +56,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public Ingredient GetById(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Ingredient> GetDataSource()
+        public override List<Ingredient> GetDataSource()
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -89,14 +84,6 @@ namespace InventarizatorLI.Repositories
             return dataSource;
         }
 
-        public void Remove(int index, int amount)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

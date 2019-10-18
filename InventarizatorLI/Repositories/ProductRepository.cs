@@ -7,7 +7,7 @@ using InventarizatorLI.Repositories.TableJoin;
 
 namespace InventarizatorLI.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : GenericRepository<Product>
     {
         public void Create(Product newProduct, Dictionary<Ingredient, double> recept)
         {
@@ -42,41 +42,6 @@ namespace InventarizatorLI.Repositories
                     }
                 }
             }
-        }
-
-        public Product GetById(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Product> GetDataSource()
-        {
-            using (StorageDbContext context = new StorageDbContext())
-            {
-                context.Products.Load();
-                return context.Products.Local.ToList();
-            }
-        }
-
-        public List<ProductConteiner> GetProductConteinerDataSource()
-        {
-
-            List<ProductConteiner> dataSource;
-            using (var dbcontext = new StorageDbContext())
-            {
-                dataSource = dbcontext.Conteiners.
-                Join(
-                dbcontext.Products,
-                conteiner => conteiner.ProductId,
-                product => product.Id,
-                (conteiner, product) => new ProductConteiner()
-                {
-                    Name = product.Name,
-                    Weight = conteiner.Weight,
-                    Amount = conteiner.Amount
-                }).ToList();
-            }
-            return dataSource;
         }
 
         public void Delete(Product element)
@@ -114,5 +79,36 @@ namespace InventarizatorLI.Repositories
                 }
             }
         }
+
+        public override List<Product> GetDataSource()
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Products.Load();
+                return context.Products.Local.ToList();
+            }
+        }
+
+        public List<ProductConteiner> GetProductConteinerDataSource()
+        {
+
+            List<ProductConteiner> dataSource;
+            using (var dbcontext = new StorageDbContext())
+            {
+                dataSource = dbcontext.Conteiners.
+                Join(
+                dbcontext.Products,
+                conteiner => conteiner.ProductId,
+                product => product.Id,
+                (conteiner, product) => new ProductConteiner()
+                {
+                    Name = product.Name,
+                    Weight = conteiner.Weight,
+                    Amount = conteiner.Amount
+                }).ToList();
+            }
+            return dataSource;
+        }
+
     }
 }

@@ -10,7 +10,6 @@ namespace InventarizatorLI.Model
     {
         public StorageDbContext() : base("StorageDBConnection")
         {
-            Database.SetInitializer<StorageDbContext>(new SampleInitializer());
         }
 
         public DbSet<Ingredient> Ingredients { get; set; }
@@ -18,5 +17,6 @@ namespace InventarizatorLI.Model
         public DbSet<Product> Products { get; set; }
         public DbSet<Conteiner> Conteiners { get; set; }
         public DbSet<IngredientsForProduct> IngredientsForProducts { get; set; }
+
     }
 }
