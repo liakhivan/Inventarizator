@@ -104,6 +104,9 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(449, 205);
+            this.MinimumSize = new System.Drawing.Size(449, 205);
             this.Name = "Backup";
             this.Text = "Backup";
             this.ResumeLayout(false);

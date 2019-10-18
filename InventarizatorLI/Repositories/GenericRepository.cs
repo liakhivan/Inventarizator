@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using InventarizatorLI.Model;
 
@@ -19,14 +20,21 @@ namespace InventarizatorLI.Repositories
                     file.Close();
                 }
                 context.Database.ExecuteSqlCommand(
-                    System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction,
+                    TransactionalBehavior.DoNotEnsureTransaction,
                     "BACKUP DATABASE " + context.Database.Connection.Database + " TO DISK = \'" + patch + "\' WITH INIT;");
             }
         }
 
-        public void RecoveryData(string patch)
+        public void RestoreData(string patch)
         {
-
+            using (var context = new StorageDbContext())
+            {
+                if (!patch.Contains(".bak"))
+                    throw new ArgumentException();
+                context.Database.ExecuteSqlCommand(
+                    TransactionalBehavior.DoNotEnsureTransaction,
+                    "RESTORE DATABASE " + context.Database.Connection.Database + " FROM DISK = \'" + patch + "\';");
+            }
         }
     }
 }

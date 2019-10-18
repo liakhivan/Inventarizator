@@ -131,5 +131,11 @@ namespace InventarizatorUI
             var form6 = new Backup();
             form6.ShowDialog();
         }
+
+        private void RecoveryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form7 = new Restore();
+            form7.ShowDialog();
+        }
     }
 }

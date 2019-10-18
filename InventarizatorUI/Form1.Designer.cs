@@ -36,6 +36,9 @@
             this.eliminationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recoveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,9 +52,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recoveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -108,37 +108,60 @@
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.addToolStripMenuItem.Text = "Додати";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripMenuItem_Click);
             // 
             // createToolStripMenuItem
             // 
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.createToolStripMenuItem.Text = "Створити";
             this.createToolStripMenuItem.Click += new System.EventHandler(this.CreateToolStripMenuItem_Click);
             // 
             // eliminationToolStripMenuItem
             // 
             this.eliminationToolStripMenuItem.Name = "eliminationToolStripMenuItem";
-            this.eliminationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminationToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.eliminationToolStripMenuItem.Text = "Списати";
             this.eliminationToolStripMenuItem.Click += new System.EventHandler(this.EliminationToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.deleteToolStripMenuItem.Text = "Видалити";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.exitToolStripMenuItem.Text = "Вихід";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
+            // dataToolStripMenuItem1
+            // 
+            this.dataToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backupToolStripMenuItem,
+            this.recoveryToolStripMenuItem});
+            this.dataToolStripMenuItem1.Name = "dataToolStripMenuItem1";
+            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 24);
+            this.dataToolStripMenuItem1.Text = "Дані";
+            // 
+            // backupToolStripMenuItem
+            // 
+            this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.backupToolStripMenuItem.Text = "Локальна копія";
+            this.backupToolStripMenuItem.Click += new System.EventHandler(this.BackupToolStripMenuItem_Click);
+            // 
+            // recoveryToolStripMenuItem
+            // 
+            this.recoveryToolStripMenuItem.Name = "recoveryToolStripMenuItem";
+            this.recoveryToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.recoveryToolStripMenuItem.Text = "Відновити дані";
+            this.recoveryToolStripMenuItem.Click += new System.EventHandler(this.RecoveryToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -282,28 +305,6 @@
             this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Назва:";
-            // 
-            // dataToolStripMenuItem1
-            // 
-            this.dataToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backupToolStripMenuItem,
-            this.recoveryToolStripMenuItem});
-            this.dataToolStripMenuItem1.Name = "dataToolStripMenuItem1";
-            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 24);
-            this.dataToolStripMenuItem1.Text = "Дані";
-            // 
-            // backupToolStripMenuItem
-            // 
-            this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.backupToolStripMenuItem.Text = "Локальна копія";
-            this.backupToolStripMenuItem.Click += new System.EventHandler(this.BackupToolStripMenuItem_Click);
-            // 
-            // recoveryToolStripMenuItem
-            // 
-            this.recoveryToolStripMenuItem.Name = "recoveryToolStripMenuItem";
-            this.recoveryToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.recoveryToolStripMenuItem.Text = "Відновити дані";
             // 
             // Form1
             // 
