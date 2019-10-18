@@ -34,7 +34,7 @@ namespace InventarizatorUI
             var fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
             textBox1.Text = fbd.SelectedPath;
-            patch = textBox1.Text;
+            patch = textBox1.Text + "\\";
         }
     }
 }

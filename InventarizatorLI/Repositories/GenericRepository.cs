@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using InventarizatorLI.Model;
 
 namespace InventarizatorLI.Repositories
@@ -13,9 +14,15 @@ namespace InventarizatorLI.Repositories
             {
                 using (var context = new StorageDbContext())
                 {
+                    patch = patch + "Backup-" + DateTime.Today.ToShortDateString() + ".bak";
+                    if (!File.Exists(patch))
+                    {
+                        var file = File.Create(patch);
+                        file.Close();
+                    }
                     context.Database.ExecuteSqlCommand(
-                        $"BACKUP DATABASE StorageDBConnection " +
-                        $"TO DISK {patch}Backup.bak");
+                        System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction,
+                        "BACKUP DATABASE " + context.Database.Connection.Database + " TO DISK = \'" + patch + "\' WITH INIT;");
                 }
                 return true;
             }
