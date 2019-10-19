@@ -44,9 +44,12 @@ namespace InventarizatorUI
         private void Button1_Click(object sender, EventArgs e)
         {
             var fbd = new FolderBrowserDialog();
-            fbd.ShowDialog();
-            textBox1.Text = fbd.SelectedPath;
-            patch = textBox1.Text + "\\";
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = fbd.SelectedPath;
+                button2.Enabled = true;
+                patch = textBox1.Text + "\\";
+            }
         }
 
         private void Label3_MouseMove(object sender, MouseEventArgs e)

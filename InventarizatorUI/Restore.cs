@@ -22,9 +22,14 @@ namespace InventarizatorUI
         private void Button1_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
-            ofd.ShowDialog();
-            patch = ofd.FileName;
-            textBox1.Text = patch;
+            ofd.Filter = "SQL SERVER database backup files|*.bak";
+            ofd.Title = "Database restore";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = ofd.FileName;
+                button2.Enabled = true;
+                patch = ofd.FileName;
+            }
         }
 
         private void Button2_Click(object sender, EventArgs e)

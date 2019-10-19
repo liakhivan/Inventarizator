@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using InventarizatorLI.Model;
 
@@ -13,7 +14,7 @@ namespace InventarizatorLI.Repositories
         {
             using (var context = new StorageDbContext())
             {
-                patch = patch + "Backup-" + DateTime.Today.ToShortDateString() + ".bak";
+                patch = patch + "database" + "-" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss") + ".bak'";
                 if (!File.Exists(patch))
                 {
                     var file = File.Create(patch);
@@ -31,9 +32,17 @@ namespace InventarizatorLI.Repositories
             {
                 if (!patch.Contains(".bak"))
                     throw new ArgumentException();
-                context.Database.ExecuteSqlCommand(
-                    TransactionalBehavior.DoNotEnsureTransaction,
-                    "RESTORE DATABASE " + context.Database.Connection.Database + " FROM DISK = \'" + patch + "\';");
+
+                string database = context.Database.Connection.Database;
+
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
+                "ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
+                "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch + "\' WITH REPLACE;");
+
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
+                "ALTER DATABASE " + database + " SET MULTI_USER");
             }
         }
     }
