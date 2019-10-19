@@ -14,7 +14,7 @@ namespace InventarizatorLI.Repositories
         {
             using (var context = new StorageDbContext())
             {
-                patch = patch + "database" + "-" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss") + ".bak'";
+                patch = patch + "database" + "-" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss") + ".bak";
                 if (!File.Exists(patch))
                 {
                     var file = File.Create(patch);

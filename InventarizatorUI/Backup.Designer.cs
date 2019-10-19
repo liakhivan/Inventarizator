@@ -59,6 +59,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(60, 57);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(320, 22);
             this.textBox1.TabIndex = 2;
             // 
@@ -110,6 +111,7 @@
             this.MinimumSize = new System.Drawing.Size(449, 205);
             this.Name = "Backup";
             this.Text = "Backup";
+            this.Load += new System.EventHandler(this.Backup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

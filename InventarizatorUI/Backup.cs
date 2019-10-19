@@ -17,7 +17,6 @@ namespace InventarizatorUI
         public Backup()
         {
             InitializeComponent();
-            patch = textBox1.Text = AppDomain.CurrentDomain.BaseDirectory;
             label3.Text = @"Інформація про створення.";
         }
 
@@ -56,6 +55,11 @@ namespace InventarizatorUI
         {
             label3.ForeColor = System.Drawing.Color.Black;
             label3.Text = @"Інформація про створення.";
+        }
+
+        private void Backup_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
