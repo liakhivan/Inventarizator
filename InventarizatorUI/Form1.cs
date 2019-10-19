@@ -137,5 +137,11 @@ namespace InventarizatorUI
             var form7 = new Restore();
             form7.ShowDialog();
         }
+
+
+        private void MaskedTextBox1_TextChanged(object sender, EventArgs e)
+        {
+                Button1_Click(this, null);
+        }
     }
 }

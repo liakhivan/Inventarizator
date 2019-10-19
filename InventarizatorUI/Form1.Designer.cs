@@ -152,14 +152,14 @@
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.backupToolStripMenuItem.Text = "Локальна копія";
             this.backupToolStripMenuItem.Click += new System.EventHandler(this.BackupToolStripMenuItem_Click);
             // 
             // recoveryToolStripMenuItem
             // 
             this.recoveryToolStripMenuItem.Name = "recoveryToolStripMenuItem";
-            this.recoveryToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.recoveryToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.recoveryToolStripMenuItem.Text = "Відновити дані";
             this.recoveryToolStripMenuItem.Click += new System.EventHandler(this.RecoveryToolStripMenuItem_Click);
             // 
@@ -279,6 +279,7 @@
             this.maskedTextBox1.Name = "maskedTextBox1";
             this.maskedTextBox1.Size = new System.Drawing.Size(134, 22);
             this.maskedTextBox1.TabIndex = 5;
+            this.maskedTextBox1.TextChanged += new System.EventHandler(this.MaskedTextBox1_TextChanged);
             // 
             // label2
             // 

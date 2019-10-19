@@ -35,7 +35,8 @@ namespace InventarizatorUI
                 catch (Exception exception)
                 {
                     label3.ForeColor = System.Drawing.Color.Red;
-                    label3.Text = exception.Message;
+                    label3.Text = "Сталася помилка.";
+                    MessageBox.Show(exception.Message);
                 }
             }
         }
@@ -55,11 +56,6 @@ namespace InventarizatorUI
         {
             label3.ForeColor = System.Drawing.Color.Black;
             label3.Text = @"Інформація про створення.";
-        }
-
-        private void Backup_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

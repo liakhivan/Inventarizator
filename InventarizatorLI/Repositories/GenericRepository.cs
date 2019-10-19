@@ -10,6 +10,7 @@ namespace InventarizatorLI.Repositories
     public abstract class GenericRepository<T> where T: class
     {
         public abstract List<T> GetDataSource();
+
         public void BackupData(string patch)
         {
             using (var context = new StorageDbContext())

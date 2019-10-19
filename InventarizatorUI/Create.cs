@@ -21,7 +21,6 @@ namespace InventarizatorUI
             comboBox1.DataSource = source.GetDataSource();
         }
 
-
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if(radioButton1.Checked)
@@ -90,8 +89,8 @@ namespace InventarizatorUI
                 var someElement = recept.Where(element => element.Key.Name == comboBox1.SelectedItem.ToString()).Select(element => element.Key).FirstOrDefault();
                 if (someElement == null)
                 {
-                    recept.Add(source
-                                   .GetDataSource().FirstOrDefault(ingredient => ingredient.Name == comboBox1.SelectedItem.ToString()) ?? throw new InvalidOperationException(),
+                    recept.Add(source.GetDataSource().
+                        FirstOrDefault(ingredient => ingredient.Name == comboBox1.SelectedItem.ToString()) ?? throw new InvalidOperationException(),
                         Double.Parse(maskedTextBox1.Text));
                     listBox1.DataSource = recept.Select(element => element.Key.ToString() + " " + element.Value.ToString(CultureInfo.InvariantCulture)).ToList();
                 }

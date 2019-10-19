@@ -47,9 +47,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(378, 56);
+            this.button1.Location = new System.Drawing.Point(380, 55);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(38, 24);
+            this.button1.Size = new System.Drawing.Size(38, 27);
             this.button1.TabIndex = 1;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
@@ -111,7 +111,6 @@
             this.MinimumSize = new System.Drawing.Size(449, 205);
             this.Name = "Backup";
             this.Text = "Backup";
-            this.Load += new System.EventHandler(this.Backup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
