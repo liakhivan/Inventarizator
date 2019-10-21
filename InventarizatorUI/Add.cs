@@ -3,7 +3,6 @@ using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using InventarizatorLI.Model;
-using System.Collections.Generic;
 using InventarizatorLI.Repositories;
 
 namespace InventarizatorUI
@@ -75,6 +74,7 @@ namespace InventarizatorUI
             checkBox1.Checked = false;
             comboBox2.Text = "";
         }
+
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
@@ -130,10 +130,12 @@ namespace InventarizatorUI
                     // які мають спільний головний інгредієнт 
                     // можна переробити, то ми витягуємо список 
                     // всіх продуктів які мають спільний головний інгредієнт.
-                    var name = comboBox1.SelectedItem.ToString().Substring(comboBox1.SelectedItem.ToString().IndexOf("\""));
-                    var data = repos.GetProductConteinerDataSource().
-                    Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 6).
-                    Select(element => $"{element.Name} {element.Weight}").ToList();
+                    ////////var name = comboBox1.SelectedItem.ToString().Substring(comboBox1.SelectedItem.ToString().IndexOf("\""));
+                    ////////var data = repos.GetProductConteinerDataSource().
+                    ////////Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 6).
+                    ////////Select(element => $"{element.Name} {element.Weight}").ToList();
+                    var data = repos.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6).
+                        Select(element => $"{element.Name} {element.Weight}").ToList();
                     if (data.Count == 0)
                     {
                         checkBox1.Checked = false;
@@ -230,11 +232,6 @@ namespace InventarizatorUI
                 label5.ForeColor = System.Drawing.Color.Green;
                 label5.Text = @"Об'єкт було успішно додано.";
                 updateInformation();
-            }
-            catch (ArgumentException)
-            {
-                label5.ForeColor = System.Drawing.Color.Red;
-                label5.Text = @"Некоректна вага продукту.";
             }
             catch (FormatException)
             {

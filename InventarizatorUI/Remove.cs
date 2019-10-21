@@ -65,6 +65,7 @@ namespace InventarizatorUI
                 Select(elem => $"{elem.Name} {elem.Weight}").ToList();
                 maskedTextBox1.Visible = maskedTextBox1.Enabled = false;
                 numericUpDown1.Visible = numericUpDown1.Enabled = true;
+                numericUpDown1.Value = 1;
             }
             else
             {
@@ -73,6 +74,7 @@ namespace InventarizatorUI
                 Select(elem => $"{elem.Name} {elem.Weight}").ToList();
                 maskedTextBox1.Visible = maskedTextBox1.Enabled = true;
                 numericUpDown1.Visible = numericUpDown1.Enabled = false;
+                maskedTextBox1.Text = "";
             }
         }
 

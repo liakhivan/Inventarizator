@@ -32,7 +32,10 @@ namespace InventarizatorUI
                 IngredientRepository source = new IngredientRepository();
                 comboBox1.DataSource = source.GetDataSource();
                 label2.Text = @"Інформація про створення.";
-                textBox1.Text = "";
+                maskedTextBox1.Text = textBox1.Text = "";
+                recept.Clear();
+                listBox1.DataSource = null;
+                listBox1.Items.Clear();
             }
             else
             {
@@ -107,11 +110,14 @@ namespace InventarizatorUI
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            IngredientRepository source = new IngredientRepository();
-            var element = source.GetDataSource().FirstOrDefault(ingredient => listBox1.SelectedItem.ToString().Contains(ingredient.Name));
-            var removeElement = recept.First(n => n.Key.Name == element.Name);
-            recept.Remove(removeElement.Key);
-            listBox1.DataSource = recept.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+            if (listBox1.Items.Count != 0)
+            {
+                IngredientRepository source = new IngredientRepository();
+                var element = source.GetDataSource().FirstOrDefault(ingredient => listBox1.SelectedItem.ToString().Contains(ingredient.Name));
+                var removeElement = recept.First(n => n.Key.Name == element.Name);
+                recept.Remove(removeElement.Key);
+                listBox1.DataSource = recept.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+            }
         }
 
         private void Label2_MouseMove(object sender, MouseEventArgs e)
@@ -119,11 +125,6 @@ namespace InventarizatorUI
 
             label2.ForeColor = System.Drawing.Color.Black;
             label2.Text = @"Інформація про створення.";
-        }
-
-        private void Label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
