@@ -75,7 +75,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(580, 400);
+            this.dataGridView1.Size = new System.Drawing.Size(580, 398);
             this.dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
@@ -89,7 +89,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(767, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(767, 30);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -102,7 +102,7 @@
             this.deleteToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
             this.dataToolStripMenuItem.Text = "Склад";
             // 
             // addToolStripMenuItem
@@ -146,7 +146,7 @@
             this.backupToolStripMenuItem,
             this.recoveryToolStripMenuItem});
             this.dataToolStripMenuItem1.Name = "dataToolStripMenuItem1";
-            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 24);
+            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 26);
             this.dataToolStripMenuItem1.Text = "Дані";
             // 
             // backupToolStripMenuItem
@@ -166,7 +166,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(124, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(124, 26);
             this.aboutToolStripMenuItem.Text = "Про програму";
             // 
             // tableLayoutPanel1
@@ -181,13 +181,13 @@
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.8686F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.131403F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(767, 449);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(767, 447);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // groupBox1
@@ -232,7 +232,7 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(3, 411);
+            this.button1.Location = new System.Drawing.Point(3, 409);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 35);
             this.button1.TabIndex = 0;
@@ -245,7 +245,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(122, 411);
+            this.panel1.Location = new System.Drawing.Point(122, 409);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(519, 35);
             this.panel1.TabIndex = 3;

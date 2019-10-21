@@ -53,8 +53,10 @@ namespace InventarizatorUI
                     throw new ArgumentNullException();
                 if (radioButton1.Checked)
                 {
-                    if ( recept.Count == 0)
-                        throw new ArgumentException();
+                    if (recept.Count == 0)
+                        throw new ArgumentException("Відсутній рецепт.");
+                    else if (recept.Sum(n => n.Value) != 1)
+                        throw new ArgumentException("Сумарна вага інгредієнтів не  = 1 кг.");
                     ProductRepository repos = new ProductRepository();
                     Product product = new Product(textBox1.Text);
                     repos.Create(product, recept);
@@ -74,10 +76,10 @@ namespace InventarizatorUI
                 label2.ForeColor = System.Drawing.Color.Red;
                 label2.Text = @"Не всі поля заповнені.";
             }
-            catch (ArgumentException)
+            catch (ArgumentException exception)
             {
                 label2.ForeColor = System.Drawing.Color.Red;
-                label2.Text = @"Цей об'єкт неможливо створити.";
+                label2.Text = exception.Message;
             }
         }
 
@@ -94,6 +96,7 @@ namespace InventarizatorUI
                         Double.Parse(maskedTextBox1.Text));
                     listBox1.DataSource = recept.Select(element => element.Key.ToString() + " " + element.Value.ToString(CultureInfo.InvariantCulture)).ToList();
                 }
+                this.maskedTextBox1.Text = "";
             } catch(FormatException)
             {
 
@@ -116,6 +119,11 @@ namespace InventarizatorUI
 
             label2.ForeColor = System.Drawing.Color.Black;
             label2.Text = @"Інформація про створення.";
+        }
+
+        private void Label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

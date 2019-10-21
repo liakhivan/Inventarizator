@@ -72,30 +72,9 @@ namespace InventarizatorUI
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
-            {
-                ProductRepository repos = new ProductRepository();
-                try
-                {
-                    // Оскільки деякі продукти, 
-                    // які мають спільний головний інгредієнт 
-                    // можна переробити, то ми витягуємо список 
-                    // всіх продуктів які мають спільний головний інгредієнт.
-                    var name = comboBox1.SelectedItem.ToString().Substring(comboBox1.SelectedItem.ToString().IndexOf("\""));
-                    var data = repos.GetProductConteinerDataSource().
-                    Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 3).
-                    Select(element => $"{element.Name} {element.Weight}").ToList();
-
-                    comboBox2.DataSource = (data.Count == 0) ? null : data;
-                }
-                catch (Exception)
-                {
-                    comboBox2.DataSource = null;
-                }
-                listBox1.Items.Clear();
-            }
+            checkBox1.Checked = false;
+            comboBox2.Text = "";
         }
-
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
@@ -126,6 +105,8 @@ namespace InventarizatorUI
                 Height -= 45;
                 maskedTextBox1.Mask = @"000.00";
             }
+            maskedTextBox1.Text = "";
+            numericUpDown1.Value = 1;
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -138,17 +119,29 @@ namespace InventarizatorUI
                 checkBox2.Location = checkBox2Position2;
                 panel4.Visible = panel4.Enabled = true;
                 comboBox2.Enabled = checkBox1.Checked;
+                numericUpDown2.Value = 1;
+                listBox1.Items.Clear();
 
                 ProductRepository repos = new ProductRepository();
 
                 try
                 {
+                    // Оскільки деякі продукти, 
+                    // які мають спільний головний інгредієнт 
+                    // можна переробити, то ми витягуємо список 
+                    // всіх продуктів які мають спільний головний інгредієнт.
                     var name = comboBox1.SelectedItem.ToString().Substring(comboBox1.SelectedItem.ToString().IndexOf("\""));
                     var data = repos.GetProductConteinerDataSource().
-                    Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 3).
+                    Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 6).
                     Select(element => $"{element.Name} {element.Weight}").ToList();
-
-                    comboBox2.DataSource = (data.Count == 0) ? null : data;
+                    if (data.Count == 0)
+                    {
+                        checkBox1.Checked = false;
+                        label5.ForeColor = System.Drawing.Color.Red;
+                        label5.Text = @"Продукту для переробки не існує";
+                    }
+                    else
+                        comboBox2.DataSource = data;
                 }
                 catch (Exception)
                 {
@@ -172,12 +165,12 @@ namespace InventarizatorUI
             {
                 if (radioButton1.Checked)
                 {
-                    if (numericUpDown1.Value <= 0)
+                    double weight = Double.Parse(maskedTextBox1.Text);
+                   
+                    if (maskedTextBox1.Text == " ," || weight == 0)
                     {
-                        throw new FormatException();
+                        throw new FormatException("Невідома вага продукції.");
                     }
-                    double weight;
-                    Double.TryParse(maskedTextBox1.Text, out weight);
                     ConteinerRepository conteinerRepository = new ConteinerRepository();
                     ProductRepository productRepository = new ProductRepository();
                     double weightForRemaking = 0;
@@ -237,6 +230,16 @@ namespace InventarizatorUI
                 label5.ForeColor = System.Drawing.Color.Green;
                 label5.Text = @"Об'єкт було успішно додано.";
                 updateInformation();
+            }
+            catch (ArgumentException)
+            {
+                label5.ForeColor = System.Drawing.Color.Red;
+                label5.Text = @"Некоректна вага продукту.";
+            }
+            catch (FormatException)
+            {
+                label5.ForeColor = System.Drawing.Color.Red;
+                label5.Text = @"Некоректна вага продукту.";
             }
             catch (Exception exception)
             {

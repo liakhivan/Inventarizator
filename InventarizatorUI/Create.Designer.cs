@@ -121,6 +121,7 @@
             this.label2.Size = new System.Drawing.Size(187, 17);
             this.label2.TabIndex = 13;
             this.label2.Text = "Інформація про створення.";
+            this.label2.Click += new System.EventHandler(this.Label2_Click);
             this.label2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Label2_MouseMove);
             // 
             // button1
