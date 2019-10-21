@@ -61,14 +61,14 @@ namespace InventarizatorUI
             form4.ShowDialog();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void Filter()
         {
             if (radioButton1.Checked)
             {
                 var Products = new ProductRepository();
                 var dataSource = Products.GetProductConteinerDataSource();
                 if (textBox1.Text != "")
-                    dataSource = dataSource.Where(product => product.Name.Contains(textBox1.Text)).ToList();
+                    dataSource = dataSource.Where(product => product.Name.ToUpper().Contains(textBox1.Text.ToUpper())).ToList();
                 if (maskedTextBox1.Text != " ,")
                     switch (comboBox1.SelectedIndex)
                     {
@@ -98,7 +98,7 @@ namespace InventarizatorUI
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            Button1_Click(sender, e);
+            Filter();
         }
 
         private void EliminationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -141,7 +141,7 @@ namespace InventarizatorUI
 
         private void MaskedTextBox1_TextChanged(object sender, EventArgs e)
         {
-                Button1_Click(this, null);
+            Filter();
         }
     }
 }
