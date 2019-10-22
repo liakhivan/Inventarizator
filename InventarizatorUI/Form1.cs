@@ -12,9 +12,6 @@ namespace InventarizatorUI
             InitializeComponent();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UpdateDataGridWiew();
-            //ProductRepository repository = new ProductRepository();
-            //dataGridView1.DataSource = repository.GetProductConteinerDataSource();
-            //dataGridView1.AutoResizeColumns();
             comboBox1.SelectedIndex = 0;
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
         }
@@ -124,7 +121,6 @@ namespace InventarizatorUI
             }
         }
 
-
         private void BackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -134,10 +130,9 @@ namespace InventarizatorUI
 
         private void RecoveryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form7 = new Restore();
+            var form7 = new Restore(UpdateDataGridWiew);
             form7.ShowDialog();
         }
-
 
         private void MaskedTextBox1_TextChanged(object sender, EventArgs e)
         {

@@ -14,9 +14,12 @@ namespace InventarizatorUI
     public partial class Restore : Form
     {
         string patch;
-        public Restore()
+        public delegate void Upd();
+        private event Upd updateInformation;
+        public Restore(Upd updateEvent)
         {
             InitializeComponent();
+            updateInformation += updateEvent;
             label3.Text = @"Інформація про відновлення.";
         }
 
@@ -35,6 +38,7 @@ namespace InventarizatorUI
 
         private void Button2_Click(object sender, EventArgs e)
         {
+            label4.Visible = true;
             var repository = new ProductRepository();
             try
             {
@@ -45,9 +49,20 @@ namespace InventarizatorUI
             catch(Exception exception)
             {
                 label3.ForeColor = System.Drawing.Color.Red;
-                label3.Text = "Сталася помилка.";
+                label3.Text = @"Сталася помилка.";
                 MessageBox.Show(exception.Message);
             }
+            finally
+            {
+
+                label4.Visible = false;
+            }
+            updateInformation();
+        }
+
+        private void Label3_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Label3_MouseMove(object sender, MouseEventArgs e)
