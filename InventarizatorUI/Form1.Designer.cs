@@ -51,6 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -74,7 +75,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(607, 400);
+            this.dataGridView1.Size = new System.Drawing.Size(607, 398);
             this.dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
@@ -84,11 +85,12 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dataToolStripMenuItem,
             this.dataToolStripMenuItem1,
+            this.статистикаToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(767, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(767, 30);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -101,7 +103,7 @@
             this.deleteToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
             this.dataToolStripMenuItem.Text = "Склад";
             // 
             // addToolStripMenuItem
@@ -145,7 +147,7 @@
             this.backupToolStripMenuItem,
             this.recoveryToolStripMenuItem});
             this.dataToolStripMenuItem1.Name = "dataToolStripMenuItem1";
-            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 24);
+            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 26);
             this.dataToolStripMenuItem1.Text = "Дані";
             // 
             // backupToolStripMenuItem
@@ -165,7 +167,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(124, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(124, 26);
             this.aboutToolStripMenuItem.Text = "Про програму";
             // 
             // tableLayoutPanel1
@@ -179,13 +181,13 @@
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.8686F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.131403F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(767, 449);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(767, 447);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // groupBox1
@@ -232,7 +234,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(129, 411);
+            this.panel1.Location = new System.Drawing.Point(129, 409);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(519, 35);
             this.panel1.TabIndex = 3;
@@ -294,6 +296,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Назва:";
             // 
+            // статистикаToolStripMenuItem
+            // 
+            this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
+            this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(98, 26);
+            this.статистикаToolStripMenuItem.Text = "Статистика";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -346,6 +354,7 @@
         private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recoveryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem статистикаToolStripMenuItem;
     }
 }
 
