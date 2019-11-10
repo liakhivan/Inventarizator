@@ -21,6 +21,7 @@ namespace InventarizatorUI
             Height -= 90;
             ProductRepository repos = new ProductRepository();
             comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
+            maskedTextBox2.Text = DateTime.Today.ToString();
             checkBox1.Checked = false;
             comboBox2.Enabled = false;
             panel1Position1 = panel1.Location = new Point(9, 106);
@@ -107,6 +108,7 @@ namespace InventarizatorUI
             }
             maskedTextBox1.Text = "";
             numericUpDown1.Value = 1;
+            maskedTextBox2.Text = DateTime.Today.ToString();
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -165,6 +167,8 @@ namespace InventarizatorUI
         {
             try
             {
+                if (maskedTextBox2.Text == "  .  .")
+                    throw new ArgumentException("Відсутня дата додавання.");
                 if (radioButton1.Checked)
                 {
                     double weight = Double.Parse(maskedTextBox1.Text);

@@ -39,6 +39,7 @@
             this.dataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recoveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -51,7 +52,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.показатиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -103,7 +105,7 @@
             this.deleteToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.dataToolStripMenuItem.Text = "Склад";
             // 
             // addToolStripMenuItem
@@ -147,7 +149,7 @@
             this.backupToolStripMenuItem,
             this.recoveryToolStripMenuItem});
             this.dataToolStripMenuItem1.Name = "dataToolStripMenuItem1";
-            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 26);
+            this.dataToolStripMenuItem1.Size = new System.Drawing.Size(54, 24);
             this.dataToolStripMenuItem1.Text = "Дані";
             // 
             // backupToolStripMenuItem
@@ -164,10 +166,19 @@
             this.recoveryToolStripMenuItem.Text = "Відновити дані";
             this.recoveryToolStripMenuItem.Click += new System.EventHandler(this.RecoveryToolStripMenuItem_Click);
             // 
+            // статистикаToolStripMenuItem
+            // 
+            this.статистикаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.показатиToolStripMenuItem,
+            this.очиститиToolStripMenuItem});
+            this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
+            this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
+            this.статистикаToolStripMenuItem.Text = "Статистика";
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(124, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(124, 24);
             this.aboutToolStripMenuItem.Text = "Про програму";
             // 
             // tableLayoutPanel1
@@ -296,11 +307,17 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Назва:";
             // 
-            // статистикаToolStripMenuItem
+            // показатиToolStripMenuItem
             // 
-            this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
-            this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(98, 26);
-            this.статистикаToolStripMenuItem.Text = "Статистика";
+            this.показатиToolStripMenuItem.Name = "показатиToolStripMenuItem";
+            this.показатиToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.показатиToolStripMenuItem.Text = "Показати";
+            // 
+            // очиститиToolStripMenuItem
+            // 
+            this.очиститиToolStripMenuItem.Name = "очиститиToolStripMenuItem";
+            this.очиститиToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.очиститиToolStripMenuItem.Text = "Очистити";
             // 
             // Form1
             // 
@@ -355,6 +372,8 @@
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recoveryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem статистикаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem показатиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem очиститиToolStripMenuItem;
     }
 }
 

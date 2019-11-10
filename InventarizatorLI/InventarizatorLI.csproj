@@ -56,6 +56,10 @@
     <Compile Include="Migrations\201911101540552_MigrationStorageDBOne.Designer.cs">
       <DependentUpon>201911101540552_MigrationStorageDBOne.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911102243046_MigrationStorageDBTwo.cs" />
+    <Compile Include="Migrations\201911102243046_MigrationStorageDBTwo.Designer.cs">
+      <DependentUpon>201911102243046_MigrationStorageDBTwo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Conteiner.cs" />
     <Compile Include="Model\Ingredient.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911101540552_MigrationStorageDBOne.resx">
       <DependentUpon>201911101540552_MigrationStorageDBOne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911102243046_MigrationStorageDBTwo.resx">
+      <DependentUpon>201911102243046_MigrationStorageDBTwo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
