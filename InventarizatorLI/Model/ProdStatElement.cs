@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace InventarizatorLI.Model
 {
-    public class StatElement<T>
+    public class ProdStatElement
     {
+
         public int Id { get; set; }
-        public int IdElrment { get; set; }
-        public virtual T Element { get; set; }
+        public int IdProduct { get; set; }
+        public virtual Product Product { get; set; }
         public string TypeEvent { get; set; }
         public double Weight { get; set; }
         public DateTime Date { get; set; }
-
-        public StatElement()
-        {
-
-        }
     }
 }

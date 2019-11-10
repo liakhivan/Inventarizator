@@ -51,9 +51,10 @@
     <Compile Include="Model\Conteiner.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\IngredientsForProduct.cs" />
+    <Compile Include="Model\IngredStatElement.cs" />
     <Compile Include="Model\Package.cs" />
+    <Compile Include="Model\ProdStatElement.cs" />
     <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\StatElement.cs" />
     <Compile Include="Repositories\IngredientsForProductRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\TableJoin\IngredientPackage.cs" />
