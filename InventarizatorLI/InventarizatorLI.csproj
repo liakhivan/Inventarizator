@@ -48,6 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201911101535539_InitialCreate.cs" />
+    <Compile Include="Migrations\201911101535539_InitialCreate.Designer.cs">
+      <DependentUpon>201911101535539_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911101540552_MigrationStorageDBOne.cs" />
+    <Compile Include="Migrations\201911101540552_MigrationStorageDBOne.Designer.cs">
+      <DependentUpon>201911101540552_MigrationStorageDBOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Conteiner.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\IngredientsForProduct.cs" />
@@ -72,6 +81,13 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911101535539_InitialCreate.resx">
+      <DependentUpon>201911101535539_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911101540552_MigrationStorageDBOne.resx">
+      <DependentUpon>201911101540552_MigrationStorageDBOne.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
