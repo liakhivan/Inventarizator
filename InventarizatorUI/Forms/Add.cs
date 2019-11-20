@@ -21,7 +21,6 @@ namespace InventarizatorUI
             Height -= 90;
             ProductRepository repos = new ProductRepository();
             comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
-            maskedTextBox2.Text = DateTime.Today.ToString();
             checkBox1.Checked = false;
             comboBox2.Enabled = false;
             panel1Position1 = panel1.Location = new Point(9, 106);
@@ -31,6 +30,7 @@ namespace InventarizatorUI
             label5Position2.Y += 27;
             checkBox2Position1 = checkBox2.Location = new Point(17, 84);
             checkBox2Position2 = new Point(17, 178);
+            dateTimePicker1.MaxDate = DateTime.Today;
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -108,7 +108,6 @@ namespace InventarizatorUI
             }
             maskedTextBox1.Text = "";
             numericUpDown1.Value = 1;
-            maskedTextBox2.Text = DateTime.Today.ToString();
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -167,8 +166,6 @@ namespace InventarizatorUI
         {
             try
             {
-                if (maskedTextBox2.Text == "  .  .")
-                    throw new ArgumentException("Відсутня дата додавання.");
                 if (radioButton1.Checked)
                 {
                     double weight = Double.Parse(maskedTextBox1.Text);
@@ -194,7 +191,7 @@ namespace InventarizatorUI
                             var product = productRepository.GetDataSource().First(element => element.Name == comboBox1.SelectedItem.ToString());
                             var conteiner = conteinerRepository.GetDataSource().First(elem => elem.ProductId == product.Id & elem.Weight == productConteiner.Weight);
 
-                            conteinerRepository.Remove(conteiner.Id, amount);
+                            conteinerRepository.Remove(conteiner.Id, dateTimePicker1.Value, 3 ,amount);
 
                             comboBox2.DataSource = productRepository.GetProductConteinerDataSource().
                             Where(elem => elem.Name.Contains(product.Name) & elem.Amount != 0 & elem.Weight <= 3).
@@ -207,15 +204,16 @@ namespace InventarizatorUI
 
                             int idProduct = productRepository.GetDataSource()
                                 .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
-                            InformationAboutOverweight form6 = new InformationAboutOverweight(overWeightForRemaking, idProduct);
+                            InformationAboutOverweight form6 = new InformationAboutOverweight(dateTimePicker1.Value, overWeightForRemaking, idProduct);
                             form6.ShowDialog();
                         }
                     }
 
                     int id = productRepository.GetDataSource()
                         .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
-                    conteinerRepository.Create(
+                    conteinerRepository.Add(
                         new Conteiner(id, weight, Decimal.ToInt32(numericUpDown1.Value)),
+                        dateTimePicker1.Value, 
                         weightForRemaking,
                         checkBox2.Checked
                         );
@@ -230,7 +228,7 @@ namespace InventarizatorUI
                     IngredientRepository ingredientRepository = new IngredientRepository();
                     int id = ingredientRepository.GetDataSource()
                         .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
-                    repository.Create(new Package(id, weight));
+                    repository.Add(new Package(id, weight), dateTimePicker1.Value);
                 }
 
                 label5.ForeColor = System.Drawing.Color.Green;
@@ -244,6 +242,7 @@ namespace InventarizatorUI
             }
             catch (Exception exception)
             {
+                //TODO: Program thrown message on english when user try to add some product. Also check this problem with ingredient.
                 label5.ForeColor = System.Drawing.Color.Red;
                 label5.Text = exception.Message;
             }

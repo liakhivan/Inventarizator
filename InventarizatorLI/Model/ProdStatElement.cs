@@ -14,6 +14,8 @@ namespace InventarizatorLI.Model
         public double Weight { get; set; }
         public DateTime Date { get; set; }
 
+        public ProdStatElement()
+        { }
         public ProdStatElement(int idProduct, int typeEvent, double weight)
         {
             IdProduct = (idProduct >= 0) ? idProduct : throw new ArgumentException();

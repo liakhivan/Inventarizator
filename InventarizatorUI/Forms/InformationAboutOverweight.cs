@@ -16,12 +16,14 @@ namespace InventarizatorUI
     {
         int idProduct;
         double weight;
-        public InformationAboutOverweight(double weight, int idProduct)
+        DateTime dateAdd;
+        public InformationAboutOverweight(DateTime dateAdd, double weight, int idProduct)
         {
             InitializeComponent();
             this.idProduct = idProduct;
             this.weight = weight;
             label1.Text += (" " + weight.ToString("0.00"));
+            this.dateAdd = dateAdd;
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -32,7 +34,12 @@ namespace InventarizatorUI
                 double weightNewConteiner = double.Parse(maskedTextBox1.Text);
                 if (weight - weightNewConteiner < 0)
                     throw new ArgumentException();
-                conteinerRepository.Create(new Conteiner(idProduct, double.Parse(maskedTextBox1.Text), 1));
+                conteinerRepository.Add(new Conteiner(idProduct, weightNewConteiner, 1), dateAdd);
+                if(weightNewConteiner - weight < 0)
+                {
+                    var statistic = new ProdStatisticsRepository();
+                    statistic.Add(idProduct, 1, weightNewConteiner - weight, dateAdd);
+                }
             }
             catch (FormatException) { }
             catch (ArgumentException) { }

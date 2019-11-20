@@ -38,6 +38,8 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +86,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(244, 22);
+            this.numericUpDown1.Size = new System.Drawing.Size(55, 22);
             this.numericUpDown1.TabIndex = 3;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
@@ -155,15 +157,36 @@
             this.maskedTextBox1.Location = new System.Drawing.Point(184, 41);
             this.maskedTextBox1.Mask = "00.000";
             this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(243, 22);
+            this.maskedTextBox1.Size = new System.Drawing.Size(55, 22);
             this.maskedTextBox1.TabIndex = 7;
             this.maskedTextBox1.ValidatingType = typeof(int);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(263, 43);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Дата:";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(315, 41);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2019, 11, 19, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(113, 22);
+            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimePicker1.Value = new System.DateTime(2019, 11, 19, 0, 0, 0, 0);
             // 
             // Remove
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(435, 118);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
@@ -195,5 +218,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

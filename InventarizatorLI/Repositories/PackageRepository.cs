@@ -8,7 +8,7 @@ namespace InventarizatorLI.Repositories
 {
     public class PackageRepository : GenericRepository<Package>
     {
-        public void Create(Package newPackage)
+        public void Add(Package newPackage, DateTime date)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -17,6 +17,8 @@ namespace InventarizatorLI.Repositories
                     findPackage.Weight += newPackage.Weight;
                 else
                     context.Packages.Add(newPackage);
+                var statistics = new IngredStatisticsRepository();
+                statistics.Add(newPackage.IngredientId, 0, newPackage.Weight, date);
                 context.SaveChanges();
             }
         }
@@ -46,7 +48,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Remove(int index, double amount)
+        public void Remove(int index, DateTime date,  double amount)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -64,6 +66,8 @@ namespace InventarizatorLI.Repositories
                             context.Packages.Attach(somePackage);
                             context.Entry(somePackage).State = EntityState.Deleted;
                         }
+
+                        context.IngredientStatistics.Add(new IngredStatElement(index, 1, amount, date));
                         context.ChangeTracker.DetectChanges();
                         context.SaveChanges();
                         transaction.Commit();

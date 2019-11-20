@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Data.Entity; 
-using System.ComponentModel;
 using InventarizatorLI.Model;
 using System.Collections.Generic;
 
@@ -9,7 +8,7 @@ namespace InventarizatorLI.Repositories
 {
     public class ConteinerRepository : GenericRepository<Conteiner>
     {
-        public void Create(Conteiner newConteiner, double remake = 0, bool washer = false)
+        public void Add(Conteiner newConteiner, DateTime dateAdd, double remake = 0, bool washer = false)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -22,9 +21,7 @@ namespace InventarizatorLI.Repositories
                         if (dbconteiner != null)
                             dbconteiner.Amount += newConteiner.Amount;
                         else
-                        {
                             context.Conteiners.Add(newConteiner);
-                        }
 
                         context.SaveChanges();
                         double weightNewConteiner = newConteiner.Weight;
@@ -47,6 +44,7 @@ namespace InventarizatorLI.Repositories
                                                  newConteiner.Amount;
                                     if (weight <= onePackage.Weight)
                                         onePackage.Weight -= weight;
+                                    //TODO: якщо треба збирати статистику списаних по рецепту інгредієнтів, то тут добавити додавання статистики
                                     else
                                         throw new ArgumentException();
                                     amountOfDontRemovedIngredients--;
@@ -56,6 +54,8 @@ namespace InventarizatorLI.Repositories
                         if (amountOfDontRemovedIngredients != 0)
                             throw new ArgumentException();
 
+                        var prodStat = new ProdStatisticsRepository();
+                        prodStat.Add(newConteiner.ProductId, 0,newConteiner.Weight, dateAdd);
                         context.SaveChanges();
                         transaction.Commit();
                     }
@@ -68,7 +68,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Remove(int index, int amount = 1)
+        public void Remove(int index, DateTime dateRemove, int typeEvent, int amount = 1)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -78,9 +78,9 @@ namespace InventarizatorLI.Repositories
                     {
                         context.Configuration.AutoDetectChangesEnabled = false;
                         context.Conteiners.Find(index).Amount -= amount;
-                        var res = context.Conteiners.Find(index).Amount;
-                        if (res < 0) throw new ArgumentOutOfRangeException();
-                        if (res == 0)
+                        var res = context.Conteiners.Find(index);
+                        if (res.Amount < 0) throw new ArgumentOutOfRangeException();
+                        if (res.Amount == 0)
                         {
                             var someConteiner = context.Conteiners.Find(index);
                             context.Configuration.ValidateOnSaveEnabled = false;
@@ -88,6 +88,7 @@ namespace InventarizatorLI.Repositories
                             context.Entry(someConteiner).State = EntityState.Deleted;
 
                         }
+                        context.ProductStatistics.Add(new ProdStatElement(index, typeEvent, res.Weight * amount, dateRemove));
                         context.ChangeTracker.DetectChanges();
                         context.SaveChanges();
                         transaction.Commit();

@@ -12,6 +12,9 @@ namespace InventarizatorLI.Model
         public int TypeEvent { get; set; }
         public double Weight { get; set; }
         public DateTime Date { get; set; }
+
+        public IngredStatElement()
+        { }
         public IngredStatElement(int idIngredient, int typeEvent, double weight)
         {
             IdIngredient = (idIngredient >= 0) ? idIngredient : throw new ArgumentException();

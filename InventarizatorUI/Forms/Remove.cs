@@ -18,6 +18,7 @@ namespace InventarizatorUI
                 Select(elem => $"{elem.Name} {elem.Weight}").ToList();
             maskedTextBox1.Visible = maskedTextBox1.Enabled = false;
             numericUpDown1.Visible = numericUpDown1.Enabled = true;
+            dateTimePicker1.MaxDate = DateTime.Today;
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace InventarizatorUI
                            First(element => $"{element.Name} {element.Weight}" == comboBox1.SelectedItem.ToString());
                     var product = productRepository.GetDataSource().First(element => element.Name == productConteiner.Name);
                     var conteiner = conteinerRepository.GetDataSource().First(elem => elem.ProductId == product.Id & elem.Weight == productConteiner.Weight);
-                    conteinerRepository.Remove(conteiner.Id, Decimal.ToInt32(numericUpDown1.Value));
+                    conteinerRepository.Remove(conteiner.Id, dateTimePicker1.Value, 1, Decimal.ToInt32(numericUpDown1.Value));
                 }
                 else
                 {
@@ -42,7 +43,7 @@ namespace InventarizatorUI
                            First(element => $"{element.Name} {element.Weight}" == comboBox1.SelectedItem.ToString());
                     var ingredient = ingredientRepository.GetDataSource().First(element => element.Name == ingredientPackage.Name);
                     var conteiner = packageRepository.GetDataSource().First(elem => elem.IngredientId == ingredient.Id & elem.Weight == ingredientPackage.Weight);
-                    packageRepository.Remove(conteiner.Id, Double.Parse(maskedTextBox1.Text));
+                    packageRepository.Remove(conteiner.Id, dateTimePicker1.Value, Double.Parse(maskedTextBox1.Text));
                 }
                 RadioButton1_CheckedChanged(null, null);
                 label3.ForeColor = System.Drawing.Color.Green;
