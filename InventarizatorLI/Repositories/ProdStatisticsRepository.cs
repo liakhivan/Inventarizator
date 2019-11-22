@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using InventarizatorLI.Model;
 using InventarizatorLI.Repositories.TableJoin;
@@ -41,6 +42,29 @@ namespace InventarizatorLI.Repositories
             }
         }
 
+        public void Remove(DateTime date1, DateTime date2)
+        {
+            using (var context = new StorageDbContext())
+            {
+                try
+                {
+                    context.Configuration.ValidateOnSaveEnabled = false;
+                    context.Configuration.AutoDetectChangesEnabled = false;
+                    var listOfStatistics = context.ProductStatistics.Where(element => element.Date <= date2 && element.Date >= date1);
+                    foreach (var someConteiner in listOfStatistics)
+                    {
+                        context.ProductStatistics.Attach(someConteiner);
+                        context.Entry(someConteiner).State = EntityState.Deleted;
+                    }
+                    context.ChangeTracker.DetectChanges();
+                    context.SaveChanges();
+                }
+                finally
+                {
+                    context.Configuration.ValidateOnSaveEnabled = true;
+                }
+            }
+        }
         public List<ProductStatistics> GetProductStatistics()
         {
             using (var context = new StorageDbContext())

@@ -15,6 +15,7 @@ namespace InventarizatorUI
             UpdateDataGridWiew();
             comboBox1.SelectedIndex = 0;
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
+            radioButton1.Checked = true;
         }
         private void Filter()
         {
@@ -55,7 +56,7 @@ namespace InventarizatorUI
             IngredientRepository repos = new IngredientRepository();
             dataGridView1.DataSource = repos.GetIngredientPackageDataSource();
             dataGridView1.AutoResizeColumns();
-            panel2.Visible = false;
+            panel1.Visible = false;
             maskedTextBox1.Text = " ,";
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.000";
         }
@@ -65,7 +66,7 @@ namespace InventarizatorUI
             ProductRepository repository = new ProductRepository();
             dataGridView1.DataSource = repository.GetProductConteinerDataSource();
             dataGridView1.AutoResizeColumns();
-            panel2.Visible = true;
+            panel1.Visible = true;
             comboBox1.SelectedIndex = 0;
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
         }
@@ -143,6 +144,17 @@ namespace InventarizatorUI
         {
             Statistics statistics = new Statistics();
             statistics.ShowDialog();
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearStatistics clearStatistics = new ClearStatistics();
+            clearStatistics.ShowDialog();
         }
     }
 }

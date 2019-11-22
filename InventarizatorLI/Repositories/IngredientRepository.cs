@@ -20,7 +20,7 @@ namespace InventarizatorLI.Repositories
                     context.Ingredients.Add(newIngredient);
                     context.SaveChanges();
                 }
-                else throw new ArgumentException($"This ingredient already exist.", nameof(newIngredient));
+                else throw new ArgumentException($"Цей інгредієнт вже існує.");
             }
         }
 

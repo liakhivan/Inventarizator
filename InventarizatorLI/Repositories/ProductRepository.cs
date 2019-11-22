@@ -33,12 +33,12 @@ namespace InventarizatorLI.Repositories
                             context.SaveChanges();
                             transaction.Commit();
                         }
-                        else throw new ArgumentException("This product already exist.", nameof(newProduct));
+                        else throw new ArgumentException("Цей продукт вже існує.");
                     }
-                    catch(Exception)
+                    catch(Exception e)
                     {
                         transaction.Rollback();
-                        throw new ArgumentException();
+                        throw new ArgumentException(e.Message);
                     }
                 }
             }

@@ -106,6 +106,18 @@
     <Compile Include="Forms\Backup.Designer.cs">
       <DependentUpon>Backup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ClearStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClearStatistics.Designer.cs">
+      <DependentUpon>ClearStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Constructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Constructor.Designer.cs">
+      <DependentUpon>Constructor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Create.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Backup.resx">
       <DependentUpon>Backup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClearStatistics.resx">
+      <DependentUpon>ClearStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Create.resx">
       <DependentUpon>Create.cs</DependentUpon>
@@ -221,22 +236,22 @@
   <ItemGroup>
     <PublishFile Include="InventarizatorLI.pdb">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="InventarizatorUI.pdb">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
