@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Conteiner.cs" />
+    <Compile Include="Model\ElementOfInvoice.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\IngredientsForProduct.cs" />
     <Compile Include="Model\IngredStatElement.cs" />

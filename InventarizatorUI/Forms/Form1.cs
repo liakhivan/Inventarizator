@@ -99,12 +99,6 @@ namespace InventarizatorUI
             Filter();
         }
 
-        private void EliminationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            var form5 = new Remove(UpdateDataGridWiew);
-            form5.ShowDialog();
-        }
 
         public void UpdateDataGridWiew()
         {
@@ -155,6 +149,23 @@ namespace InventarizatorUI
         {
             ClearStatistics clearStatistics = new ClearStatistics();
             clearStatistics.ShowDialog();
+        }
+
+        private void InvoiceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ManyallyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form5 = new Remove(UpdateDataGridWiew);
+            form5.ShowDialog();
+        }
+
+        private void CreateInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form5 = new Constructor();
+            form5.ShowDialog();
         }
     }
 }
