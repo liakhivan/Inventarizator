@@ -11,11 +11,6 @@ namespace InventarizatorUI
         public Form1()
         {
             InitializeComponent();
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            UpdateDataGridWiew();
-            comboBox1.SelectedIndex = 0;
-            dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
-            radioButton1.Checked = true;
         }
         private void Filter()
         {
@@ -99,7 +94,6 @@ namespace InventarizatorUI
             Filter();
         }
 
-
         public void UpdateDataGridWiew()
         {
             if(radioButton1.Checked)
@@ -166,6 +160,15 @@ namespace InventarizatorUI
         {
             var form5 = new Constructor();
             form5.ShowDialog();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UpdateDataGridWiew();
+            comboBox1.SelectedIndex = 0;
+            dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
+            radioButton1.Checked = true;
         }
     }
 }

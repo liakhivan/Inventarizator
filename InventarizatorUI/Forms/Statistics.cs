@@ -11,11 +11,6 @@ namespace InventarizatorUI.Forms
         public Statistics()
         {
             InitializeComponent();
-            ProdStatisticsRepository prodStatistics = new ProdStatisticsRepository();
-            dataGridView1.DataSource = prodStatistics.GetProductStatistics();
-            RadioButton1_CheckedChanged(this, null);
-            dateTimePicker2.MaxDate = DateTime.Today;
-            chart1.ChartAreas.Add("Статистика.");
         }
 
         private void Filter()
@@ -102,6 +97,16 @@ namespace InventarizatorUI.Forms
         private void DateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
             Filter();
+        }
+
+        private void Statistics_Load(object sender, EventArgs e)
+        {
+            ProdStatisticsRepository prodStatistics = new ProdStatisticsRepository();
+            dataGridView1.DataSource = prodStatistics.GetProductStatistics(); 
+            dataGridView1.AutoResizeColumns();
+            RadioButton1_CheckedChanged(this, null);
+            dateTimePicker2.MaxDate = DateTime.Today;
+            chart1.ChartAreas.Add("Статистика.");
         }
     }
 }
