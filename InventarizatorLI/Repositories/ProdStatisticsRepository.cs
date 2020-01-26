@@ -9,8 +9,8 @@ namespace InventarizatorLI.Repositories
 {
     public class ProdStatisticsRepository : GenericRepository<ProdStatElement>
     {
-        //TODO: Продукти: { 0, "Додано" }, { 1, "Списано вручну" }, { 2, "Списано" }, { 4, "Перероблено" } }
-        Dictionary<int, string> typesEvents = new Dictionary<int, string>() { {0, "Додано" }, {1, "Списано вручну" }, { 2, "Списано" }, {4, "Перероблено" } };
+        //TODO: Продукти: { 0, "Додано" }, { 1, "Списано вручну" }, { 2, "Списано" }, { 3, "Перероблено" } }
+        Dictionary<int, string> typesEvents = new Dictionary<int, string>() { {0, "Додано" }, {1, "Списано вручну" }, { 2, "Списано" }, {3, "Перероблено" } };
         public Dictionary<int, string> TypeEvents { get { return typesEvents; } }
         public override List<ProdStatElement> GetDataSource()
         {
@@ -50,7 +50,7 @@ namespace InventarizatorLI.Repositories
                 {
                     context.Configuration.ValidateOnSaveEnabled = false;
                     context.Configuration.AutoDetectChangesEnabled = false;
-                    var listOfStatistics = context.ProductStatistics.Where(element => element.Date <= date2 && element.Date >= date1);
+                    var listOfStatistics = context.ProductStatistics.Where(element => element.Date <= date2 && element.Date >= date1).ToList();
                     foreach (var someConteiner in listOfStatistics)
                     {
                         context.ProductStatistics.Attach(someConteiner);
@@ -83,7 +83,7 @@ namespace InventarizatorLI.Repositories
                         statElement.Weight,
                         statElement.Date
                     }
-                    );
+                    ).ToList();
 
                 var newStatistics = buffStatistics.Join(
                     typesEvents,

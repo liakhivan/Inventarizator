@@ -55,7 +55,7 @@ namespace InventarizatorLI.Repositories
                             throw new ArgumentException();
 
                         var prodStat = new ProdStatisticsRepository();
-                        prodStat.Add(newConteiner.ProductId, 0,newConteiner.Weight, dateAdd);
+                        prodStat.Add(newConteiner.ProductId, 0, newConteiner.Weight * newConteiner.Amount, dateAdd);
                         context.SaveChanges();
                         transaction.Commit();
                     }
@@ -86,9 +86,8 @@ namespace InventarizatorLI.Repositories
                             context.Configuration.ValidateOnSaveEnabled = false;
                             context.Conteiners.Attach(someConteiner);
                             context.Entry(someConteiner).State = EntityState.Deleted;
-
                         }
-                        context.ProductStatistics.Add(new ProdStatElement(index, typeEvent, res.Weight * amount, dateRemove));
+                        context.ProductStatistics.Add(new ProdStatElement(res.ProductId, typeEvent, res.Weight * amount, dateRemove));
                         context.ChangeTracker.DetectChanges();
                         context.SaveChanges();
                         transaction.Commit();

@@ -70,6 +70,7 @@ namespace InventarizatorUI
             { }
         }
 
+
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkBox1.Checked = false;

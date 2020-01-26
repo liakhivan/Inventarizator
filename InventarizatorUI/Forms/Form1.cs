@@ -49,8 +49,7 @@ namespace InventarizatorUI
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             IngredientRepository repos = new IngredientRepository();
-            dataGridView1.DataSource = repos.GetIngredientPackageDataSource();
-            dataGridView1.AutoResizeColumns();
+            UpdateDataGridWiew();
             panel1.Visible = false;
             maskedTextBox1.Text = " ,";
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.000";
@@ -59,8 +58,7 @@ namespace InventarizatorUI
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             ProductRepository repository = new ProductRepository();
-            dataGridView1.DataSource = repository.GetProductConteinerDataSource();
-            dataGridView1.AutoResizeColumns();
+            UpdateDataGridWiew();
             panel1.Visible = true;
             comboBox1.SelectedIndex = 0;
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
@@ -99,13 +97,13 @@ namespace InventarizatorUI
             if(radioButton1.Checked)
             {
                 ProductRepository repository = new ProductRepository();
-                dataGridView1.DataSource = repository.GetProductConteinerDataSource();
+                dataGridView1.DataSource = repository.GetProductConteinerDataSource().OrderBy(n => n.Name).ToList();
                 dataGridView1.AutoResizeColumns();
             }
             else
             {
                 IngredientRepository repos = new IngredientRepository();
-                dataGridView1.DataSource = repos.GetIngredientPackageDataSource();
+                dataGridView1.DataSource = repos.GetIngredientPackageDataSource().OrderBy(n => n.Name).ToList();
                 dataGridView1.AutoResizeColumns();
             }
         }
@@ -147,7 +145,8 @@ namespace InventarizatorUI
 
         private void InvoiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ParserInvoice parserInvoice = new ParserInvoice(UpdateDataGridWiew);
+            parserInvoice.ShowDialog();
         }
 
         private void ManyallyToolStripMenuItem_Click(object sender, EventArgs e)

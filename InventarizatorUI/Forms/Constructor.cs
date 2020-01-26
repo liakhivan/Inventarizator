@@ -23,20 +23,81 @@ namespace InventarizatorUI.Forms
             invoice = new List<ElementOfInvoice>();
         }
 
+        private string Mounth(int number)
+        {
+            string mounth = "";
+            switch (number)
+            {
+                case 1:
+                    mounth = "січня";
+                    break;
+                case 2:
+                    mounth = "лютого";
+                    break;
+                case 3:
+                    mounth = "березня";
+                    break;
+                case 4:
+                    mounth = "квітня";
+                    break;
+                case 5:
+                    mounth = "травня";
+                    break;
+                case 6:
+                    mounth = "червня";
+                    break;
+                case 7:
+                    mounth = "липня";
+                    break;
+                case 8:
+                    mounth = "серпня";
+                    break;
+                case 9:
+                    mounth = "вересня";
+                    break;
+                case 10:
+                    mounth = "жовтня";
+                    break;
+                case 11:
+                    mounth = "листопада";
+                    break;
+                case 12:
+                    mounth = "грудня";
+                    break;
+                default:
+                    break;
+            }
+            return mounth;
+        }
+
         private void Add_Click(object sender, EventArgs e)
         {
             try
             {
                 var nameSomeProduct = comboBox1.SelectedItem.ToString();
-                var weightSomeProduct = Double.Parse(comboBox2.SelectedItem.ToString());
+                var weightSomeProduct = Double.Parse(comboBox2.Text.ToString());
                 var countSomeProduct = Decimal.ToInt32(numericUpDown1.Value);
                 var priceSomeProduct = Double.Parse(textBox1.Text);
-
-                invoice.Add(new ElementOfInvoice(nameSomeProduct, weightSomeProduct, countSomeProduct, priceSomeProduct));
-
-                listBox1.Items.Add(nameSomeProduct + "     " + weightSomeProduct.ToString("0.00") + "     " +
-                    countSomeProduct + "     " + priceSomeProduct);
-
+                ElementOfInvoice element = new ElementOfInvoice(nameSomeProduct, weightSomeProduct, countSomeProduct, priceSomeProduct);
+                if ((invoice.FirstOrDefault(elemInvoice => (elemInvoice.Product == element.Product) & (elemInvoice.Weight == element.Weight))) != null)
+                {
+                    listBox1.Items.Clear();
+                    foreach (var item in invoice)
+                    {
+                        if (item.Product == element.Product & item.Weight == element.Weight)
+                        {
+                            item.Count++;
+                        }
+                        listBox1.Items.Add(item.Product + "     " + item.Weight.ToString("0.00") + "     " +
+                            item.Count + "     " + item.Price);
+                    }
+                }
+                else
+                {
+                    invoice.Add(element);
+                    listBox1.Items.Add(nameSomeProduct + "     " + weightSomeProduct.ToString("0.00") + "     " +
+                        countSomeProduct + "     " + priceSomeProduct);
+                }
                 create.Enabled = true;
             }
             catch (Exception)
@@ -53,12 +114,36 @@ namespace InventarizatorUI.Forms
             {
                 Excel.Application invoiceFile = new Excel.Application
                 {
-                    Visible = true
+                    Visible = false
                 };
                 try
                 {
+                    // Створення нового списку продуктів.
+                    List<ElementOfInvoice> newInvoice = new List<ElementOfInvoice>();
+
+                    // Спрощення старого списку продуктів та його уніфікація.
+                    for (int index = 0; index < invoice.Count(); index++)
+                    {
+                        // Знаходження єдиної назви.
+                        string currProductName = invoice[index].Product;
+                        // Якщо така назва продукту інує в новому списку, то пропустити цей продукт.
+                        if (newInvoice.FirstOrDefault(n => n.Product == currProductName) != null)
+                        {
+                            continue;
+                        }
+                        // Знайти всі продукти з такою назвою.
+                        var elementsInvoice = invoice.Where(n => n.Product == currProductName);
+                        // Знайти єдину вагу, кількість продукту та ціну.
+                        double weight = elementsInvoice.Sum(n => n.Weight * n.Count);
+                        int count = 1;
+                        double price = invoice[index].Price;
+                        newInvoice.Add(new ElementOfInvoice(currProductName, weight, count, price));
+                    }
+
                     if (!Int32.TryParse(textBox2.Text, out int res))
+                    {
                         throw new ArgumentException("№ накладної повинен бути числом!!!");
+                    }
                     // Генерація імені накладної.
                     newFileName = textBox3.Text + "_" + textBox2.Text + "_" + dateTimePicker1.Value.ToString("dd-MM-yyyy") + ".xlsx";
                     // Копіювання файлу з корінної папки в потрібну.
@@ -71,13 +156,16 @@ namespace InventarizatorUI.Forms
                     invoiceFile.Workbooks.Open(path + "\\" + newFileName);
 
                     Excel.Worksheet sheet = invoiceFile.Sheets[1];
+                    Excel.Worksheet sheetRemove = invoiceFile.Sheets[2];
 
                     //Заповнення накладної.
                     sheet.Range["H17"].Value = textBox3.Text;
                     sheet.Range["AJ5"].Value = textBox2.Text;
+                    sheet.Range["AJ10"].Value = dateTimePicker1.Value.Day;
+                    sheet.Range["AM10"].Value = Mounth(dateTimePicker1.Value.Month) + " " + dateTimePicker1.Value.Year;
 
                     int i = 0;
-                    foreach (var element in invoice)
+                    foreach (var element in newInvoice)
                     {
                         // №
                         sheet.Range["A"+ (startProductPosition + i)].Value = i + 1;
@@ -91,6 +179,16 @@ namespace InventarizatorUI.Forms
                         sheet.Range["AP" + (startProductPosition + i)].Value = element.Price;
                         i++;
                     }
+                    i = 1;
+                    foreach (var element in invoice)
+                    {
+                        sheetRemove.Range["A" + i].Value = element.Product;
+                        sheetRemove.Range["B" + i].Value = element.Count;
+                        sheetRemove.Range["C" + i].Value = element.Weight;
+                        i++;
+                    }
+                    sheetRemove.Range["D1"].Value = dateTimePicker1.Value.ToString("dd.MM.yyyy");
+
                     invoiceFile.ActiveWorkbook.Save();
 
                     label5.ForeColor = System.Drawing.Color.Green;

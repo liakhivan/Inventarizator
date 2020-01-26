@@ -15,9 +15,11 @@ namespace InventarizatorUI.Forms
 
         private void Filter()
         {
-            chart1.Series[0].Points.Clear();
-            chart1.Titles.Clear();
-            if(radioButton1.Checked)
+            DateTime date1 = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day);
+
+            DateTime date2 = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day);
+
+            if (radioButton1.Checked)
             {
                 ProdStatisticsRepository prodStatistics = new ProdStatisticsRepository();
                 var statistics = prodStatistics.GetProductStatistics();
@@ -25,12 +27,7 @@ namespace InventarizatorUI.Forms
                 if (comboBox1.SelectedItem.ToString() != "Все")
                     statistics = statistics.Where(element => element.TypeEvent == comboBox1.SelectedItem.ToString()).ToList();
                 if(!checkBox1.Checked)
-                    statistics = statistics.Where(element => (element.Date >= dateTimePicker1.Value && element.Date <= dateTimePicker2.Value)).ToList();
-
-                var chartDataSource = statistics.GroupBy(i => i.Date).Select(g => new { Date = g.Key, Weight = g.Sum(i => i.Weight) }).ToList();
-                chart1.Titles.Add("Статистика продуктів.");
-                foreach (var element in chartDataSource)
-                    chart1.Series[0].Points.AddXY(element.Date.ToString("dd.MM.yy"), element.Weight);
+                    statistics = statistics.Where(element => (element.Date >= date1.Date && element.Date <= date2.Date)).ToList();
                 dataGridView1.DataSource = statistics;
             }
             else
@@ -41,15 +38,9 @@ namespace InventarizatorUI.Forms
                 if (comboBox1.SelectedItem.ToString() != "Все")
                     statistics = statistics.Where(element => element.TypeEvent == comboBox1.SelectedItem.ToString()).ToList();
                 if (!checkBox1.Checked)
-                    statistics = statistics.Where(element => (element.Date >= dateTimePicker1.Value && element.Date <= dateTimePicker2.Value)).ToList();
-
-                var chartDataSource = statistics.GroupBy(i => i.Date).Select(g => new { Date = g.Key, Weight = g.Sum(i => i.Weight) });
-                chart1.Titles.Add("Статистика інгредієнтів.");
-                foreach (var element in chartDataSource)
-                    chart1.Series[0].Points.AddXY(element.Date.ToString("dd.MM.yy"), element.Weight);
+                    statistics = statistics.Where(element => (element.Date >= date1.Date && element.Date <= date2.Date)).ToList();
                 dataGridView1.DataSource = statistics;
             }
-            chart1.DataBind();
         }
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
@@ -103,10 +94,11 @@ namespace InventarizatorUI.Forms
         {
             ProdStatisticsRepository prodStatistics = new ProdStatisticsRepository();
             dataGridView1.DataSource = prodStatistics.GetProductStatistics(); 
+            dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
             dataGridView1.AutoResizeColumns();
             RadioButton1_CheckedChanged(this, null);
+            dateTimePicker1.MaxDate = DateTime.Today;
             dateTimePicker2.MaxDate = DateTime.Today;
-            chart1.ChartAreas.Add("Статистика.");
         }
     }
 }
