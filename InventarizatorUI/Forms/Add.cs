@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using InventarizatorLI.Model;
 using InventarizatorLI.Repositories;
+using InventarizatorLI.Repositories.TableJoin;
+using System.Collections.Generic;
 
 namespace InventarizatorUI
 {
@@ -12,11 +14,15 @@ namespace InventarizatorUI
         Point panel1Position1, panel1Position2, label5Position1, label5Position2, checkBox2Position1, checkBox2Position2;
         public delegate void Upd();
         private event Upd updateInformation;
+        private List<ProductConteiner> conteiners;
+        private ProductConteiner elementForRemaking;
+        private ProductConteiner defProductForRemaking;
 
 
         public Add(Upd eventUpdate)
         {
             updateInformation += eventUpdate;
+            conteiners = new List<ProductConteiner>();
             InitializeComponent();
             Height -= 90;
             ProductRepository repos = new ProductRepository();
@@ -35,11 +41,44 @@ namespace InventarizatorUI
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (!comboBox2.SelectedItem.Equals(null))
+            try
             {
-                var newElementOfListBox = (numericUpDown2.Value + @" " + comboBox2.SelectedItem.ToString());
-                if (!listBox1.Items.Contains(newElementOfListBox))
-                    listBox1.Items.Add(newElementOfListBox);
+                if (!comboBox2.SelectedItem.Equals(null))
+                {
+                    elementForRemaking = new ProductConteiner(
+                        defProductForRemaking.Name,
+                        defProductForRemaking.Weight,
+                        Decimal.ToInt32(numericUpDown2.Value)
+                        );
+                    bool wasNotFound = true;
+                    listBox1.Items.Clear();
+
+                    for (int index = 0; index < conteiners.Count(); index++)
+                    {
+                        if (conteiners[index].Name == elementForRemaking.Name & conteiners[index].Weight == elementForRemaking.Weight)
+                        {
+                            if ((conteiners[index].Amount + elementForRemaking.Amount) > Int32.Parse(label7.Text))
+                            {
+                                label5.ForeColor = System.Drawing.Color.Red;
+                                label5.Text = @"Кіликість продукту занадто велика.";
+                            }
+                            else
+                                conteiners[index].Amount += elementForRemaking.Amount;
+                            wasNotFound = false;
+                        }
+                        listBox1.Items.Add(conteiners[index].ToString());
+                    }
+                    if (wasNotFound)
+                    {
+                        conteiners.Add(elementForRemaking);
+                        listBox1.Items.Add(elementForRemaking.ToString());
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                label5.ForeColor = System.Drawing.Color.Red;
+                label5.Text = ex.Message;
             }
         }
 
@@ -48,9 +87,10 @@ namespace InventarizatorUI
             try
             {
                 var productRepository = new ProductRepository();
-                var currentProductConteinerForRemaking = productRepository.GetProductConteinerDataSource().
-                    First(element => $"{element.Name} {element.Weight}" == comboBox2.SelectedItem.ToString());
-                label7.Text = currentProductConteinerForRemaking.Amount.ToString();
+                defProductForRemaking = productRepository.GetProductConteinerDataSource().
+                    First(element => element.ToString() == comboBox2.SelectedItem.ToString());
+                label7.Text = defProductForRemaking.Amount.ToString();
+
             }
             catch(NullReferenceException)
             {
@@ -64,6 +104,7 @@ namespace InventarizatorUI
         {
             try
             {
+                conteiners.RemoveAt(listBox1.SelectedIndex);
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
             }
             catch(ArgumentOutOfRangeException)
@@ -113,6 +154,7 @@ namespace InventarizatorUI
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
+            elementForRemaking = null;
             if (checkBox1.Checked)
             {
                 this.Height += 90;
@@ -136,8 +178,7 @@ namespace InventarizatorUI
                     ////////var data = repos.GetProductConteinerDataSource().
                     ////////Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 6).
                     ////////Select(element => $"{element.Name} {element.Weight}").ToList();
-                    var data = repos.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6).
-                        Select(element => $"{element.Name} {element.Weight}").ToList();
+                    List<string> data = repos.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6).Select(n => n.ToString()).ToList();
                     if (data.Count == 0)
                     {
                         checkBox1.Checked = false;
@@ -180,23 +221,19 @@ namespace InventarizatorUI
                     double weightForRemaking = 0;
                     if (checkBox1.Checked)
                     {
-                        foreach (var elementOfRemaking in listBox1.Items)
+                        foreach (var elementOfRemaking in conteiners)
                         {
-                            var productConteiner = productRepository.GetProductConteinerDataSource().
-                            First(element => elementOfRemaking.ToString().Contains($"{element.Name} {element.Weight}"));
 
-                            var arrayOfWords = elementOfRemaking.ToString().Split(' ');
+                            weightForRemaking += elementForRemaking.Weight * elementForRemaking.Amount;
+                            var product = productRepository.GetDataSource()
+                                .First(element => element.Name == elementForRemaking.Name);
+                            var conteiner = conteinerRepository.GetDataSource()
+                                .First(elem => elem.ProductId == product.Id & elem.Weight == elementForRemaking.Weight);
 
-                            int amount = Int32.Parse(arrayOfWords[0]);
-                            weightForRemaking += productConteiner.Weight * amount;
-                            var product = productRepository.GetDataSource().First(element => element.Name == comboBox1.SelectedItem.ToString());
-                            var conteiner = conteinerRepository.GetDataSource().First(elem => elem.ProductId == product.Id & elem.Weight == productConteiner.Weight);
+                            conteinerRepository.Remove(conteiner.Id, dateTimePicker1.Value, 3 ,elementForRemaking.Amount);
 
-                            conteinerRepository.Remove(conteiner.Id, dateTimePicker1.Value, 3 ,amount);
-
-                            comboBox2.DataSource = productRepository.GetProductConteinerDataSource().
-                            Where(elem => elem.Name.Contains(product.Name) & elem.Amount != 0 & elem.Weight <= 3).
-                            Select(element => $"{element.Name} {element.Weight}").ToList();
+                            comboBox2.DataSource = productRepository.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6)
+                                .Select(n => n.ToString()).ToList();
                         }
 
                         if(weightForRemaking > weight * Decimal.ToInt32(numericUpDown1.Value))

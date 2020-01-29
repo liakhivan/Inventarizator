@@ -85,7 +85,7 @@ namespace InventarizatorLI.Repositories
             using (StorageDbContext context = new StorageDbContext())
             {
                 context.Products.Load();
-                return context.Products.Local.ToList();
+                return context.Products.Local.OrderBy(n => n.Name).ToList();
             }
         }
 
@@ -105,7 +105,7 @@ namespace InventarizatorLI.Repositories
                     Name = product.Name,
                     Weight = conteiner.Weight,
                     Amount = conteiner.Amount
-                }).ToList();
+                }).OrderBy(n => n.Weight).ToList().OrderBy(n => n.Name).ToList();
             }
             return dataSource;
         }

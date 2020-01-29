@@ -33,19 +33,14 @@ namespace InventarizatorUI
             {
                 double weightNewConteiner = double.Parse(maskedTextBox1.Text);
                 if (weight - weightNewConteiner < 0)
-                    throw new ArgumentException();
+                    throw new ArgumentException("Вага занадто велика.");
                 conteinerRepository.Add(new Conteiner(idProduct, weightNewConteiner, 1), dateAdd);
-                if(weightNewConteiner - weight < 0)
-                {
-                    var statistic = new ProdStatisticsRepository();
-                    statistic.Add(idProduct, 1, weightNewConteiner - weight, dateAdd);
-                }
-            }
-            catch (FormatException) { }
-            catch (ArgumentException) { }
-            finally
-            {
+                var statistic = new ProdStatisticsRepository();
                 this.Close();
+            }
+            catch (Exception ex)
+            {
+                label4.Text = ex.Message;
             }
         }
 
