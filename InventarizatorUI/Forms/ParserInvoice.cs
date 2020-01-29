@@ -92,7 +92,6 @@ namespace InventarizatorUI.Forms
         {
             ConteinerRepository conteinerRepository = new ConteinerRepository();
             ProductRepository productRepository = new ProductRepository();
-            //Заповнення накладної.
 
             try
             {
@@ -117,6 +116,12 @@ namespace InventarizatorUI.Forms
                 updateInformation();
             }
 
+        }
+
+        private void ParserInvoice_MouseMove(object sender, MouseEventArgs e)
+        {
+            label1.ForeColor = System.Drawing.Color.Black;
+            label1.Text = @"Інформація про списання.";
         }
     }
 }

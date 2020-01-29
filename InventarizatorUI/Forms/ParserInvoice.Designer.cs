@@ -44,13 +44,13 @@
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(401, 220);
+            this.textBox1.Size = new System.Drawing.Size(401, 175);
             this.textBox1.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(3, 229);
+            this.button1.Location = new System.Drawing.Point(3, 184);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 36);
             this.button1.TabIndex = 1;
@@ -61,7 +61,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(204, 229);
+            this.button2.Location = new System.Drawing.Point(204, 184);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 36);
             this.button2.TabIndex = 2;
@@ -73,23 +73,24 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 272);
+            this.label1.Location = new System.Drawing.Point(1, 224);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 15);
+            this.label1.Size = new System.Drawing.Size(159, 15);
             this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
+            this.label1.Text = "Інформація про списання.";
             // 
             // ParserInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 307);
+            this.ClientSize = new System.Drawing.Size(407, 259);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Name = "ParserInvoice";
             this.Text = "ParserInvoice";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ParserInvoice_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();
 
