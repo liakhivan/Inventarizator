@@ -216,11 +216,11 @@
             this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker2.Location = new System.Drawing.Point(166, 3);
-            this.dateTimePicker2.MaxDate = new System.DateTime(2020, 1, 26, 0, 0, 0, 0);
+            this.dateTimePicker2.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(96, 21);
             this.dateTimePicker2.TabIndex = 25;
-            this.dateTimePicker2.Value = new System.DateTime(2020, 1, 26, 0, 0, 0, 0);
+            this.dateTimePicker2.Value = new System.DateTime(2020, 1, 31, 0, 0, 0, 0);
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.DateTimePicker2_ValueChanged);
             // 
             // label7
@@ -315,7 +315,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MaximizeBox = false;
             this.Name = "Statistics";
-            this.Text = "Statistics";
+            this.Text = "Статистика";
             this.Load += new System.EventHandler(this.Statistics_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

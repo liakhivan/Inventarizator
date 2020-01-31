@@ -44,7 +44,6 @@
             this.statisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.показатиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -78,8 +77,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dataToolStripMenuItem,
             this.dataToolStripMenuItem1,
-            this.statisticsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.statisticsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -203,12 +201,6 @@
             this.clearToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.clearToolStripMenuItem.Text = "Очистити";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.aboutToolStripMenuItem.Text = "Про програму";
             // 
             // показатиToolStripMenuItem
             // 
@@ -441,7 +433,6 @@
         private System.Windows.Forms.ToolStripMenuItem eliminationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recoveryToolStripMenuItem;

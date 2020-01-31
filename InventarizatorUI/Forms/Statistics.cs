@@ -97,8 +97,10 @@ namespace InventarizatorUI.Forms
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
             dataGridView1.AutoResizeColumns();
             RadioButton1_CheckedChanged(this, null);
-            dateTimePicker1.MaxDate = DateTime.Today;
+            dateTimePicker1.MaxDate = DateTime.Today; 
+            dateTimePicker1.Value = DateTime.Today;
             dateTimePicker2.MaxDate = DateTime.Today;
+            dateTimePicker2.Value = DateTime.Today;
         }
     }
 }

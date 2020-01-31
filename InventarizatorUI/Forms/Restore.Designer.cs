@@ -129,7 +129,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "Restore";
-            this.Text = "Recovery";
+            this.Text = "Відновлення даних";
             this.ResumeLayout(false);
             this.PerformLayout();
 
