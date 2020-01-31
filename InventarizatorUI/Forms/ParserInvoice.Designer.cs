@@ -88,8 +88,9 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
+            this.MaximizeBox = false;
             this.Name = "ParserInvoice";
-            this.Text = "ParserInvoice";
+            this.Text = "Списати по накладній";
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ParserInvoice_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();

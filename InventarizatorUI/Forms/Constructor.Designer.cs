@@ -31,6 +31,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.create = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -40,7 +43,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.create = new System.Windows.Forms.Button();
             this.deleteAll = new System.Windows.Forms.Button();
             this.delete = new System.Windows.Forms.Button();
             this.add = new System.Windows.Forms.Button();
@@ -57,8 +59,6 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -78,7 +78,7 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -97,9 +97,9 @@
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(2, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(283, 363);
+            this.panel1.Size = new System.Drawing.Size(283, 364);
             this.panel1.TabIndex = 0;
             // 
             // panel4
@@ -117,16 +117,44 @@
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Location = new System.Drawing.Point(2, 156);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(279, 152);
             this.panel4.TabIndex = 13;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(4, 77);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(239, 15);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Шлях до папки, куди зберігати накладні:";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(4, 96);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(242, 21);
+            this.textBox4.TabIndex = 16;
+            // 
+            // create
+            // 
+            this.create.Enabled = false;
+            this.create.Location = new System.Drawing.Point(4, 120);
+            this.create.Margin = new System.Windows.Forms.Padding(2);
+            this.create.Name = "create";
+            this.create.Size = new System.Drawing.Size(265, 25);
+            this.create.TabIndex = 11;
+            this.create.Text = "Створити накладну";
+            this.create.UseVisualStyleBackColor = true;
+            this.create.Click += new System.EventHandler(this.Create_Click);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Modern No. 20", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(247, 95);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(24, 23);
             this.button1.TabIndex = 15;
@@ -137,7 +165,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(76, 52);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(194, 21);
             this.textBox3.TabIndex = 14;
@@ -156,7 +184,7 @@
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(188, 23);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(82, 21);
             this.dateTimePicker1.TabIndex = 12;
@@ -174,7 +202,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(60, 23);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(81, 21);
             this.textBox2.TabIndex = 10;
@@ -206,27 +234,14 @@
             this.label5.Location = new System.Drawing.Point(5, 318);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 15);
+            this.label5.Size = new System.Drawing.Size(0, 15);
             this.label5.TabIndex = 12;
-            this.label5.Text = "label5";
-            // 
-            // create
-            // 
-            this.create.Enabled = false;
-            this.create.Location = new System.Drawing.Point(4, 120);
-            this.create.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.create.Name = "create";
-            this.create.Size = new System.Drawing.Size(265, 25);
-            this.create.TabIndex = 11;
-            this.create.Text = "Створити накладну";
-            this.create.UseVisualStyleBackColor = true;
-            this.create.Click += new System.EventHandler(this.Create_Click);
             // 
             // deleteAll
             // 
             this.deleteAll.Enabled = false;
             this.deleteAll.Location = new System.Drawing.Point(181, 115);
-            this.deleteAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteAll.Margin = new System.Windows.Forms.Padding(2);
             this.deleteAll.Name = "deleteAll";
             this.deleteAll.Size = new System.Drawing.Size(95, 25);
             this.deleteAll.TabIndex = 10;
@@ -238,7 +253,7 @@
             // 
             this.delete.Enabled = false;
             this.delete.Location = new System.Drawing.Point(103, 115);
-            this.delete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.delete.Margin = new System.Windows.Forms.Padding(2);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(74, 25);
             this.delete.TabIndex = 9;
@@ -250,7 +265,7 @@
             // 
             this.add.Enabled = false;
             this.add.Location = new System.Drawing.Point(7, 115);
-            this.add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.add.Margin = new System.Windows.Forms.Padding(2);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(65, 25);
             this.add.TabIndex = 8;
@@ -266,7 +281,7 @@
             this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.panel2);
             this.panel5.Location = new System.Drawing.Point(2, 2);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(281, 109);
             this.panel5.TabIndex = 7;
@@ -286,7 +301,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(60, 24);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(210, 23);
             this.comboBox1.TabIndex = 6;
@@ -310,7 +325,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(2, 48);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(272, 52);
             this.panel2.TabIndex = 1;
@@ -318,7 +333,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(194, 2);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(75, 21);
             this.textBox1.TabIndex = 1;
@@ -338,7 +353,7 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(58, 2);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(81, 23);
             this.comboBox2.TabIndex = 2;
@@ -358,7 +373,7 @@
             this.panel3.Controls.Add(this.numericUpDown1);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(2, 27);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(269, 25);
             this.panel3.TabIndex = 0;
@@ -366,7 +381,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(56, 3);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             50,
             0,
@@ -402,27 +417,11 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(289, 2);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(372, 364);
+            this.listBox1.Size = new System.Drawing.Size(370, 364);
             this.listBox1.TabIndex = 1;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(4, 96);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(242, 21);
-            this.textBox4.TabIndex = 16;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 77);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(239, 15);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Шлях до папки, куди зберігати накладні:";
             // 
             // Constructor
             // 
@@ -430,9 +429,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 368);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Constructor";
-            this.Text = "Constructor";
+            this.Text = "Конструктор накладної";
             this.Load += new System.EventHandler(this.Constructor_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Constructor_MouseMove);
             this.tableLayoutPanel1.ResumeLayout(false);

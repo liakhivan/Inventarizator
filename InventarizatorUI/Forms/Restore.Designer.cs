@@ -40,25 +40,28 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 64);
+            this.label1.Location = new System.Drawing.Point(5, 52);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 17);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Файл:";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(58, 61);
+            this.textBox1.Location = new System.Drawing.Point(44, 50);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(338, 22);
+            this.textBox1.Size = new System.Drawing.Size(254, 20);
             this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(397, 60);
+            this.button1.Location = new System.Drawing.Point(298, 49);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(33, 27);
+            this.button1.Size = new System.Drawing.Size(25, 22);
             this.button1.TabIndex = 2;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(10, 101);
+            this.button2.Location = new System.Drawing.Point(8, 82);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(164, 45);
+            this.button2.Size = new System.Drawing.Size(123, 37);
             this.button2.TabIndex = 3;
             this.button2.Text = "Відновити";
             this.button2.UseVisualStyleBackColor = true;
@@ -78,9 +82,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 9);
+            this.label2.Location = new System.Drawing.Point(16, 7);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(386, 34);
+            this.label2.Size = new System.Drawing.Size(298, 26);
             this.label2.TabIndex = 4;
             this.label2.Text = "Для відновлення даних вкажіть шлях до файлу локальної\r\nкопії даних.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -88,11 +93,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(180, 135);
+            this.label3.Location = new System.Drawing.Point(135, 110);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.Size = new System.Drawing.Size(0, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
             this.label3.Click += new System.EventHandler(this.Label3_Click);
             this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Label3_MouseMove);
             // 
@@ -101,18 +106,19 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(180, 101);
+            this.label4.Location = new System.Drawing.Point(135, 82);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(229, 34);
+            this.label4.Size = new System.Drawing.Size(182, 26);
             this.label4.TabIndex = 6;
             this.label4.Text = "Не виконуйте жодних дій.\r\nЦе може зайняти трохи часу.";
             this.label4.Visible = false;
             // 
             // Restore
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 168);
+            this.ClientSize = new System.Drawing.Size(328, 136);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -120,6 +126,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
             this.Name = "Restore";
             this.Text = "Recovery";
             this.ResumeLayout(false);
