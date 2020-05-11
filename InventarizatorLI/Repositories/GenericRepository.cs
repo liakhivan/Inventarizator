@@ -39,7 +39,7 @@ namespace InventarizatorLI.Repositories
                 "ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
 
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch + "\' WITH REPLACE;");
+                "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch + "\' WITH RECOVERY;");
 
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
                 "ALTER DATABASE " + database + " SET MULTI_USER");
