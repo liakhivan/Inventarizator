@@ -31,10 +31,10 @@ namespace InventarizatorUI
             comboBox2.Enabled = false;
             panel1Position1 = panel1.Location = new Point(9, 106);
             panel1Position2 = panel2.Location = new Point(9, 60);
-            label5Position1 = label5.Location = new Point(127, 84);
-            label5Position2 = label2.Location;
-            label5Position2.Y += 27;
-            checkBox2Position1 = checkBox2.Location = new Point(17, 84);
+            //label5Position1 = label5.Location = new Point(127, 84);
+            //label5Position2 = label2.Location;
+            //label5Position2.Y += 27;
+            checkBox2Position1 = new Point(17, 84);
             checkBox2Position2 = new Point(17, 178);
             dateTimePicker1.MaxDate = DateTime.Today;
         }
@@ -59,8 +59,7 @@ namespace InventarizatorUI
                         {
                             if ((conteiners[index].Amount + elementForRemaking.Amount) > Int32.Parse(label7.Text))
                             {
-                                label5.ForeColor = System.Drawing.Color.Red;
-                                label5.Text = @"Кіликість продукту занадто велика.";
+                                MessageBox.Show(@"Кіликість продукту занадто велика.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                             else
                                 conteiners[index].Amount += elementForRemaking.Amount;
@@ -77,8 +76,7 @@ namespace InventarizatorUI
             }
             catch(Exception ex)
             {
-                label5.ForeColor = System.Drawing.Color.Red;
-                label5.Text = ex.Message;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -111,7 +109,6 @@ namespace InventarizatorUI
             { }
         }
 
-
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkBox1.Checked = false;
@@ -126,11 +123,10 @@ namespace InventarizatorUI
                 comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
                 label1.Text = @"Назва:";
                 panel1.Location = panel1Position1;
-                label5.Location = label5Position1;
+                //label5.Location = label5Position1;
                 Height += 45;
                 panel2.Visible = panel2.Enabled = true;
                 panel3.Visible = panel3.Enabled = true;
-                checkBox2.Enabled = checkBox2.Visible = true;
                 maskedTextBox1.Mask = @"0.00";
             }
             else
@@ -141,10 +137,8 @@ namespace InventarizatorUI
                 panel2.Visible = panel2.Enabled = false;
                 panel3.Visible = panel3.Enabled = false;
                 panel4.Visible = panel4.Enabled = false;
-                checkBox2.Checked = checkBox1.Checked = false;
-                checkBox2.Enabled = checkBox2.Visible = false;
                 panel1.Location = panel1Position2;
-                label5.Location = label5Position2;
+                //label5.Location = label5Position2;
                 Height -= 45;
                 maskedTextBox1.Mask = @"000.00";
             }
@@ -159,8 +153,7 @@ namespace InventarizatorUI
             {
                 this.Height += 90;
                 panel1.Location = new Point(4, 200);
-                label5.Location = new Point(127, 179);
-                checkBox2.Location = checkBox2Position2;
+                //label5.Location = new Point(127, 179);
                 panel4.Visible = panel4.Enabled = true;
                 comboBox2.Enabled = checkBox1.Checked;
                 numericUpDown2.Value = 1;
@@ -182,8 +175,7 @@ namespace InventarizatorUI
                     if (data.Count == 0)
                     {
                         checkBox1.Checked = false;
-                        label5.ForeColor = System.Drawing.Color.Red;
-                        label5.Text = @"Продукту для переробки не існує";
+                        MessageBox.Show(@"Продукту для переробки не існує", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                         comboBox2.DataSource = data;
@@ -196,8 +188,7 @@ namespace InventarizatorUI
             else
             {
                 this.Height -= 90;
-                checkBox2.Location = checkBox2Position1;
-                label5.Location = label5Position1;
+                //label5.Location = label5Position1;
                 panel1.Location = new Point(4, 104);
                 panel4.Visible = panel4.Enabled = false;
             }
@@ -253,7 +244,7 @@ namespace InventarizatorUI
                         new Conteiner(id, weight, Decimal.ToInt32(numericUpDown1.Value)),
                         dateTimePicker1.Value, 
                         weightForRemaking,
-                        checkBox2.Checked
+                        false
                         );
                     listBox1.Items.Clear();
                     comboBox1.DataSource = productRepository.GetDataSource();
@@ -269,27 +260,27 @@ namespace InventarizatorUI
                     repository.Add(new Package(id, weight), dateTimePicker1.Value);
                 }
 
-                label5.ForeColor = System.Drawing.Color.Green;
-                label5.Text = @"Об'єкт було успішно додано.";
+
+                MessageBox.Show(@"Об'єкт було успішно додано.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 updateInformation();
             }
             catch (FormatException)
             {
-                label5.ForeColor = System.Drawing.Color.Red;
-                label5.Text = @"Некоректна вага продукту.";
+
+                MessageBox.Show(@"Некоректна вага продукту.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception exception)
             {
                 //TODO: Program thrown message on english when user try to add some product. Also check this problem with ingredient.
-                label5.ForeColor = System.Drawing.Color.Red;
-                label5.Text = exception.Message;
+
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+
+        //TODO: Delete an event method.
         private void Add_MouseMove(object sender, MouseEventArgs e)
         {
-            label5.ForeColor = System.Drawing.Color.Black;
-            label5.Text = @"Інформація про додавання.";
         }
     }
 }

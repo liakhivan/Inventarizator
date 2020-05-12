@@ -35,14 +35,22 @@ namespace InventarizatorLI.Repositories
 
                 string database = context.Database.Connection.Database;
 
-                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                "ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+                string databasePath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+                if (Environment.OSVersion.Version.Major >= 6)
+                {
+                    databasePath = Directory.GetParent(databasePath).ToString();
+                }
 
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch + "\' WITH RECOVERY;");
+                    "ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
 
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                "ALTER DATABASE " + database + " SET MULTI_USER");
+                    "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch + "\' WITH REPLACE, " +
+                    "MOVE \'StorageDBConnection\' to \'" + databasePath + "\\StorageDBConnection.mdf\', " +
+                    "MOVE \'StorageDBConnection_log\' to \'" + databasePath + "\\StorageDBConnection.ldf\'");
+
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
+                    "ALTER DATABASE " + database + " SET MULTI_USER");
             }
         }
     }

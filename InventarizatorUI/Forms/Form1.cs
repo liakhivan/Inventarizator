@@ -46,22 +46,32 @@ namespace InventarizatorUI
                 dataGridView1.DataSource = dataSource;
             }
         }
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            IngredientRepository repos = new IngredientRepository();
-            UpdateDataGridWiew();
-            panel1.Visible = false;
-            maskedTextBox1.Text = " ,";
-            dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.000";
-        }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            ProductRepository repository = new ProductRepository();
-            UpdateDataGridWiew();
-            panel1.Visible = true;
-            comboBox1.SelectedIndex = 0;
-            dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
+            if (radioButton1.Checked)
+            {
+                ProductRepository repository = new ProductRepository();
+                UpdateDataGridWiew();
+                panel1.Visible = true;
+                comboBox1.SelectedIndex = 0;
+                dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
+
+                dataGridView1.Columns[0].HeaderText = @"Назва";
+                dataGridView1.Columns[1].HeaderText = @"Вага";
+                dataGridView1.Columns[2].HeaderText = @"Кількість";
+            }
+            else
+            {
+                IngredientRepository repos = new IngredientRepository();
+                UpdateDataGridWiew();
+                panel1.Visible = false;
+                maskedTextBox1.Text = " ,";
+                dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.000";
+
+                dataGridView1.Columns[0].HeaderText = @"Назва";
+                dataGridView1.Columns[1].HeaderText = @"Вага";
+            }
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)

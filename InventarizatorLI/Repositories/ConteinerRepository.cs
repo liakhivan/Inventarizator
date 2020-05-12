@@ -8,7 +8,7 @@ namespace InventarizatorLI.Repositories
 {
     public class ConteinerRepository : GenericRepository<Conteiner>
     {
-        public void Add(Conteiner newConteiner, DateTime dateAdd, double remake = 0, bool washer = false)
+        /*public void Add(Conteiner newConteiner, DateTime dateAdd, double remake = 0, bool washer = false)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -66,7 +66,69 @@ namespace InventarizatorLI.Repositories
                     }
                 }
             }
+        }*/
+
+
+        public void Add(Conteiner newConteiner, DateTime dateAdd, double remake = 0, bool washer = false)
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Conteiner dbconteiner = context.Conteiners.FirstOrDefault(n =>
+                             n.ProductId == newConteiner.ProductId & n.Weight == newConteiner.Weight);
+                        if (dbconteiner != null)
+                            dbconteiner.Amount += newConteiner.Amount;
+                        else
+                            context.Conteiners.Add(newConteiner);
+
+                        context.SaveChanges();
+                        double weightNewConteiner = newConteiner.Weight;
+                        if (remake != 0)
+                            weightNewConteiner -= remake;
+
+                        if (washer)
+                            weightNewConteiner += 0.6;
+
+                        var recept = context.IngredientsForProducts.
+                            Where(element => element.ProductId == newConteiner.ProductId);
+                        int amountOfDontRemovedIngredients = recept.Count();
+                        foreach (var oneIngredientOfRecept in recept)
+                        {
+                            foreach (var onePackage in context.Packages)
+                            {
+                                if (oneIngredientOfRecept.IngredientId == onePackage.IngredientId)
+                                {
+                                    var weight = oneIngredientOfRecept.Weight * weightNewConteiner *
+                                                 newConteiner.Amount;
+                                    if (weight <= onePackage.Weight)
+                                        onePackage.Weight -= weight;
+                                    //TODO: якщо треба збирати статистику списаних по рецепту інгредієнтів, то тут добавити додавання статистики
+                                    else
+                                        throw new ArgumentException();
+                                    amountOfDontRemovedIngredients--;
+                                }
+                            }
+                        }
+                        if (amountOfDontRemovedIngredients != 0)
+                            throw new ArgumentException();
+
+                        var prodStat = new ProdStatisticsRepository();
+                        prodStat.Add(newConteiner.ProductId, 0, newConteiner.Weight * newConteiner.Amount, dateAdd);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw new ArgumentException("Немає/недостатньо інгредієнтів.");
+                    }
+                }
+            }
         }
+
 
         public void Remove(int index, DateTime dateRemove, int typeEvent, int amount = 1)
         {

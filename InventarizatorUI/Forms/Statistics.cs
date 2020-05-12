@@ -59,6 +59,7 @@ namespace InventarizatorUI.Forms
             }
             checkBox1.Checked = true;
             comboBox1.DataSource = statisticList;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
@@ -95,7 +96,17 @@ namespace InventarizatorUI.Forms
             ProdStatisticsRepository prodStatistics = new ProdStatisticsRepository();
             dataGridView1.DataSource = prodStatistics.GetProductStatistics(); 
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
-            dataGridView1.AutoResizeColumns();
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dataGridView1.Columns[0].HeaderText = @"Назва";
+            dataGridView1.Columns[1].HeaderText = @"Дія";
+            dataGridView1.Columns[1].Width = 50;
+            dataGridView1.Columns[2].HeaderText = @"Вага";
+            dataGridView1.Columns[2].Width = 30;
+            dataGridView1.Columns[3].HeaderText = @"Дата";
+            dataGridView1.Columns[3].Width = 80;
+
+
             RadioButton1_CheckedChanged(this, null);
             dateTimePicker1.MaxDate = DateTime.Today; 
             dateTimePicker1.Value = DateTime.Today;
