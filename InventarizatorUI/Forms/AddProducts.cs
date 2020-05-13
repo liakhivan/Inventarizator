@@ -7,12 +7,12 @@ using InventarizatorLI.Repositories;
 using InventarizatorLI.Repositories.TableJoin;
 using System.Collections.Generic;
 
-namespace InventarizatorUI
+namespace InventarizatorUI.Forms
 {
-    public partial class Add : Form
+    public partial class AddProducts : Form
     {
-        Point panel1PositionProductWithoutRemake, panel1PositionProductWithRemake, panel1PositionIngredients;
-        int heightProductsWithoutRemake = 209, heightProductsWithRemake = 301, heightIngredients = 181;
+        Point panel1PositionProductWithoutRemake, panel1PositionProductWithRemake;
+        int heightProductsWithoutRemake = 500, heightProductsWithRemake = 500;
         public delegate void Upd();
         private event Upd updateInformation;
         private List<ProductConteiner> conteiners;
@@ -20,7 +20,7 @@ namespace InventarizatorUI
         private ProductConteiner defProductForRemaking;
 
 
-        public Add(Upd eventUpdate)
+        public AddProducts(Upd eventUpdate)
         {
             updateInformation += eventUpdate;
             conteiners = new List<ProductConteiner>();
@@ -28,12 +28,10 @@ namespace InventarizatorUI
             Height = heightProductsWithoutRemake;
             ProductRepository repos = new ProductRepository();
             comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
-            checkBox1.Checked = false;
-            comboBox2.Enabled = false;
+            groupBox2.Visible = groupBox2.Enabled = false;
 
-            panel1PositionProductWithoutRemake = panel1.Location = new Point(9, 87);
+            panel1PositionProductWithoutRemake = panel1.Location = new Point(9, 307);
             panel1PositionProductWithRemake = new Point(9, 180);
-            panel1PositionIngredients = new Point(9, 60);
             dateTimePicker1.MaxDate = DateTime.Today;
         }
 
@@ -72,7 +70,7 @@ namespace InventarizatorUI
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -88,7 +86,7 @@ namespace InventarizatorUI
                 label7.Text = defProductForRemaking.Amount.ToString();
 
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 label7.Text = @"0";
             }
@@ -103,7 +101,7 @@ namespace InventarizatorUI
                 conteiners.RemoveAt(listBox1.SelectedIndex);
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
             }
-            catch(ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             { }
         }
 
@@ -115,41 +113,30 @@ namespace InventarizatorUI
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
-            {
                 ProductRepository repos = new ProductRepository();
                 comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
                 label1.Text = @"Назва:";
                 panel1.Location = panel1PositionProductWithoutRemake;
                 Height = heightProductsWithoutRemake;
-                panel2.Visible = panel2.Enabled = true;
                 panel3.Visible = panel3.Enabled = true;
                 maskedTextBox1.Mask = @"0.00";
-            }
-            else
-            {
-                IngredientRepository repos = new IngredientRepository();
-                comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
-                label1.Text = @"Назва:";
-                panel2.Visible = panel2.Enabled = false;
-                panel3.Visible = panel3.Enabled = false;
-                panel4.Visible = panel4.Enabled = false;
-                panel1.Location = panel1PositionIngredients;
-                Height = heightIngredients;
-                maskedTextBox1.Mask = @"000.00";
-            }
             maskedTextBox1.Text = "";
             numericUpDown1.Value = 1;
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
+
+
+            groupBox2.Visible = groupBox2.Enabled = checkBox1.Checked;
+            maskedTextBox1.Text = "";
+            numericUpDown1.Value = 1;
+
             elementForRemaking = null;
             if (checkBox1.Checked)
             {
                 Height = heightProductsWithRemake;
                 panel1.Location = panel1PositionProductWithRemake;
-                panel4.Visible = panel4.Enabled = true;
                 comboBox2.Enabled = checkBox1.Checked;
                 numericUpDown2.Value = 1;
                 listBox1.Items.Clear();
@@ -167,7 +154,7 @@ namespace InventarizatorUI
                     ////////var data = repos.GetProductConteinerDataSource().
                     ////////Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 6).
                     ////////Select(element => $"{element.Name} {element.Weight}").ToList();
-                    
+
                     List<string> data = repos.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6).Select(n => n.ToString()).ToList();
                     if (data.Count == 0)
                     {
@@ -182,23 +169,17 @@ namespace InventarizatorUI
                     comboBox2.DataSource = null;
                 }
             }
-            else
-            {
-                this.Height = heightProductsWithoutRemake;
-                panel1.Location = panel1PositionProductWithoutRemake;
-                panel4.Visible = panel4.Enabled = false;
-            }
-            comboBox2.Enabled = checkBox1.Checked;
+            groupBox2.Visible = groupBox2.Enabled = checkBox1.Checked;
+            maskedTextBox1.Text = "";
+            numericUpDown1.Value = 1;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
             try
             {
-                if (radioButton1.Checked)
-                {
                     double weight = Double.Parse(maskedTextBox1.Text);
-                   
+
                     if (maskedTextBox1.Text == " ," || weight == 0)
                     {
                         throw new FormatException("Невідома вага продукції.");
@@ -206,7 +187,7 @@ namespace InventarizatorUI
                     ConteinerRepository conteinerRepository = new ConteinerRepository();
                     ProductRepository productRepository = new ProductRepository();
                     double weightForRemaking = 0;
- 
+
                     {
                         foreach (var elementOfRemaking in conteiners)
                         {
@@ -217,13 +198,13 @@ namespace InventarizatorUI
                             var conteiner = conteinerRepository.GetDataSource()
                                 .First(elem => elem.ProductId == product.Id & elem.Weight == elementForRemaking.Weight);
 
-                            conteinerRepository.Remove(conteiner.Id, dateTimePicker1.Value, 3 ,elementForRemaking.Amount);
+                            conteinerRepository.Remove(conteiner.Id, dateTimePicker1.Value, 3, elementForRemaking.Amount);
 
                             comboBox2.DataSource = productRepository.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6)
                                 .Select(n => n.ToString()).ToList();
                         }
 
-                        if(weightForRemaking > weight * Decimal.ToInt32(numericUpDown1.Value))
+                        if (weightForRemaking > weight * Decimal.ToInt32(numericUpDown1.Value))
                         {
                             double overWeightForRemaking = weightForRemaking - weight * Decimal.ToInt32(numericUpDown1.Value);
 
@@ -238,23 +219,13 @@ namespace InventarizatorUI
                         .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
                     conteinerRepository.Add(
                         new Conteiner(id, weight, Decimal.ToInt32(numericUpDown1.Value)),
-                        dateTimePicker1.Value, 
+                        dateTimePicker1.Value,
                         weightForRemaking,
                         false
                         );
                     listBox1.Items.Clear();
                     comboBox1.DataSource = productRepository.GetDataSource();
                     this.ComboBox1_SelectedIndexChanged(null, null);
-                }
-                else
-                {
-                    Double.TryParse(maskedTextBox1.Text, out var weight);
-                    PackageRepository repository = new PackageRepository();
-                    IngredientRepository ingredientRepository = new IngredientRepository();
-                    int id = ingredientRepository.GetDataSource()
-                        .First(element => element.Name == comboBox1.SelectedItem.ToString()).Id;
-                    repository.Add(new Package(id, weight), dateTimePicker1.Value);
-                }
 
 
                 MessageBox.Show(@"Об'єкт було успішно додано.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -271,12 +242,6 @@ namespace InventarizatorUI
 
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-
-        //TODO: Delete an event method.
-        private void Add_MouseMove(object sender, MouseEventArgs e)
-        {
         }
     }
 }

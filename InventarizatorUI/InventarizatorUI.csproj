@@ -100,6 +100,18 @@
     <Compile Include="Forms\Add.Designer.cs">
       <DependentUpon>Add.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddIngredients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddIngredients.Designer.cs">
+      <DependentUpon>AddIngredients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddProducts.Designer.cs">
+      <DependentUpon>AddProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Backup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +182,12 @@
     </Compile>
     <EmbeddedResource Include="Forms\Add.resx">
       <DependentUpon>Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddIngredients.resx">
+      <DependentUpon>AddIngredients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddProducts.resx">
+      <DependentUpon>AddProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Backup.resx">
       <DependentUpon>Backup.cs</DependentUpon>

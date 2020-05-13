@@ -177,7 +177,31 @@ namespace InventarizatorUI
             UpdateDataGridWiew();
             comboBox1.SelectedIndex = 0;
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
+            dataGridView1.RowHeadersVisible = false;
             radioButton1.Checked = true;
+        }
+
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormatingDBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProductRepository.FormatingAllData();
+        }
+
+        private void addProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var form = new AddProducts(UpdateDataGridWiew);
+            form.ShowDialog();
+        }
+
+        private void addIngredientsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new AddIngradients(UpdateDataGridWiew);
+            form.ShowDialog();
         }
     }
 }

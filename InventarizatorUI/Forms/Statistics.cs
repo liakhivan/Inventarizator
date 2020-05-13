@@ -96,6 +96,7 @@ namespace InventarizatorUI.Forms
             ProdStatisticsRepository prodStatistics = new ProdStatisticsRepository();
             dataGridView1.DataSource = prodStatistics.GetProductStatistics(); 
             dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             dataGridView1.Columns[0].HeaderText = @"Назва";
