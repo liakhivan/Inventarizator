@@ -292,33 +292,54 @@ namespace InventarizatorUI.Forms
         {
             try
             {
-                double weightForRemaking = 0;
-
-                double weightBatch = 0;
-
-                double weight = Double.Parse(maskedTextBox2.Text);
-
-                double amount = Double.Parse(maskedTextBox3.Text);
-
-
-                if (radioButton1.Checked & weight <= 0)
+                if(radioButton1.Checked)
                 {
-                    MessageBox.Show(@"Некоректна вага інгредієнту - ключа на 1 заміс", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+
+                    ConteinerRepository conteinerRepository = new ConteinerRepository();
+                    //        ProductRepository productRepository = new ProductRepository();
+                    double weight = Double.Parse(maskedTextBox2.Text);
+
+                    double amount = Double.Parse(maskedTextBox3.Text);
+
+                    double weightBatch = weight * amount;
+
+                    double weightAllProducts = entryProductsContainerCollection.Sum(n => n.Amount * n.Weight);
+
+
+                    if (weight <= 0)
+                    {
+                        MessageBox.Show(@"Некоректна вага інгредієнту - ключа на 1 заміс", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 
-                if (radioButton1.Checked & amount <= 0)
+                    if (amount <= 0)
+                    {
+                        MessageBox.Show(@"Некоректна кількість замісів", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (checkBox1.Checked)
+                    {
+                        double weightForRemaking = 0;
+                        weightForRemaking = productsForRemaking.Sum(n => n.Amount * n.Weight);
+                        weightBatch += weightForRemaking;
+                    }
+
+                    if (weightAllProducts <= weightBatch)
+                    {
+
+                        MessageBox.Show($"Некоректна вага всіх продуктів.\n Видаліть зайві продукти, збільшіть кількість замісів,\n або додайте переробку.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    conteinerRepository.Add()
+                }
+                else
                 {
-                    MessageBox.Show(@"Некоректна кількість замісів", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+
                 }
 
-                weightBatch = weight * amount;
-
-                if(checkBox1.Checked)
-                {
-                    weightForRemaking = productsForRemaking.Sum(n => n.Amount * n.Weight);
-                }
+               
 
 
 
