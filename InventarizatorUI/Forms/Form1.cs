@@ -85,12 +85,6 @@ namespace InventarizatorUI
             form2.ShowDialog();
         }
 
-        private void AddToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Add form3 = new Add(UpdateDataGridWiew);
-            form3.ShowDialog();
-        }
-
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Delete form4 = new Delete(UpdateDataGridWiew);

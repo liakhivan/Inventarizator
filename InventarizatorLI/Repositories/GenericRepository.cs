@@ -58,18 +58,13 @@ namespace InventarizatorLI.Repositories
         {
             using (var context = new StorageDbContext())
             {
-                throw new Exception();
-
-                //context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                //    "ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
-
-                //context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                //    "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch + "\' WITH REPLACE, " +
-                //    "MOVE \'StorageDBConnection\' to \'" + databasePath + "\\StorageDBConnection.mdf\', " +
-                //    "MOVE \'StorageDBConnection_log\' to \'" + databasePath + "\\StorageDBConnection.ldf\'");
-
-                //context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                //    "ALTER DATABASE " + database + " SET MULTI_USER");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE ProductStatistics");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE IngredientStatistics");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE IngredientsForProducts");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Conteiners");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Packages");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"DELETE FROM Ingredients WHERE ID != -1");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"DELETE FROM Products WHERE ID != -1");
             }
         }
     }

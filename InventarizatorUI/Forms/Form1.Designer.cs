@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addIngredientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manyallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,8 +66,6 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.addProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addIngredientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -111,7 +111,20 @@
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addToolStripMenuItem.Text = "Додати";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripMenuItem_Click);
+            // 
+            // addProductsToolStripMenuItem
+            // 
+            this.addProductsToolStripMenuItem.Name = "addProductsToolStripMenuItem";
+            this.addProductsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addProductsToolStripMenuItem.Text = "Продукти";
+            this.addProductsToolStripMenuItem.Click += new System.EventHandler(this.addProductsToolStripMenuItem_Click);
+            // 
+            // addIngredientsToolStripMenuItem
+            // 
+            this.addIngredientsToolStripMenuItem.Name = "addIngredientsToolStripMenuItem";
+            this.addIngredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addIngredientsToolStripMenuItem.Text = "Інгредієнти";
+            this.addIngredientsToolStripMenuItem.Click += new System.EventHandler(this.addIngredientsToolStripMenuItem_Click);
             // 
             // eliminationToolStripMenuItem
             // 
@@ -119,7 +132,7 @@
             this.invoiceToolStripMenuItem,
             this.manyallyToolStripMenuItem});
             this.eliminationToolStripMenuItem.Name = "eliminationToolStripMenuItem";
-            this.eliminationToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.eliminationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminationToolStripMenuItem.Text = "Списати";
             // 
             // invoiceToolStripMenuItem
@@ -139,21 +152,21 @@
             // createToolStripMenuItem
             // 
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.createToolStripMenuItem.Text = "Створити";
             this.createToolStripMenuItem.Click += new System.EventHandler(this.CreateToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Видалити";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Вихід";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -392,25 +405,25 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(148, 2);
@@ -437,20 +450,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(625, 351);
             this.tableLayoutPanel1.TabIndex = 5;
-            // 
-            // addProductsToolStripMenuItem
-            // 
-            this.addProductsToolStripMenuItem.Name = "addProductsToolStripMenuItem";
-            this.addProductsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addProductsToolStripMenuItem.Text = "Продукти";
-            this.addProductsToolStripMenuItem.Click += new System.EventHandler(this.addProductsToolStripMenuItem_Click);
-            // 
-            // addIngredientsToolStripMenuItem
-            // 
-            this.addIngredientsToolStripMenuItem.Name = "addIngredientsToolStripMenuItem";
-            this.addIngredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addIngredientsToolStripMenuItem.Text = "Інгредієнти";
-            this.addIngredientsToolStripMenuItem.Click += new System.EventHandler(this.addIngredientsToolStripMenuItem_Click);
             // 
             // Form1
             // 
