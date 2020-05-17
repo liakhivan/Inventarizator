@@ -70,7 +70,7 @@ namespace InventarizatorLI.Repositories
         }
 
 
-        public void AddRange(List<Conteiner> newConteiners, DateTime dateAdd, List<ProductConteiner> remakeCollection, bool washer = false)
+        public void AddCollectionContainers(List<Conteiner> newConteiners, DateTime dateAdd, double weightBatch)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -78,68 +78,56 @@ namespace InventarizatorLI.Repositories
                 {
                     try
                     {
-                        ProductRepository productRepository = new ProductRepository();
-
-                        ConteinerRepository conteinerRepository = new ConteinerRepository();
-
-                        foreach (var elementOfRemaking in remakeCollection)
+                        int productId = newConteiners[0].ProductId;
+                        var prodStat = new ProdStatisticsRepository();
+                        foreach (var element in newConteiners)
                         {
+                            Conteiner dbconteiner = context.Conteiners.FirstOrDefault(n =>
+                                 n.ProductId == element.ProductId & n.Weight == element.Weight);
 
-                            var product = productRepository.GetDataSource()
-                                .First(element => element.Name == elementOfRemaking.Name);
-
-                            var conteiner = conteinerRepository.GetDataSource()
-                                .First(elem => elem.ProductId == product.Id & elem.Weight == elementOfRemaking.Weight);
-
-                            conteinerRepository.Remove(conteiner.Id, dateAdd.Date, 3, elementOfRemaking.Amount);
+                            if (dbconteiner != null)
+                            {
+                                dbconteiner.Amount += element.Amount;
+                            }
+                            else
+                            {
+                                context.Conteiners.Add(element);
+                            }
+                            prodStat.Add(element.ProductId, 0, element.Weight * element.Amount, dateAdd);
                         }
 
+                        if (weightBatch > 0)
+                        {
+                            var receipt = context.IngredientsForProducts.
+                                Where(element => element.ProductId == productId).ToList();
 
+                            int amountOfDontRemovedIngredients = receipt.Count();
 
+                            foreach (var oneIngredientOfRecept in receipt)
+                            {
+                                foreach (var onePackage in context.Packages)
+                                {
+                                    if (oneIngredientOfRecept.IngredientId == onePackage.IngredientId)
+                                    {
+                                        var weight = oneIngredientOfRecept.Weight * weightBatch;
 
+                                        if (weight >= onePackage.Weight)
+                                        {
+                                            throw new ArgumentException();
+                                        }
 
-                        //Conteiner dbconteiner = context.Conteiners.FirstOrDefault(n =>
-                        //     n.ProductId == newConteiner.ProductId & n.Weight == newConteiner.Weight);
-                        //if (dbconteiner != null)
-                        //    dbconteiner.Amount += newConteiner.Amount;
-                        //else
-                        //    context.Conteiners.Add(newConteiner);
-
-                        //context.SaveChanges();
-                        //double weightNewConteiner = newConteiner.Weight;
-                        //if (remake != 0)
-                        //    weightNewConteiner -= remake;
-
-                        //if (washer)
-                        //    weightNewConteiner += 0.6;
-
-                        //var recept = context.IngredientsForProducts.
-                        //    Where(element => element.ProductId == newConteiner.ProductId);
-                        //int amountOfDontRemovedIngredients = recept.Count();
-                        //foreach (var oneIngredientOfRecept in recept)
-                        //{
-                        //    foreach (var onePackage in context.Packages)
-                        //    {
-                        //        if (oneIngredientOfRecept.IngredientId == onePackage.IngredientId)
-                        //        {
-                        //            var weight = oneIngredientOfRecept.Weight * weightNewConteiner *
-                        //                         newConteiner.Amount;
-                        //            if (weight <= onePackage.Weight)
-                        //                onePackage.Weight -= weight;
-                        //            //TODO: якщо треба збирати статистику списаних по рецепту інгредієнтів, то тут добавити додавання статистики
-                        //            else
-                        //                throw new ArgumentException();
-                        //            amountOfDontRemovedIngredients--;
-                        //        }
-                        //    }
-                        //}
-                        //if (amountOfDontRemovedIngredients != 0)
-                        //    throw new ArgumentException();
-
-                        //var prodStat = new ProdStatisticsRepository();
-                        //prodStat.Add(newConteiner.ProductId, 0, newConteiner.Weight * newConteiner.Amount, dateAdd);
-                        //context.SaveChanges();
-                        //transaction.Commit();
+                                        onePackage.Weight -= weight;
+                                        amountOfDontRemovedIngredients--;
+                                        break;
+                                        //TODO: якщо треба збирати статистику списаних по рецепту інгредієнтів, то тут добавити додавання статистики
+                                    }
+                                }
+                            }
+                            if (amountOfDontRemovedIngredients != 0)
+                                throw new ArgumentException();
+                        }
+                        context.SaveChanges();
+                        transaction.Commit();
                     }
                     catch (Exception)
                     {
