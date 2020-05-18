@@ -74,14 +74,10 @@ namespace InventarizatorUI.Forms
                     productCount.Add(conteiner, count);
                     i++;
                 }
-
-                label1.ForeColor = System.Drawing.Color.Green;
-                label1.Text = @"Накладна успішно відкрита.";
             }
             catch (Exception ex)
             {
-                label1.ForeColor = System.Drawing.Color.Red;
-                label1.Text = ex.Message;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 invoiceFile.Workbooks.Close();
                 invoiceFile.Quit();
@@ -101,13 +97,11 @@ namespace InventarizatorUI.Forms
                     conteinerRepository.Remove(elem.Key.Id, date, 2, elem.Value);
                 }
 
-                label1.ForeColor = System.Drawing.Color.Green;
-                label1.Text = @"Продукти успішно списані.";
+                MessageBox.Show(@"Продукти успішно списані.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                label1.ForeColor = System.Drawing.Color.Red;
-                label1.Text = ex.Message;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -115,13 +109,6 @@ namespace InventarizatorUI.Forms
                 invoiceFile.Quit();
                 updateInformation();
             }
-
-        }
-
-        private void ParserInvoice_MouseMove(object sender, MouseEventArgs e)
-        {
-            label1.ForeColor = System.Drawing.Color.Black;
-            label1.Text = @"Інформація про списання.";
         }
     }
 }

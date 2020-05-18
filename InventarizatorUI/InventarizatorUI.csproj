@@ -94,12 +94,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Add.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Add.Designer.cs">
-      <DependentUpon>Add.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\AddIngredients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,12 +142,6 @@
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\InformationAboutOverweight.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\InformationAboutOverweight.Designer.cs">
-      <DependentUpon>InformationAboutOverweight.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ParserInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,9 +168,6 @@
     <Compile Include="Forms\Remove.Designer.cs">
       <DependentUpon>Remove.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\Add.resx">
-      <DependentUpon>Add.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddIngredients.resx">
       <DependentUpon>AddIngredients.cs</DependentUpon>
     </EmbeddedResource>
@@ -206,9 +191,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\InformationAboutOverweight.resx">
-      <DependentUpon>InformationAboutOverweight.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ParserInvoice.resx">
       <DependentUpon>ParserInvoice.cs</DependentUpon>

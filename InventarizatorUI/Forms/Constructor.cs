@@ -102,8 +102,7 @@ namespace InventarizatorUI.Forms
             }
             catch (Exception)
             {
-                label5.ForeColor = System.Drawing.Color.Red;
-                label5.Text = @"Введено некоректні дані.";
+                MessageBox.Show(@"Введено некоректні дані.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -191,13 +190,11 @@ namespace InventarizatorUI.Forms
 
                     invoiceFile.ActiveWorkbook.Save();
 
-                    label5.ForeColor = System.Drawing.Color.Green;
-                    label5.Text = @"Накладна успішно створена.";
+                    MessageBox.Show( @"Накладна успішно створена.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    label5.ForeColor = System.Drawing.Color.Red;
-                    label5.Text = ex.Message;
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -207,8 +204,7 @@ namespace InventarizatorUI.Forms
             }
             else
             {
-                label5.ForeColor = System.Drawing.Color.Red;
-                label5.Text = @"Не всі поля заповнені.";
+                MessageBox.Show(@"Не всі поля заповнені.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -230,13 +226,6 @@ namespace InventarizatorUI.Forms
             listBox1.Items.Clear();
             
             delete.Enabled = deleteAll.Enabled = create.Enabled = false;
-        }
-
-        private void Constructor_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            label5.ForeColor = System.Drawing.Color.Black;
-            label5.Text = @"";
         }
 
         private void Constructor_Load(object sender, EventArgs e)

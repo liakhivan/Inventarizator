@@ -64,21 +64,13 @@ namespace InventarizatorUI
                     repos.Delete(ingredient);
                     listBox1.DataSource = repos.GetDataSource();
                 }
-                label1.ForeColor = System.Drawing.Color.Green;
-                label1.Text = @"Видалення успішне.";
+                MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 updateInformation();
             }
             catch(InvalidOperationException exeption)
             {
-                label1.ForeColor = System.Drawing.Color.Red;
-                label1.Text = exeption.Message;
+                MessageBox.Show(exeption.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Delete_MouseMove(object sender, MouseEventArgs e)
-        {
-            label1.Text = @"Інформація про видалення.";
-            label1.ForeColor = System.Drawing.Color.Black;
         }
     }
 }

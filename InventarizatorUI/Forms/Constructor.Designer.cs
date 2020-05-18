@@ -42,7 +42,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.deleteAll = new System.Windows.Forms.Button();
             this.delete = new System.Windows.Forms.Button();
             this.add = new System.Windows.Forms.Button();
@@ -90,7 +89,6 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.deleteAll);
             this.panel1.Controls.Add(this.delete);
             this.panel1.Controls.Add(this.add);
@@ -227,15 +225,6 @@
             this.label7.Size = new System.Drawing.Size(155, 15);
             this.label7.TabIndex = 8;
             this.label7.Text = "Створення накладної:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 318);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 15);
-            this.label5.TabIndex = 12;
             // 
             // deleteAll
             // 
@@ -434,10 +423,8 @@
             this.Name = "Constructor";
             this.Text = "Конструктор накладної";
             this.Load += new System.EventHandler(this.Constructor_Load);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Constructor_MouseMove);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -466,7 +453,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button create;
         private System.Windows.Forms.Button deleteAll;
         private System.Windows.Forms.Button delete;

@@ -31,7 +31,6 @@ namespace InventarizatorUI
                 panel3.Location = position;
                 IngredientRepository source = new IngredientRepository();
                 comboBox1.DataSource = source.GetDataSource();
-                label2.Text = @"Інформація про створення.";
                 maskedTextBox1.Text = textBox1.Text = "";
                 recept.Clear();
                 listBox1.DataSource = null;
@@ -43,7 +42,6 @@ namespace InventarizatorUI
                 panel2.Enabled = false;
                 panel2.Visible = false;
                 panel3.Location = panel2.Location;
-                label2.Text = @"Інформація про створення.";
                 textBox1.Text = "";
             }
         }
@@ -70,19 +68,15 @@ namespace InventarizatorUI
                     repos.Create(new Ingredient(textBox1.Text));
                 }
 
-                label2.ForeColor = System.Drawing.Color.Green;
-                label2.Text = @"Об'єкт було успішно створено.";
+                MessageBox.Show(@"Об'єкт було успішно створено.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (ArgumentNullException)
             {
-
-                label2.ForeColor = System.Drawing.Color.Red;
-                label2.Text = @"Не всі поля заповнені.";
+                MessageBox.Show(@"Не всі поля заповнені.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ArgumentException exception)
             {
-                label2.ForeColor = System.Drawing.Color.Red;
-                label2.Text = exception.Message;
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -102,9 +96,7 @@ namespace InventarizatorUI
                 this.maskedTextBox1.Text = "";
             } catch(FormatException)
             {
-
-                label2.ForeColor = System.Drawing.Color.Red;
-                label2.Text = @"Не всі поля заповнені.";
+                MessageBox.Show(@"Не всі поля заповнені.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -118,13 +110,6 @@ namespace InventarizatorUI
                 recept.Remove(removeElement.Key);
                 listBox1.DataSource = recept.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
             }
-        }
-
-        private void Label2_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            label2.ForeColor = System.Drawing.Color.Black;
-            label2.Text = @"Інформація про створення.";
         }
     }
 }

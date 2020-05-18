@@ -20,7 +20,6 @@ namespace InventarizatorUI
         {
             InitializeComponent();
             updateInformation += updateEvent;
-            label3.Text = @"Інформація про відновлення.";
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -43,32 +42,17 @@ namespace InventarizatorUI
             try
             {
                 repository.RestoreData(patch);
-                label3.ForeColor = System.Drawing.Color.Green;
-                label3.Text = @"Дані успішно відновлені.";
+                MessageBox.Show(@"Дані успішно відновлені.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception exception)
             {
-                label3.ForeColor = System.Drawing.Color.Red;
-                label3.Text = @"Сталася помилка.";
-                MessageBox.Show(exception.Message);
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-
                 label4.Visible = false;
             }
             updateInformation();
-        }
-
-        private void Label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label3_MouseMove(object sender, MouseEventArgs e)
-        {
-            label3.ForeColor = System.Drawing.Color.Black;
-            label3.Text = @"Інформація про відновлення.";
         }
     }
 }

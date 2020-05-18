@@ -46,14 +46,13 @@ namespace InventarizatorUI
                     packageRepository.Remove(conteiner.Id, dateTimePicker1.Value, Double.Parse(maskedTextBox1.Text));
                 }
                 RadioButton1_CheckedChanged(null, null);
-                label3.ForeColor = System.Drawing.Color.Green;
-                label3.Text = @"Об'єкт успішно списано.";
+
+                MessageBox.Show(@"Об'єкт успішно списано.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 updateInformation();
 
             }  catch(Exception)
             {
-                label3.ForeColor = System.Drawing.Color.Red;
-                label3.Text = @"Помилка списання";
+                MessageBox.Show(@"Помилка списання", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -77,12 +76,6 @@ namespace InventarizatorUI
                 numericUpDown1.Visible = numericUpDown1.Enabled = false;
                 maskedTextBox1.Text = "";
             }
-        }
-
-        private void Label3_MouseMove(object sender, MouseEventArgs e)
-        {
-            label3.ForeColor = System.Drawing.Color.Black;
-            label3.Text = @"Інформація про списання.";
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)

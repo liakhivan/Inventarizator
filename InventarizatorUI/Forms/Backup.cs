@@ -17,7 +17,6 @@ namespace InventarizatorUI
         public Backup()
         {
             InitializeComponent();
-            label3.Text = @"Інформація про створення.";
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -29,14 +28,11 @@ namespace InventarizatorUI
                 {
                     repository.BackupData(patch);
 
-                    label3.ForeColor = System.Drawing.Color.Green;
-                    label3.Text = @"Локальна копія створена.";
+                    MessageBox.Show($"Локальна копія створена.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
-                    label3.ForeColor = System.Drawing.Color.Red;
-                    label3.Text = "Сталася помилка.";
-                    MessageBox.Show(exception.Message);
+                    MessageBox.Show(exception.Message, "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -50,12 +46,6 @@ namespace InventarizatorUI
                 button2.Enabled = true;
                 patch = textBox1.Text + "\\";
             }
-        }
-
-        private void Label3_MouseMove(object sender, MouseEventArgs e)
-        {
-            label3.ForeColor = System.Drawing.Color.Black;
-            label3.Text = @"Інформація про створення.";
         }
     }
 }

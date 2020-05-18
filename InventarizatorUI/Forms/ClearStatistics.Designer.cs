@@ -39,7 +39,6 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -111,7 +110,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(416, 128);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(416, 96);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // panel2
@@ -122,7 +121,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(113, 122);
+            this.panel2.Size = new System.Drawing.Size(113, 90);
             this.panel2.TabIndex = 3;
             // 
             // radioButton2
@@ -150,7 +149,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label1);
@@ -160,23 +158,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(122, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(291, 122);
+            this.panel1.Size = new System.Drawing.Size(291, 90);
             this.panel1.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 95);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(232, 15);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Інформація про очищення статистики.";
             // 
             // ClearStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 128);
+            this.ClientSize = new System.Drawing.Size(416, 96);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MaximizeBox = false;
@@ -206,6 +195,5 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label4;
     }
 }

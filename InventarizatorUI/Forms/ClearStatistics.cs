@@ -36,22 +36,12 @@ namespace InventarizatorUI.Forms
                     IngredStatisticsRepository ingredStatistics = new IngredStatisticsRepository();
                     ingredStatistics.Remove(dateTimePicker1.Value, dateTimePicker2.Value);
                 }
-                label4.ForeColor = System.Drawing.Color.Green;
-                label4.Text = @"Статистику очищено.";
+                MessageBox.Show(@"Статистику очищено.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception excep)
             {
-
-                label4.ForeColor = System.Drawing.Color.Red;
-                label4.Text = excep.Message;
+                MessageBox.Show(excep.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Label1_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            label4.ForeColor = System.Drawing.Color.Black;
-            label4.Text = @"Інформація про очищення статистики.";
         }
     }
 }
