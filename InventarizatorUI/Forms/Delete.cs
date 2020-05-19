@@ -1,5 +1,6 @@
 ﻿using InventarizatorLI.Model;
 using InventarizatorLI.Repositories;
+using InventarizatorUI.Forms;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -47,27 +48,16 @@ namespace InventarizatorUI
                 {
                     var repos = new IngredientRepository();
                     var ingredientsForProductRepository = new IngredientsForProductRepository();
-                    Ingredient ingredient;
-                    IngredientsForProduct ingredientForProduct = null;
-                    do
-                    {
-                        ingredient = repos.GetDataSource().First(element => element.Name == listBox1.SelectedItem.ToString());
-                        ingredientForProduct = ingredientsForProductRepository.GetDataSource().
-                            FirstOrDefault(element => element.IngredientId == ingredient.Id);
-                        if (ingredientForProduct != null)
-                        {
-                            ProductRepository productRepository = new ProductRepository();
-                            var product = productRepository.GetDataSource().First(element => element.Id == ingredientForProduct.ProductId);
-                            productRepository.Delete(product);
-                        }
-                    } while (ingredientForProduct != null);
-                    repos.Delete(ingredient);
-                    listBox1.DataSource = repos.GetDataSource();
+                    Ingredient ingredient = repos.GetDataSource().First(element => element.Name == listBox1.SelectedItem.ToString());
+
+                    DeleteMessage deleteMessage = new DeleteMessage(ingredient);
+                    deleteMessage.ShowDialog();
+
+                    MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    updateInformation();
                 }
-                MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                updateInformation();
             }
-            catch(InvalidOperationException exeption)
+            catch (InvalidOperationException exeption)
             {
                 MessageBox.Show(exeption.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
