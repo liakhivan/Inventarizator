@@ -21,6 +21,23 @@ namespace InventarizatorLI.Repositories
             }
         }
 
+        public void Edit(List<IngredientsForProduct> newIngredientsForProduct)
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Configuration.AutoDetectChangesEnabled = false;
+
+                int productId = newIngredientsForProduct[0].ProductId;
+                var receipt = context.IngredientsForProducts.Where(n => n.ProductId == productId);
+
+                foreach (var element in newIngredientsForProduct ?? throw new ArgumentNullException())
+                    context.IngredientsForProducts.Add(element);
+
+                context.ChangeTracker.DetectChanges();
+                context.SaveChanges();
+            }
+        }
+
         public void Remove(Conteiner newConteiner)
         {
             using(var context = new StorageDbContext())

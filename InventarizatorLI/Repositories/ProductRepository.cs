@@ -9,7 +9,7 @@ namespace InventarizatorLI.Repositories
 {
     public class ProductRepository : GenericRepository<Product>
     {
-        public void Create(Product newProduct, Dictionary<Ingredient, double> recept)
+        public void Create(Product newProduct, Dictionary<Ingredient, double> receipt)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -25,7 +25,8 @@ namespace InventarizatorLI.Repositories
                             context.ChangeTracker.DetectChanges();
                             context.SaveChanges();
                             var currentProduct = context.Products.FirstOrDefault(buffProduct => buffProduct.Name == newProduct.Name); 
-                            foreach (var element in recept)
+
+                            foreach (var element in receipt)
                             {
                                 context.IngredientsForProducts.Add(new IngredientsForProduct(currentProduct, element.Key, element.Value));
                             }
@@ -36,6 +37,41 @@ namespace InventarizatorLI.Repositories
                         else throw new ArgumentException("Цей продукт вже існує.");
                     }
                     catch(Exception e)
+                    {
+                        transaction.Rollback();
+                        throw new ArgumentException(e.Message);
+                    }
+                }
+            }
+        }
+
+        public void Etit(Product newProduct, Dictionary<Ingredient, double> newReceipt)
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Configuration.AutoDetectChangesEnabled = false;
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
+
+                        var product = context.Products.First(element => element.Id == newProduct.Id);
+
+                        if (product == null)
+                        {
+                            throw new ArgumentNullException("Цей продукт не існує");
+                        }
+
+                        product.Name = newProduct.Name;
+
+                        foreach (var oneIngredient in newReceipt)
+                        {
+                            ingredientsForProductRepository.Edit(new IngredientsForProduct(product.Id, oneIngredient.Key.Id, oneIngredient.Value));
+                        }
+
+                    }
+                    catch (Exception e)
                     {
                         transaction.Rollback();
                         throw new ArgumentException(e.Message);

@@ -15,16 +15,29 @@ namespace InventarizatorUI.Forms
     public partial class ChangeWithDeleting : Form
     {
         private Ingredient ingredient;
-        public ChangeWithDeleting(Ingredient igredient)
+        public ChangeWithDeleting(Ingredient ingredient)
         {
             IngredientRepository ingredientRepository = new IngredientRepository();
+            this.ingredient = ingredient;
             InitializeComponent();
-            comboBox1.DataSource = ingredientRepository.GetDataSource().SkipWhile(n => n.Id == ingredient.Id).ToList();
+            comboBox1.DataSource = ingredientRepository.GetDataSource().SkipWhile(n => n.Id == ingredient.Id).Select(n => n.Name).ToList().Prepend("None");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            IngredientRepository repos = new IngredientRepository();
+            IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
 
+            Ingredient selectedIngredient = repos.GetDataSource().FirstOrDefault(n => n.Name == comboBox1.SelectedItem.ToString());
+
+            if (selectedIngredient == null)
+            {
+                MessageBox.Show("Інгредієнт не вибрано.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            ingredientsForProductRepository.GetDataSource().
+                Where(element => element.IngredientId == ingredient.Id).ToList().ForEach(n => n.IngredientId = selectedIngredient.Id);
         }
     }
 }

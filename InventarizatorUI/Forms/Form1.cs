@@ -177,7 +177,8 @@ namespace InventarizatorUI
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Edit edit = new Edit();
+            edit.ShowDialog();
         }
 
         private void FormatingDBToolStripMenuItem_Click(object sender, EventArgs e)

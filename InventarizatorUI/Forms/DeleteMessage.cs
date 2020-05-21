@@ -40,12 +40,12 @@ namespace InventarizatorUI.Forms
             //        productRepository.Delete(product);
             //    }
             //} while (ingredientForProduct != null);
-            repos.Delete(ingredient);
+            //repos.Delete(ingredient);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ChangeWithDeleting changeWithDeleting = new ChangeWithDeleting();
+            ChangeWithDeleting changeWithDeleting = new ChangeWithDeleting(entryIngredient);
             changeWithDeleting.ShowDialog();
 
             IngredientRepository repos = new IngredientRepository();
