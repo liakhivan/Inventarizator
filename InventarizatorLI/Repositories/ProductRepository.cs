@@ -45,7 +45,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Etit(Product newProduct, Dictionary<Ingredient, double> newReceipt)
+        public void Edit(Product newProduct, Dictionary<Ingredient, double> newReceipt)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -56,20 +56,21 @@ namespace InventarizatorLI.Repositories
                     {
                         IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
 
-                        var product = context.Products.First(element => element.Id == newProduct.Id);
+                        var currentProduct = context.Products.FirstOrDefault(element => element.Id == newProduct.Id);
 
-                        if (product == null)
+                        if (currentProduct == null)
                         {
                             throw new ArgumentNullException("Цей продукт не існує");
                         }
 
-                        product.Name = newProduct.Name;
+                        currentProduct.Name = newProduct.Name;
 
-                        foreach (var oneIngredient in newReceipt)
+                        ingredientsForProductRepository.Delete(currentProduct);
+
+                        foreach (var element in newReceipt)
                         {
-                            ingredientsForProductRepository.Edit(new IngredientsForProduct(product.Id, oneIngredient.Key.Id, oneIngredient.Value));
+                            context.IngredientsForProducts.Add(new IngredientsForProduct(currentProduct, element.Key, element.Value));
                         }
-
                     }
                     catch (Exception e)
                     {

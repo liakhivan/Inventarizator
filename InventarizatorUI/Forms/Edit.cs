@@ -17,14 +17,16 @@ namespace InventarizatorUI.Forms
     {
         Point position;
         Dictionary<Ingredient, double> receipt = new Dictionary<Ingredient, double>();
+        Product currProduct;
 
         public Edit()
         {
             InitializeComponent();
             position = button1.Location;
             IngredientRepository source = new IngredientRepository();
-            comboBox1.DataSource = source.GetDataSource();
-            InitializeComponent();
+            ProductRepository productRepository = new ProductRepository();
+            comboBox1.DataSource = source.GetDataSource().Select(n => n.Name).ToList();
+            comboBox2.DataSource = productRepository.GetDataSource().Select(n => n.Name).ToList();
         }
         
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -40,14 +42,14 @@ namespace InventarizatorUI.Forms
                 IngredientRepository source = new IngredientRepository();
                 comboBox1.DataSource = source.GetDataSource();
                 maskedTextBox1.Text = textBox1.Text = "";
-                receipt.Clear();
                 listBox1.DataSource = null;
                 listBox1.Items.Clear();
+
             }
             else
             {
-                IngredientRepository productRepository = new IngredientRepository();
-                comboBox2.DataSource = productRepository.GetDataSource().Select(n => n.Name).ToList();
+                IngredientRepository ingredientRepository = new IngredientRepository();
+                comboBox2.DataSource = ingredientRepository.GetDataSource().Select(n => n.Name).ToList();
                 this.Height = 145;
                 panel2.Enabled = false;
                 panel2.Visible = false;
@@ -65,11 +67,13 @@ namespace InventarizatorUI.Forms
                 {
                     if (receipt.Count == 0)
                         throw new ArgumentException("Відсутній рецепт.");
-                    else if (receipt.Sum(n => n.Value) != 1)
+                    double weightReceipt = receipt.Sum(n => n.Value);
+                    if (1 - weightReceipt > 0.00001)
                         throw new ArgumentException("Сумарна вага інгредієнтів не = 1 кг.");
-                    ProductRepository repos = new ProductRepository();
-                    Product product = new Product(textBox1.Text);
-                    repos.Edit(product, receipt);
+
+                    ProductRepository productRepository = new ProductRepository();
+                    Product product = productRepository.GetDataSource().FirstOrDefault(n => n.Name == comboBox2.SelectedItem.ToString());
+                    productRepository.Edit(product, receipt);
                 }
                 else
                 {
@@ -94,7 +98,9 @@ namespace InventarizatorUI.Forms
             try
             {
                 IngredientRepository source = new IngredientRepository();
-                var someElement = receipt.Where(element => element.Key.Name == comboBox1.SelectedItem.ToString()).Select(element => element.Key).FirstOrDefault();
+
+                var someElement = receipt.FirstOrDefault(n => n.Key.Name == comboBox1.SelectedItem.ToString()).Key;
+
                 if (someElement == null)
                 {
                     receipt.Add(source.GetDataSource().
@@ -112,14 +118,18 @@ namespace InventarizatorUI.Forms
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count != 0)
+            if (listBox1.Items.Count == 0)
             {
-                IngredientRepository source = new IngredientRepository();
-                var element = source.GetDataSource().FirstOrDefault(ingredient => listBox1.SelectedItem.ToString().Contains(ingredient.Name));
-                var removeElement = receipt.First(n => n.Key.Name == element.Name);
-                receipt.Remove(removeElement.Key);
-                listBox1.DataSource = receipt.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+                return;
             }
+
+            IngredientRepository ingredientRepository = new IngredientRepository();
+
+            Ingredient ingredientForRemove = ingredientRepository.GetDataSource().FirstOrDefault(ingredient => listBox1.SelectedItem.ToString().Contains(ingredient.Name));
+
+            receipt.Remove(receipt.First(n => n.Key.Id == ingredientForRemove.Id).Key);
+
+            listBox1.DataSource = receipt.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -130,18 +140,21 @@ namespace InventarizatorUI.Forms
             List<Ingredient> ingredients = ingredientRepository.GetDataSource();
             textBox1.Text = comboBox2.SelectedItem.ToString();
 
-            Product selectedProduct = productRepository.GetDataSource().First(n => n.Name == textBox1.Text);
+            receipt.Clear();
 
-            var ingredientsForProduct = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == selectedProduct.Id).ToList();
+            currProduct = productRepository.GetDataSource().First(n => n.Name == textBox1.Text);
 
-            foreach (var element in ingredientsForProduct)
+            var currReceipt = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id);
+
+            foreach(var oneElementInReceipt in currReceipt)
             {
-                Ingredient oneIngredient = ingredients.First(n => n.Id == element.IngredientId);
-
-                receipt.Add(oneIngredient, element.Weight);
+                Ingredient ingredient = ingredients.First(n => n.Id == oneElementInReceipt.IngredientId);
+                receipt.Add(ingredient, oneElementInReceipt.Weight);
             }
 
-            listBox1.DataSource = receipt.Select(n => n.).ToList();
+            var ingredientsForProduct = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id).ToList();
+
+            listBox1.DataSource = receipt.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
         }
     }
 }

@@ -52,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(139, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Очищення статистики.";
-            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Label1_MouseMove);
             // 
             // label2
             // 

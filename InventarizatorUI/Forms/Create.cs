@@ -85,7 +85,9 @@ namespace InventarizatorUI
             try
             {
                 IngredientRepository source = new IngredientRepository();
+
                 var someElement = recept.Where(element => element.Key.Name == comboBox1.SelectedItem.ToString()).Select(element => element.Key).FirstOrDefault();
+
                 if (someElement == null)
                 {
                     recept.Add(source.GetDataSource().
@@ -93,6 +95,7 @@ namespace InventarizatorUI
                         Double.Parse(maskedTextBox1.Text));
                     listBox1.DataSource = recept.Select(element => element.Key.ToString() + " " + element.Value.ToString(CultureInfo.InvariantCulture)).ToList();
                 }
+
                 this.maskedTextBox1.Text = "";
             } catch(FormatException)
             {
