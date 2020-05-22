@@ -18,9 +18,12 @@ namespace InventarizatorUI.Forms
         Point position;
         Dictionary<Ingredient, double> receipt = new Dictionary<Ingredient, double>();
         Product currProduct;
+        public delegate void Upd();
+        private event Upd updateInformation;
 
-        public Edit()
+        public Edit(Upd eventUpdate)
         {
+            updateInformation += eventUpdate;
             InitializeComponent();
             position = button1.Location;
             IngredientRepository source = new IngredientRepository();
@@ -35,7 +38,7 @@ namespace InventarizatorUI.Forms
             {
                 ProductRepository productRepository = new ProductRepository();
                 comboBox2.DataSource = productRepository.GetDataSource().Select(n => n.Name).ToList();
-                this.Height = 295; // +45
+                this.Height = 280;
                 panel2.Enabled = true;
                 panel2.Visible = true;
                 button1.Location = position;
@@ -50,7 +53,7 @@ namespace InventarizatorUI.Forms
             {
                 IngredientRepository ingredientRepository = new IngredientRepository();
                 comboBox2.DataSource = ingredientRepository.GetDataSource().Select(n => n.Name).ToList();
-                this.Height = 145;
+                this.Height = 158;
                 panel2.Enabled = false;
                 panel2.Visible = false;
                 button1.Location = panel2.Location;
@@ -73,14 +76,18 @@ namespace InventarizatorUI.Forms
 
                     ProductRepository productRepository = new ProductRepository();
                     Product product = productRepository.GetDataSource().FirstOrDefault(n => n.Name == comboBox2.SelectedItem.ToString());
+                    product.Name = textBox1.Text;
                     productRepository.Edit(product, receipt);
                 }
                 else
                 {
-                    IngredientRepository repos = new IngredientRepository();
-                    repos.Create(new Ingredient(textBox1.Text));
-                }
+                    IngredientRepository ingredientRepository = new IngredientRepository();
+                    Ingredient currIngredient = ingredientRepository.GetDataSource().First(n => n.Name == comboBox2.SelectedItem.ToString());
 
+                    currIngredient.Name = textBox1.Text;
+                    ingredientRepository.Edit(currIngredient);
+                }
+                updateInformation();
                 MessageBox.Show(@"Об'єкт було успішно відредаговано.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (ArgumentNullException)
@@ -134,27 +141,39 @@ namespace InventarizatorUI.Forms
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProductRepository productRepository = new ProductRepository();
-            IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
-            IngredientRepository ingredientRepository = new IngredientRepository();
-            List<Ingredient> ingredients = ingredientRepository.GetDataSource();
-            textBox1.Text = comboBox2.SelectedItem.ToString();
-
-            receipt.Clear();
-
-            currProduct = productRepository.GetDataSource().First(n => n.Name == textBox1.Text);
-
-            var currReceipt = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id);
-
-            foreach(var oneElementInReceipt in currReceipt)
+            if (radioButton1.Checked)
             {
-                Ingredient ingredient = ingredients.First(n => n.Id == oneElementInReceipt.IngredientId);
-                receipt.Add(ingredient, oneElementInReceipt.Weight);
+                ProductRepository productRepository = new ProductRepository();
+                IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
+                IngredientRepository ingredientRepository = new IngredientRepository();
+                List<Ingredient> ingredients = ingredientRepository.GetDataSource();
+                textBox1.Text = comboBox2.SelectedItem.ToString();
+
+                receipt.Clear();
+
+                currProduct = productRepository.GetDataSource().First(n => n.Name == textBox1.Text);
+
+                var currReceipt = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id);
+
+                foreach (var oneElementInReceipt in currReceipt)
+                {
+                    Ingredient ingredient = ingredients.First(n => n.Id == oneElementInReceipt.IngredientId);
+                    receipt.Add(ingredient, oneElementInReceipt.Weight);
+                }
+
+                var ingredientsForProduct = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id).ToList();
+
+                listBox1.DataSource = receipt.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+
             }
+            else
+            {
+                IngredientRepository ingredientRepository = new IngredientRepository();
 
-            var ingredientsForProduct = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id).ToList();
+                comboBox2.DataSource = ingredientRepository.GetDataSource().Select(n => n.Name).ToList();
 
-            listBox1.DataSource = receipt.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+                textBox1.Text = comboBox2.SelectedItem.ToString();
+            }
         }
     }
 }

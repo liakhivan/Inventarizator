@@ -71,6 +71,10 @@ namespace InventarizatorLI.Repositories
                         {
                             context.IngredientsForProducts.Add(new IngredientsForProduct(currentProduct, element.Key, element.Value));
                         }
+
+                        context.ChangeTracker.DetectChanges();
+                        context.SaveChanges();
+                        transaction.Commit();
                     }
                     catch (Exception e)
                     {

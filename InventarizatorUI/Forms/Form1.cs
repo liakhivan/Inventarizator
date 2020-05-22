@@ -177,7 +177,7 @@ namespace InventarizatorUI
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Edit edit = new Edit();
+            Edit edit = new Edit(UpdateDataGridWiew);
             edit.ShowDialog();
         }
 

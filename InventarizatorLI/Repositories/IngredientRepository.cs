@@ -24,6 +24,11 @@ namespace InventarizatorLI.Repositories
             }
         }
 
+        public void Edit(Ingredient ingredient)
+        {
+
+        }
+
         public void Delete(Ingredient element)
         {
             using (StorageDbContext context = new StorageDbContext())
