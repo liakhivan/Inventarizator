@@ -54,10 +54,8 @@ namespace InventarizatorUI.Forms
                 IngredientRepository ingredientRepository = new IngredientRepository();
                 comboBox2.DataSource = ingredientRepository.GetDataSource().Select(n => n.Name).ToList();
                 this.Height = 158;
-                panel2.Enabled = false;
-                panel2.Visible = false;
+                panel2.Enabled = panel2.Visible = false;
                 button1.Location = panel2.Location;
-                textBox1.Text = "";
             }
         }
         private void Button1_Click(object sender, EventArgs e)
@@ -66,6 +64,7 @@ namespace InventarizatorUI.Forms
             {
                 if (textBox1.Text == "")
                     throw new ArgumentNullException();
+
                 if (radioButton1.Checked)
                 {
                     if (receipt.Count == 0)
@@ -168,10 +167,6 @@ namespace InventarizatorUI.Forms
             }
             else
             {
-                IngredientRepository ingredientRepository = new IngredientRepository();
-
-                comboBox2.DataSource = ingredientRepository.GetDataSource().Select(n => n.Name).ToList();
-
                 textBox1.Text = comboBox2.SelectedItem.ToString();
             }
         }

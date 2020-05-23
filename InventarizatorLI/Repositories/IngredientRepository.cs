@@ -24,9 +24,34 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Edit(Ingredient ingredient)
+        public void Edit(Ingredient newIngredient)
         {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Configuration.AutoDetectChangesEnabled = false;
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Ingredient ingredientForChanging = context.Ingredients.First(n => n.Id == newIngredient.Id);
 
+                        ingredientForChanging.Name = newIngredient.Name;
+
+                        context.ChangeTracker.DetectChanges();
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw new InvalidOperationException("Помилка редагування.");
+                    }
+                    finally
+                    {
+                        context.Configuration.ValidateOnSaveEnabled = true;
+                    }
+                }
+            }
         }
 
         public void Delete(Ingredient element)
