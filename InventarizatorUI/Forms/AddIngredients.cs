@@ -21,6 +21,7 @@ namespace InventarizatorUI.Forms
 
             IngredientRepository repos = new IngredientRepository();
             comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
+            comboBox1.SelectedIndex = -1;
             label1.Text = @"Назва:";
             maskedTextBox1.Mask = @"000.00";
             maskedTextBox1.Text = "";
@@ -47,6 +48,10 @@ namespace InventarizatorUI.Forms
             catch (FormatException)
             {
                 MessageBox.Show(@"Некоректна вага інгредієнту.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show($"Інгредієнт не вибрано.\nБудь ласка виберіть потрібний інгредієнт", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error) ;
             }
             catch (Exception exception)
             {

@@ -38,6 +38,7 @@ namespace InventarizatorUI.Forms
             comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
             groupBox2.Visible = groupBox2.Enabled = false;
 
+
             panel1PositionProductWithoutRemake = panel1.Location = new Point(3, 163);
             panel1PositionProductWithRemake = new Point(3, 307);
             dateTimePicker1.MaxDate = DateTime.Today;
@@ -129,7 +130,7 @@ namespace InventarizatorUI.Forms
                 elem => elem.IngredientId,
                 ingr => ingr.Id,
                 (elem, ingr) => ingr.Name).ToList();
-
+            comboBox3.SelectedIndex = -1;
             checkBox1.Checked = false;
             comboBox2.Text = "";
             entryProductsContainerCollection.Clear();
@@ -399,7 +400,12 @@ namespace InventarizatorUI.Forms
                         MessageBox.Show($"Операція успішно виконана.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
             }
-            catch(Exception exc)
+
+            catch (NullReferenceException)
+            {
+                MessageBox.Show($"Не вибрано інгредієнт-ключ.\nБудь ласка виберіть інгредієнт-ключ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

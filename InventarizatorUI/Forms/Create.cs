@@ -19,6 +19,7 @@ namespace InventarizatorUI
             position = panel3.Location;
             IngredientRepository source = new IngredientRepository();
             comboBox1.DataSource = source.GetDataSource();
+            comboBox1.SelectedIndex = -1;
         }
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
@@ -31,6 +32,7 @@ namespace InventarizatorUI
                 panel3.Location = position;
                 IngredientRepository source = new IngredientRepository();
                 comboBox1.DataSource = source.GetDataSource();
+                comboBox1.SelectedIndex = -1;
                 maskedTextBox1.Text = textBox1.Text = "";
                 recept.Clear();
                 listBox1.DataSource = null;
@@ -93,13 +95,22 @@ namespace InventarizatorUI
                     recept.Add(source.GetDataSource().
                         FirstOrDefault(ingredient => ingredient.Name == comboBox1.SelectedItem.ToString()) ?? throw new InvalidOperationException(),
                         Double.Parse(maskedTextBox1.Text));
-                    listBox1.DataSource = recept.Select(element => element.Key.ToString() + " " + element.Value.ToString(CultureInfo.InvariantCulture)).ToList();
+                    listBox1.DataSource = recept.Select(element => $"{element.Key}  {String.Format("{0:f2}", element.Value)} кг.").ToList();
                 }
 
                 this.maskedTextBox1.Text = "";
-            } catch(FormatException)
+            }
+            catch (FormatException)
             {
                 MessageBox.Show(@"Не всі поля заповнені.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show(@"Інгредієнт не вибраний.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -111,7 +122,7 @@ namespace InventarizatorUI
                 var element = source.GetDataSource().FirstOrDefault(ingredient => listBox1.SelectedItem.ToString().Contains(ingredient.Name));
                 var removeElement = recept.First(n => n.Key.Name == element.Name);
                 recept.Remove(removeElement.Key);
-                listBox1.DataSource = recept.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+                listBox1.DataSource = recept.Select(someElement => $"{someElement.Key}  {String.Format("{0:f2}", someElement.Value)} кг.").ToList();
             }
         }
     }

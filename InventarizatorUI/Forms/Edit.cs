@@ -29,6 +29,8 @@ namespace InventarizatorUI.Forms
             IngredientRepository source = new IngredientRepository();
             ProductRepository productRepository = new ProductRepository();
             comboBox1.DataSource = source.GetDataSource().Select(n => n.Name).ToList();
+            comboBox1.DataSource = source.GetDataSource();
+            comboBox1.SelectedIndex = -1;
             comboBox2.DataSource = productRepository.GetDataSource().Select(n => n.Name).ToList();
         }
         
@@ -44,6 +46,7 @@ namespace InventarizatorUI.Forms
                 button1.Location = position;
                 IngredientRepository source = new IngredientRepository();
                 comboBox1.DataSource = source.GetDataSource();
+                comboBox1.SelectedIndex = -1;
                 maskedTextBox1.Text = textBox1.Text = "";
                 listBox1.DataSource = null;
                 listBox1.Items.Clear();
