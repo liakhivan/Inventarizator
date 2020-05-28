@@ -185,7 +185,7 @@ namespace InventarizatorUI.Forms
         private void UpdateListBoxProduct()
         {
             int lemght = comboBox1.SelectedItem.ToString().Split('\"').Length;
-            listBox2.DataSource = entryProductsContainerCollection.Select(n => n.Amount + " " + comboBox1.SelectedItem.ToString().Split('\"')[lemght - 2] + " " + n.Weight.ToString("#.##")).ToList();
+            listBox2.DataSource = entryProductsContainerCollection.Select(n => $"\"{comboBox1.SelectedItem.ToString().Split('\"')[lemght - 2]}\" {n.Amount} шт.  по  {String.Format("{0:f2}", n.Weight)} кг.").ToList();
         }
 
         private void button5_Click(object sender, EventArgs e)

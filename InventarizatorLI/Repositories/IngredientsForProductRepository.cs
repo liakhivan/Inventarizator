@@ -56,8 +56,7 @@ namespace InventarizatorLI.Repositories
                     {
                         if (oneIngredientOfRecept.IngredientId == onePackage.IngredientId)
                         {
-                            var weight = oneIngredientOfRecept.Weight * newConteiner.Weight *
-                                         newConteiner.Amount;
+                            var weight = oneIngredientOfRecept.Weight * newConteiner.Weight * newConteiner.Amount;
                             if (weight <= onePackage.Weight)
                                 onePackage.Weight -= weight;
                             else
@@ -65,7 +64,6 @@ namespace InventarizatorLI.Repositories
                         }
                     }
                 }
-
                 context.SaveChanges();
             }
         }
@@ -78,8 +76,7 @@ namespace InventarizatorLI.Repositories
                 {
                     context.Configuration.ValidateOnSaveEnabled = false;
                     context.Configuration.AutoDetectChangesEnabled = false;
-                    var recept = context.IngredientsForProducts.Where(element =>
-                        element.ProductId == product.Id);
+                    var recept = context.IngredientsForProducts.Where(element => element.ProductId == product.Id);
                     foreach (var elementOfRecept in recept)
                     {
                         context.IngredientsForProducts.Attach(elementOfRecept);
@@ -103,6 +100,5 @@ namespace InventarizatorLI.Repositories
                 return context.IngredientsForProducts.Local.ToList();
             }
         }
-
     }
 }

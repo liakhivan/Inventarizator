@@ -91,7 +91,6 @@ namespace InventarizatorUI.Forms
 
             try
             {
-                int i = 1;
                 foreach(var elem in productCount)
                 {
                     conteinerRepository.Remove(elem.Key.Id, date, 2, elem.Value);

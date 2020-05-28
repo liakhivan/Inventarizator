@@ -43,6 +43,7 @@ namespace InventarizatorUI
                     var product = repos.GetDataSource().First(element => element.Name == listBox1.SelectedItem.ToString());
                     repos.Delete(product);
                     listBox1.DataSource = repos.GetDataSource();
+                    updateInformation();
                 }
                 else
                 {
@@ -66,7 +67,6 @@ namespace InventarizatorUI
                         MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                    updateInformation();
                     RadioButton1_CheckedChanged(this, null);
                 }
             }

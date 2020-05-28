@@ -114,7 +114,6 @@ namespace InventarizatorUI
 
         private void BackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             var form6 = new Backup();
             form6.ShowDialog();
         }
@@ -184,6 +183,7 @@ namespace InventarizatorUI
         private void FormatingDBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProductRepository.FormatingAllData();
+            UpdateDataGridWiew();
         }
 
         private void addProductsToolStripMenuItem_Click(object sender, EventArgs e)
