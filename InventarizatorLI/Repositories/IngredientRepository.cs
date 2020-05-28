@@ -54,7 +54,7 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void Delete(Ingredient element)
+        public void Delete(Ingredient ingredient)
         {
             using (StorageDbContext context = new StorageDbContext())
             {
@@ -64,11 +64,25 @@ namespace InventarizatorLI.Repositories
                     try
                     {
                         PackageRepository package = new PackageRepository();
-                        package.Delete(element);
+                        ProductRepository productRepository = new ProductRepository();
+                        IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
+
+                        package.Delete(ingredient);
+
+                        var allReceiptsWithEntryIngredients = ingredientsForProductRepository.GetDataSource().Where(n => n.IngredientId == ingredient.Id).ToList();
+                        if (allReceiptsWithEntryIngredients != null)
+                        {
+                            foreach (var oneIngredientForProductInReceipt in allReceiptsWithEntryIngredients)
+                            {
+                                Product productWithEntryIngredientInReceipt = productRepository.GetDataSource().First(n => n.Id == oneIngredientForProductInReceipt.ProductId);
+
+                                productRepository.Delete(productWithEntryIngredientInReceipt);
+                            }
+                        }
 
                         context.Configuration.ValidateOnSaveEnabled = false;
-                        context.Ingredients.Attach(element);
-                        context.Entry(element).State = EntityState.Deleted;
+                        context.Ingredients.Attach(ingredient);
+                        context.Entry(ingredient).State = EntityState.Deleted;
                         context.ChangeTracker.DetectChanges();
                         context.SaveChanges();
                         transaction.Commit();

@@ -15,32 +15,26 @@ namespace InventarizatorUI.Forms
     public partial class DeleteMessage : Form
     {
         private Ingredient entryIngredient;
-        public DeleteMessage(Ingredient entryIngredient)
+        private event Delete.Upd updateInformation;
+
+        public DeleteMessage(Ingredient entryIngredient, Delete.Upd updateEvent)
         {
+            updateInformation += updateEvent;
             this.entryIngredient = entryIngredient;
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IngredientRepository repos = new IngredientRepository();
+            IngredientRepository ingredientRepository = new IngredientRepository();
             IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
+            ProductRepository productRepository = new ProductRepository();
+            Ingredient ingredient = ingredientRepository.GetDataSource().First(element => element.Name == entryIngredient.Name);
 
-            ingredientsForProductRepository.GetDataSource().
-                Where(element => element.IngredientId == entryIngredient.Id).ToList().ForEach(n => n.IngredientId = entryIngredient.Id);
-            
+            ingredientRepository.Delete(ingredient);
 
-            //do
-            //{
-
-            //    if (ingredientForProduct != null)
-            //    {
-            //        ProductRepository productRepository = new ProductRepository();
-            //        var product = productRepository.GetDataSource().First(element => element.Id == ingredientForProduct.ProductId);
-            //        productRepository.Delete(product);
-            //    }
-            //} while (ingredientForProduct != null);
-            //repos.Delete(ingredient);
+            updateInformation();
+            MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -21,6 +21,27 @@ namespace InventarizatorLI.Repositories
             }
         }
 
+        public void Edit(IngredientsForProduct newIngredientsForProduct)
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.IngredientsForProducts.First(n => n.Id == newIngredientsForProduct.Id).IngredientId = newIngredientsForProduct.IngredientId;
+
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception(ex.Message);
+                    }
+                }
+            }
+        }
 
         public void Remove(Conteiner newConteiner)
         {

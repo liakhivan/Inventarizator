@@ -21,7 +21,7 @@ namespace InventarizatorUI
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton1.Checked)
+            if (radioButton1.Checked)
             {
                 ProductRepository repos = new ProductRepository();
                 listBox1.DataSource = repos.GetDataSource();
@@ -46,15 +46,28 @@ namespace InventarizatorUI
                 }
                 else
                 {
-                    var repos = new IngredientRepository();
-                    var ingredientsForProductRepository = new IngredientsForProductRepository();
-                    Ingredient ingredient = repos.GetDataSource().First(element => element.Name == listBox1.SelectedItem.ToString());
+                    IngredientRepository ingredientRepository = new IngredientRepository();
+                    IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
 
-                    DeleteMessage deleteMessage = new DeleteMessage(ingredient);
-                    deleteMessage.ShowDialog();
+                    Ingredient ingredient = ingredientRepository.GetDataSource().First(element => element.Name == listBox1.SelectedItem.ToString());
 
-                    MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var receiptsWithCurrIngredient = ingredientsForProductRepository.GetDataSource().Where(n => n.IngredientId == ingredient.Id).ToList();
+
+                    if (receiptsWithCurrIngredient.Count != 0)
+                    {
+                        DeleteMessage deleteMessage = new DeleteMessage(ingredient, updateInformation);
+                        deleteMessage.ShowDialog();
+                    }
+                    else
+                    {
+                        ingredientRepository.Delete(ingredient);
+
+                        updateInformation();
+                        MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                     updateInformation();
+                    RadioButton1_CheckedChanged(this, null);
                 }
             }
             catch (InvalidOperationException exeption)

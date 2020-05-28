@@ -20,15 +20,16 @@ namespace InventarizatorUI.Forms
             IngredientRepository ingredientRepository = new IngredientRepository();
             this.ingredient = ingredient;
             InitializeComponent();
-            comboBox1.DataSource = ingredientRepository.GetDataSource().SkipWhile(n => n.Id == ingredient.Id).Select(n => n.Name).ToList().Prepend("None");
+            comboBox1.DataSource = ingredientRepository.GetDataSource().SkipWhile(n => n.Id == ingredient.Id).Select(n => n.Name).ToList();
+            comboBox1.SelectedItem = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IngredientRepository repos = new IngredientRepository();
+            IngredientRepository ingredientRepository = new IngredientRepository();
             IngredientsForProductRepository ingredientsForProductRepository = new IngredientsForProductRepository();
 
-            Ingredient selectedIngredient = repos.GetDataSource().FirstOrDefault(n => n.Name == comboBox1.SelectedItem.ToString());
+            Ingredient selectedIngredient = ingredientRepository.GetDataSource().FirstOrDefault(n => n.Name == comboBox1.SelectedItem.ToString());
 
             if (selectedIngredient == null)
             {
@@ -36,8 +37,18 @@ namespace InventarizatorUI.Forms
                 return;
             }
 
-            ingredientsForProductRepository.GetDataSource().
-                Where(element => element.IngredientId == ingredient.Id).ToList().ForEach(n => n.IngredientId = selectedIngredient.Id);
+            var ingredientInReceipts = ingredientsForProductRepository.GetDataSource().Where(element => element.IngredientId == ingredient.Id).ToList();
+
+            foreach(var item in ingredientInReceipts)
+            {
+                item.IngredientId = selectedIngredient.Id;
+
+                ingredientsForProductRepository.Edit(item);
+            }
+
+            ingredientRepository.Delete(ingredient);
+
+            MessageBox.Show("Інгредієнт успішно замінено і видалено.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
