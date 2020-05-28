@@ -32,7 +32,7 @@ namespace InventarizatorLI.Repositories.TableJoin
 
         public override string ToString()
         {
-            return (Amount + "  " + Name + "  " + Weight);
+            return ( $"{Amount} шт.  {Name} {Weight:f2} кг." );
         }
     }
 }

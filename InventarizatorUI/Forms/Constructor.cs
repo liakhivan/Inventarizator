@@ -88,15 +88,13 @@ namespace InventarizatorUI.Forms
                         {
                             item.Count++;
                         }
-                        listBox1.Items.Add(item.Product + "     " + item.Weight.ToString("0.00") + "     " +
-                            item.Count + "     " + item.Price);
+                        listBox1.Items.Add($"{item.Product}  {item.Weight:f2} кг.  {item.Count} шт.   {item.Price} грн.");
                     }
                 }
                 else
                 {
                     invoice.Add(element);
-                    listBox1.Items.Add(nameSomeProduct + "     " + weightSomeProduct.ToString("0.00") + "     " +
-                        countSomeProduct + "     " + priceSomeProduct);
+                    listBox1.Items.Add($"{nameSomeProduct}  {weightSomeProduct:f2} кг.  {countSomeProduct} шт.  {priceSomeProduct} грн.");
                 }
                 create.Enabled = true;
             }
