@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using InventarizatorLI.Repositories;
 using System.Linq;
 using InventarizatorUI.Forms;
+using System.Threading;
 
 namespace InventarizatorUI
 {
@@ -182,7 +183,20 @@ namespace InventarizatorUI
 
         private void FormatingDBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProductRepository.FormatingAllData();
+            Thread threadForFormatingDB = new Thread(new ThreadStart(ProductRepository.FormatingAllData));
+
+            DialogResult dialogResult = MessageBox.Show(@"Ви дійсно хочете очистити базу даних?", "Sucsess", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (dialogResult == DialogResult.No)
+                return;
+
+            this.Cursor = Cursors.WaitCursor;
+
+            threadForFormatingDB.Start();
+            threadForFormatingDB.Join();
+
+            this.Cursor = Cursors.Default;
+
             UpdateDataGridWiew();
         }
 

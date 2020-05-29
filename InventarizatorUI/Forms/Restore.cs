@@ -43,11 +43,12 @@ namespace InventarizatorUI
             {
                 Thread threadForRestoreDataBase = new Thread(new ParameterizedThreadStart(repository.RestoreData));
 
-                MessageBox.Show($"Відновлення даних може зайняти декілька хвилин.\n.Не виконуйте жодних дій.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Відновлення даних може зайняти декілька хвилин.\nНе виконуйте жодних дій.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Cursor = Cursors.WaitCursor;
 
                 threadForRestoreDataBase.Start(patch);
+                threadForRestoreDataBase.Join();
 
                 this.Cursor = Cursors.Default;
                 MessageBox.Show(@"Дані успішно відновлені.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
