@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
+using System.Threading;
 using InventarizatorLI.Model;
 
 namespace InventarizatorLI.Repositories
@@ -26,11 +27,11 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public void RestoreData(string patch)
+        public void RestoreData(object patch)
         {
             using (var context = new StorageDbContext())
             {
-                if (!patch.Contains(".bak"))
+                if (!patch.ToString().Contains(".bak"))
                     throw new ArgumentException();
 
                 string database = context.Database.Connection.Database;
@@ -45,7 +46,7 @@ namespace InventarizatorLI.Repositories
                     "ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
 
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                    "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch + "\' WITH REPLACE, " +
+                    "USE MASTER RESTORE DATABASE " + database + " FROM DISK=\'" + patch.ToString() + "\' WITH REPLACE, " +
                     "MOVE \'StorageDBConnection\' to \'" + databasePath + "\\StorageDBConnection.mdf\', " +
                     "MOVE \'StorageDBConnection_log\' to \'" + databasePath + "\\StorageDBConnection.ldf\'");
 

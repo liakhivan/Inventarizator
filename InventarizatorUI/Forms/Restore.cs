@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,20 +38,23 @@ namespace InventarizatorUI
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            label4.Visible = true;
             var repository = new ProductRepository();
             try
             {
-                repository.RestoreData(patch);
+                Thread threadForRestoreDataBase = new Thread(new ParameterizedThreadStart(repository.RestoreData));
+
+                MessageBox.Show($"Відновлення даних може зайняти декілька хвилин.\n.Не виконуйте жодних дій.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Cursor = Cursors.WaitCursor;
+
+                threadForRestoreDataBase.Start(patch);
+
+                this.Cursor = Cursors.Default;
                 MessageBox.Show(@"Дані успішно відновлені.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception exception)
             {
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                label4.Visible = false;
             }
             updateInformation();
         }
