@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_66E7CB8B996D4DE5AEFFB58501A57CC7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_AC26F93D76CBA940569B7A23EA77ED0F"
         "OwnerKey" = "8:_EEE34C8B35C24353894058932B05F383"
         "MsmSig" = "8:_UNDEFINED"
@@ -53,6 +47,12 @@
         {
         "MsmKey" = "8:_B889FCF0C043F56AB1EA16CEB007E0FE"
         "OwnerKey" = "8:_EEE34C8B35C24353894058932B05F383"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C829233414B642178ABED75A54D3F701"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -212,26 +212,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_66E7CB8B996D4DE5AEFFB58501A57CC7"
-            {
-            "SourcePath" = "8:D:\\Downloads\\inventory.png"
-            "TargetName" = "8:inventory.png"
-            "Tag" = "8:"
-            "Folder" = "8:_3AB9C5B3F8C444BB8267CFFD297DD22A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AC26F93D76CBA940569B7A23EA77ED0F"
             {
             "AssemblyRegister" = "3:1"
@@ -325,6 +305,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C829233414B642178ABED75A54D3F701"
+            {
+            "SourcePath" = "8:D:\\Downloads\\invent-icon.ico"
+            "TargetName" = "8:invent-icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_C2458056506D4F55AA823B1EDD68BB3D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D9AB15CA02814A7D937784EEA35B602D"
             {
             "SourcePath" = "8:..\\InventarizatorUI\\bin\\Debug\\invoice.xlsx"
@@ -411,26 +411,26 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Setup"
+        "ProductName" = "8:Inventarizator Setup"
         "ProductCode" = "8:{C645F2AD-E850-4C98-968D-66A0BA40E300}"
-        "PackageCode" = "8:{ABD2300A-2323-416D-A82E-637B81483F6F}"
+        "PackageCode" = "8:{F74B568D-D3C3-4E56-AE2E-4D8A0EC6173D}"
         "UpgradeCode" = "8:{44BF5511-6EB8-4753-86CD-6996C0643BA9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:Invent Inc."
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Setup"
+        "Title" = "8:Inventarizator"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Invent Inc."
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:App Installer"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_C829233414B642178ABED75A54D3F701"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -544,7 +544,7 @@
             "Target" = "8:_EEE34C8B35C24353894058932B05F383"
             "Folder" = "8:_3AB9C5B3F8C444BB8267CFFD297DD22A"
             "WorkingFolder" = "8:_C2458056506D4F55AA823B1EDD68BB3D"
-            "Icon" = "8:"
+            "Icon" = "8:_C829233414B642178ABED75A54D3F701"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F59EBD6C7ADD426087A681CD56E26430"
@@ -558,7 +558,7 @@
             "Target" = "8:_EEE34C8B35C24353894058932B05F383"
             "Folder" = "8:_1CAA1E8958374B63A7424304FA97AA59"
             "WorkingFolder" = "8:_C2458056506D4F55AA823B1EDD68BB3D"
-            "Icon" = "8:"
+            "Icon" = "8:_C829233414B642178ABED75A54D3F701"
             "Feature" = "8:"
             }
         }
@@ -962,7 +962,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EEE34C8B35C24353894058932B05F383"
             {
-            "SourcePath" = "8:..\\InventarizatorUI\\obj\\Debug\\InventarizatorUI.exe"
+            "SourcePath" = "8:..\\InventarizatorUI\\obj\\Debug\\Inventarizator.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2458056506D4F55AA823B1EDD68BB3D"
