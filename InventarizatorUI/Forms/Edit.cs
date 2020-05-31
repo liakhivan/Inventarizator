@@ -123,6 +123,14 @@ namespace InventarizatorUI.Forms
             {
                 MessageBox.Show(@"Не всі поля заповнені.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show(@"Інгредієнт не вибраний або заповнені не всі .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Button2_Click(object sender, EventArgs e)

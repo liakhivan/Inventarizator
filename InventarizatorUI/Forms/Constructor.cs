@@ -247,5 +247,20 @@ namespace InventarizatorUI.Forms
             if (fbd.ShowDialog() == DialogResult.OK)
                 textBox4.Text = path = fbd.SelectedPath;
         }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ProductRepository productRepository = new ProductRepository();
+            numericUpDown1.Maximum = productRepository.GetProductConteinerDataSource().First(n => n.Name == comboBox1.SelectedItem.ToString() & n.Weight == Double.Parse(comboBox2.SelectedItem.ToString())).Amount;
+            label5.Text = numericUpDown1.Maximum.ToString();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) || Char.IsControl(e.KeyChar)) 
+                return;
+            
+            e.Handled = true;
+        }
     }
 }
