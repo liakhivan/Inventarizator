@@ -250,10 +250,10 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(315, 247);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(278, 141);
             this.Name = "Create";
             this.Text = "Створити";

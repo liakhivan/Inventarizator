@@ -60,6 +60,7 @@ namespace InventarizatorUI.Forms
                 panel2.Enabled = panel2.Visible = false;
                 button1.Location = panel2.Location;
             }
+            comboBox2_SelectedIndexChanged(this, null);
         }
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -73,7 +74,7 @@ namespace InventarizatorUI.Forms
                     if (receipt.Count == 0)
                         throw new ArgumentException("Відсутній рецепт.");
                     double weightReceipt = receipt.Sum(n => n.Value);
-                    if (1 - weightReceipt > 0.00001)
+                    if (1 - weightReceipt > 0.00001 || 1 - weightReceipt < 0)
                         throw new ArgumentException("Сумарна вага інгредієнтів не = 1 кг.");
 
                     ProductRepository productRepository = new ProductRepository();
@@ -91,6 +92,7 @@ namespace InventarizatorUI.Forms
                 }
                 updateInformation();
                 MessageBox.Show(@"Об'єкт було успішно відредаговано.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
             catch (ArgumentNullException)
             {
@@ -105,7 +107,7 @@ namespace InventarizatorUI.Forms
         private void Button3_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
                 IngredientRepository source = new IngredientRepository();
 
                 var someElement = receipt.FirstOrDefault(n => n.Key.Name == comboBox1.SelectedItem.ToString()).Key;
@@ -115,7 +117,7 @@ namespace InventarizatorUI.Forms
                     receipt.Add(source.GetDataSource().
                         FirstOrDefault(ingredient => ingredient.Name == comboBox1.SelectedItem.ToString()) ?? throw new InvalidOperationException(),
                         Double.Parse(maskedTextBox1.Text));
-                    listBox1.DataSource = receipt.Select(element => element.Key.ToString() + " " + element.Value.ToString(CultureInfo.InvariantCulture)).ToList();
+                    listBox1.DataSource = receipt.Select(element => element.Key.ToString() + " " + String.Format("{0:f3}", element.Value)).ToList();
                 }
                 this.maskedTextBox1.Text = "";
             }
@@ -125,7 +127,7 @@ namespace InventarizatorUI.Forms
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show(@"Інгредієнт не вибраний або заповнені не всі .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Інгредієнт не вибраний або заповнені не всі поля для нього.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -173,7 +175,7 @@ namespace InventarizatorUI.Forms
 
                 var ingredientsForProduct = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id).ToList();
 
-                listBox1.DataSource = receipt.Select(someElement => someElement.Key.ToString() + " " + someElement.Value.ToString()).ToList();
+                listBox1.DataSource = receipt.Select(element => element.Key.ToString() + " " + String.Format("{0:f3}", element.Value)).ToList();
 
             }
             else

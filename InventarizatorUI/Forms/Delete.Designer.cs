@@ -101,8 +101,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimizeBox = false;
+            this.MaximizeBox = false;
             this.Name = "Delete";
             this.Text = "Видалити";
             this.groupBox1.ResumeLayout(false);

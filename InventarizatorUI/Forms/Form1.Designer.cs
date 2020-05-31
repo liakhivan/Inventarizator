@@ -109,20 +109,20 @@
             this.addProductsToolStripMenuItem,
             this.addIngredientsToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.addToolStripMenuItem.Text = "Додати";
             // 
             // addProductsToolStripMenuItem
             // 
             this.addProductsToolStripMenuItem.Name = "addProductsToolStripMenuItem";
-            this.addProductsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addProductsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.addProductsToolStripMenuItem.Text = "Продукти";
             this.addProductsToolStripMenuItem.Click += new System.EventHandler(this.addProductsToolStripMenuItem_Click);
             // 
             // addIngredientsToolStripMenuItem
             // 
             this.addIngredientsToolStripMenuItem.Name = "addIngredientsToolStripMenuItem";
-            this.addIngredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addIngredientsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.addIngredientsToolStripMenuItem.Text = "Інгредієнти";
             this.addIngredientsToolStripMenuItem.Click += new System.EventHandler(this.addIngredientsToolStripMenuItem_Click);
             // 
@@ -132,7 +132,7 @@
             this.invoiceToolStripMenuItem,
             this.manyallyToolStripMenuItem});
             this.eliminationToolStripMenuItem.Name = "eliminationToolStripMenuItem";
-            this.eliminationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminationToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.eliminationToolStripMenuItem.Text = "Списати";
             // 
             // invoiceToolStripMenuItem
@@ -152,21 +152,21 @@
             // createToolStripMenuItem
             // 
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.createToolStripMenuItem.Text = "Створити";
             this.createToolStripMenuItem.Click += new System.EventHandler(this.CreateToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.deleteToolStripMenuItem.Text = "Видалити";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.exitToolStripMenuItem.Text = "Вихід";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -460,7 +460,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(615, 414);
             this.Name = "Form1";
             this.Text = "Склад";

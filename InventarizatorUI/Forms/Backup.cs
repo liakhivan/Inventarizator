@@ -29,6 +29,8 @@ namespace InventarizatorUI
                     repository.BackupData(patch);
 
                     MessageBox.Show($"Локальна копія створена.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
                 }
                 catch (Exception exception)
                 {

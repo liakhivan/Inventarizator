@@ -437,7 +437,7 @@
             this.ClientSize = new System.Drawing.Size(661, 368);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(677, 407);
             this.Name = "Constructor";
             this.Text = "Конструктор накладної";
             this.Load += new System.EventHandler(this.Constructor_Load);

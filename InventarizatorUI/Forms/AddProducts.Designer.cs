@@ -474,6 +474,8 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "AddProducts";
             this.Text = "Додавання продуктів";
             this.panel3.ResumeLayout(false);

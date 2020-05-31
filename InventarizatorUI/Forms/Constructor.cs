@@ -180,6 +180,8 @@ namespace InventarizatorUI.Forms
                     invoiceFile.ActiveWorkbook.Save();
 
                     MessageBox.Show( @"Накладна успішно створена.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
                 }
                 catch (Exception ex)
                 {

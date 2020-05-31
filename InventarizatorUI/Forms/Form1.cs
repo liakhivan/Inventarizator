@@ -43,7 +43,7 @@ namespace InventarizatorUI
                 var Ingredients = new IngredientRepository();
                 var dataSource = Ingredients.GetIngredientPackageDataSource();
                 if (textBox1.Text != "")
-                    dataSource = dataSource.Where(ingredient => ingredient.Name.Contains(textBox1.Text)).ToList();
+                    dataSource = dataSource.Where(ingredient => ingredient.Name.ToUpper().Contains(textBox1.Text.ToUpper())).ToList();
                 dataGridView1.DataSource = dataSource;
             }
         }

@@ -52,8 +52,9 @@ namespace InventarizatorUI
 
                 this.Cursor = Cursors.Default;
                 MessageBox.Show(@"Дані успішно відновлені.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
