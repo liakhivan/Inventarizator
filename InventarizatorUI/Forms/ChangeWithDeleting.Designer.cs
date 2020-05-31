@@ -71,7 +71,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Name = "ChangeWithDeleting";
-            this.Text = "PropositionDeleting";
+            this.Text = "Замінити і видалити";
             this.ResumeLayout(false);
             this.PerformLayout();
 

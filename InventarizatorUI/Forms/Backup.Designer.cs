@@ -104,7 +104,7 @@
             this.MaximumSize = new System.Drawing.Size(341, 174);
             this.MinimumSize = new System.Drawing.Size(341, 174);
             this.Name = "Backup";
-            this.Text = "Бекап";
+            this.Text = "Створення бекапу";
             this.ResumeLayout(false);
             this.PerformLayout();
 

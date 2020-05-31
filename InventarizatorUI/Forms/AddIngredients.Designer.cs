@@ -125,7 +125,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Name = "AddIngradients";
-            this.Text = "AddIngredients";
+            this.Text = "Додавання інгредієнтів";
             this.ResumeLayout(false);
             this.PerformLayout();
 

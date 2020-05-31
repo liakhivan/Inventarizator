@@ -475,7 +475,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Name = "AddProducts";
-            this.Text = "AddProducts";
+            this.Text = "Додавання продуктів";
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

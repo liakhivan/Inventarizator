@@ -251,7 +251,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Edit";
-            this.Text = "Edit";
+            this.Text = "Редагування";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

@@ -85,7 +85,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "DeleteMessage";
-            this.Text = "DeleteMessage";
+            this.Text = "Повідомлення про видалення";
             this.ResumeLayout(false);
             this.PerformLayout();
 
