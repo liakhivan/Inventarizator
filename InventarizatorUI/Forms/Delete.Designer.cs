@@ -44,7 +44,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(142, 55);
+            this.groupBox1.Size = new System.Drawing.Size(115, 55);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
@@ -76,18 +76,18 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(156, 6);
+            this.listBox1.Location = new System.Drawing.Point(128, 6);
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(170, 134);
+            this.listBox1.Size = new System.Drawing.Size(231, 134);
             this.listBox1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(9, 69);
+            this.button1.Location = new System.Drawing.Point(9, 61);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(142, 26);
+            this.button1.Size = new System.Drawing.Size(115, 34);
             this.button1.TabIndex = 4;
             this.button1.Text = "Видалити";
             this.button1.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 144);
+            this.ClientSize = new System.Drawing.Size(365, 144);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.groupBox1);

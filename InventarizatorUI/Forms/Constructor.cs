@@ -177,6 +177,16 @@ namespace InventarizatorUI.Forms
                         i++;
                     }
 
+                    i = 1;
+                    foreach (var element in invoice)
+                    {
+                        sheetRemove.Range["A" + i].Value = element.Product;
+                        sheetRemove.Range["B" + i].Value = element.Count;
+                        sheetRemove.Range["C" + i].Value = element.Weight;
+                        i++;
+                    }
+                    sheetRemove.Range["D1"].Value = dateTimePicker1.Value.ToString("dd.MM.yyyy");
+
                     invoiceFile.ActiveWorkbook.Save();
 
                     MessageBox.Show( @"Накладна успішно створена.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -38,6 +38,9 @@ namespace InventarizatorUI.Forms
                 int count;
                 double weight;
 
+                productCount.Clear();
+                textBox1.Text = "";
+
                 ConteinerRepository conteinerRepository = new ConteinerRepository();
                 ProductRepository productRepository = new ProductRepository();
 
@@ -60,7 +63,7 @@ namespace InventarizatorUI.Forms
                     nameProduct = sheet.Range["A" + i].Value;
                     count = (int)sheet.Range["B" + i].Value;
                     weight = sheet.Range["C" + i].Value;
-                    textBox1.Text += nameProduct + "   " + count + "   " + weight + "\r\n";
+                    textBox1.Text += nameProduct + "   " + count + " шт. по " + String.Format("{0:f2}", weight) + " кг.\r\n";
                     var product = productRepository.GetDataSource().FirstOrDefault(n => n.Name == nameProduct);
                     if (product == null)
                     {
@@ -78,7 +81,9 @@ namespace InventarizatorUI.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+            }
+            finally
+            {
                 invoiceFile.Workbooks.Close();
                 invoiceFile.Quit();
             }
@@ -97,6 +102,8 @@ namespace InventarizatorUI.Forms
                 }
 
                 MessageBox.Show(@"Продукти успішно списані.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
             }
             catch (Exception ex)
             {

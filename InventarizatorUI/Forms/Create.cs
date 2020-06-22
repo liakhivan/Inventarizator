@@ -40,7 +40,7 @@ namespace InventarizatorUI
             }
             else
             {
-                this.Height = 145;
+                this.Height = 125;
                 panel2.Enabled = false;
                 panel2.Visible = false;
                 panel3.Location = panel2.Location;
@@ -58,7 +58,7 @@ namespace InventarizatorUI
                 {
                     if (recept.Count == 0)
                         throw new ArgumentException("Відсутній рецепт.");
-                    else if (recept.Sum(n => n.Value) != 1)
+                    else if (Math.Abs(recept.Sum(n => n.Value)-1) > 0.0001)
                         throw new ArgumentException("Сумарна вага інгредієнтів не  = 1 кг.");
                     ProductRepository repos = new ProductRepository();
                     Product product = new Product(textBox1.Text);
@@ -95,7 +95,7 @@ namespace InventarizatorUI
                     recept.Add(source.GetDataSource().
                         FirstOrDefault(ingredient => ingredient.Name == comboBox1.SelectedItem.ToString()) ?? throw new InvalidOperationException(),
                         Double.Parse(maskedTextBox1.Text));
-                    listBox1.DataSource = recept.Select(element => $"{element.Key}  {String.Format("{0:f2}", element.Value)} кг.").ToList();
+                    listBox1.DataSource = recept.Select(element => $"{element.Key}  {String.Format("{0:f3}", element.Value)} кг.").ToList();
                 }
 
                 this.maskedTextBox1.Text = "";
@@ -122,7 +122,7 @@ namespace InventarizatorUI
                 var element = source.GetDataSource().FirstOrDefault(ingredient => listBox1.SelectedItem.ToString().Contains(ingredient.Name));
                 var removeElement = recept.First(n => n.Key.Name == element.Name);
                 recept.Remove(removeElement.Key);
-                listBox1.DataSource = recept.Select(someElement => $"{someElement.Key}  {String.Format("{0:f2}", someElement.Value)} кг.").ToList();
+                listBox1.DataSource = recept.Select(someElement => $"{someElement.Key}  {String.Format("{0:f3}", someElement.Value)} кг.").ToList();
             }
         }
     }

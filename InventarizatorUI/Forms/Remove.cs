@@ -19,6 +19,7 @@ namespace InventarizatorUI
             maskedTextBox1.Visible = maskedTextBox1.Enabled = false;
             numericUpDown1.Visible = numericUpDown1.Enabled = true;
             dateTimePicker1.MaxDate = DateTime.Today;
+            dateTimePicker1.Value = DateTime.Today;
         }
 
         private void Button1_Click(object sender, EventArgs e)
