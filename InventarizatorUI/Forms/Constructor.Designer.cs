@@ -55,10 +55,13 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -84,7 +87,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(661, 368);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(729, 368);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -115,7 +118,7 @@
             this.panel4.Controls.Add(this.textBox2);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Location = new System.Drawing.Point(2, 156);
+            this.panel4.Location = new System.Drawing.Point(2, 171);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(279, 152);
@@ -231,7 +234,7 @@
             // deleteAll
             // 
             this.deleteAll.Enabled = false;
-            this.deleteAll.Location = new System.Drawing.Point(181, 115);
+            this.deleteAll.Location = new System.Drawing.Point(181, 137);
             this.deleteAll.Margin = new System.Windows.Forms.Padding(2);
             this.deleteAll.Name = "deleteAll";
             this.deleteAll.Size = new System.Drawing.Size(95, 25);
@@ -243,7 +246,7 @@
             // delete
             // 
             this.delete.Enabled = false;
-            this.delete.Location = new System.Drawing.Point(103, 115);
+            this.delete.Location = new System.Drawing.Point(103, 137);
             this.delete.Margin = new System.Windows.Forms.Padding(2);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(74, 25);
@@ -255,7 +258,7 @@
             // add
             // 
             this.add.Enabled = false;
-            this.add.Location = new System.Drawing.Point(7, 115);
+            this.add.Location = new System.Drawing.Point(7, 137);
             this.add.Margin = new System.Windows.Forms.Padding(2);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(65, 25);
@@ -274,7 +277,7 @@
             this.panel5.Location = new System.Drawing.Point(2, 2);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(281, 109);
+            this.panel5.Size = new System.Drawing.Size(281, 131);
             this.panel5.TabIndex = 7;
             // 
             // label6
@@ -312,6 +315,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.radioButton2);
+            this.panel2.Controls.Add(this.radioButton1);
+            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.comboBox2);
@@ -320,7 +326,7 @@
             this.panel2.Location = new System.Drawing.Point(2, 48);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(272, 52);
+            this.panel2.Size = new System.Drawing.Size(272, 79);
             this.panel2.TabIndex = 1;
             // 
             // textBox1
@@ -369,11 +375,21 @@
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.numericUpDown1);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(2, 27);
+            this.panel3.Location = new System.Drawing.Point(2, 49);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(269, 25);
             this.panel3.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(83, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 16);
+            this.label5.TabIndex = 3;
             // 
             // numericUpDown1
             // 
@@ -416,25 +432,48 @@
             this.listBox1.Location = new System.Drawing.Point(289, 2);
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(370, 364);
+            this.listBox1.Size = new System.Drawing.Size(438, 364);
             this.listBox1.TabIndex = 1;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
-            // label5
+            // label12
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(83, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 16);
-            this.label5.TabIndex = 3;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 29);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(137, 15);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Одиниці вимірювання:";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(162, 26);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(39, 19);
+            this.radioButton1.TabIndex = 4;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "кг.";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(206, 26);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(44, 19);
+            this.radioButton2.TabIndex = 5;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "шт.";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // Constructor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(661, 368);
+            this.ClientSize = new System.Drawing.Size(729, 368);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(677, 407);
@@ -489,5 +528,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label12;
     }
 }

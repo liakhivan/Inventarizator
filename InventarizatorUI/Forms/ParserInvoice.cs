@@ -45,12 +45,15 @@ namespace InventarizatorUI.Forms
                 ProductRepository productRepository = new ProductRepository();
 
                 OpenFileDialog OPF = new OpenFileDialog();
+                OPF.Filter = "MS Excel files|*.xlsx";
+                OPF.Title = "Excel invoice";
                 if (OPF.ShowDialog() == DialogResult.OK)
                 {
                     string fileInvoice = OPF.FileName;
-                // Відкриття файлу накладної.
-                invoiceFile.Workbooks.Open(fileInvoice.ToString());
+                    // Відкриття файлу накладної.
+                    invoiceFile.Workbooks.Open(fileInvoice.ToString());
                 }
+
                 sheet = invoiceFile.Sheets[2];
 
                 string dateString = sheet.Range["D1"].Value;

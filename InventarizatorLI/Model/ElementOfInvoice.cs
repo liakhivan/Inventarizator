@@ -12,13 +12,15 @@ namespace InventarizatorLI.Model
         public double Weight { get; set; }
         public int Count { get; set; }
         public double Price { get; set; }
+        public string UnitOfMeasurement { get; set; }
 
-        public ElementOfInvoice(string product, double weight, int count, double price)
+        public ElementOfInvoice(string product, double weight, int count, double price, string unitOfMeasurement)
         {
             Product = product;
             Weight = weight;
             Count = count;
             Price = price;
+            UnitOfMeasurement = unitOfMeasurement;
         }
     }
 }
