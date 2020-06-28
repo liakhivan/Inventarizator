@@ -79,38 +79,46 @@ namespace InventarizatorUI.Forms
                 var countSomeProduct = Decimal.ToInt32(numericUpDown1.Value);
                 var priceSomeProduct = Double.Parse(textBox1.Text);
                 ElementOfInvoice element = new ElementOfInvoice(nameSomeProduct, weightSomeProduct, countSomeProduct, priceSomeProduct, (radioButton1.Checked) ? "кг" : "шт");
-                var currProductInInvoice = invoice.Where(elemInvoice => (elemInvoice.Product == element.Product)).ToList();
+                //var currProductInInvoice = invoice.Where(elemInvoice => (elemInvoice.Product == element.Product)).ToList();
+                var currProductInInvoice = invoice.Where(n => n.UnitOfMeasurement == element.UnitOfMeasurement & n.Product == element.Product).ToList();
                 if (currProductInInvoice.Count != 0)
                 {
-                    if (currProductInInvoice[0].Price != priceSomeProduct & currProductInInvoice.Where(n => n.UnitOfMeasurement == ))
+                    if(element.UnitOfMeasurement == "шт")
+                        if(currProductInInvoice[0].Price != priceSomeProduct & currProductInInvoice[0].Weight == element.Weight)
+                            throw new ArgumentException("Ціна даного продукту не співпадає з наявним продуктом.");
+
+                    if (currProductInInvoice[0].Price != priceSomeProduct)
                         throw new ArgumentException("Ціна даного продукту не співпадає з наявним продуктом.");
                 }
 
+                var currProductsInInvoice = invoice.Where(elemInvoice => (elemInvoice.Product == element.Product) & (elemInvoice.Weight == element.Weight)).ToList();
+                if (currProductsInInvoice != null)
+                {
+                    int countOfCurrProductContainers = currProductsInInvoice.Sum(n => n.Count);
+
+                    if (countOfCurrProductContainers + element.Count > Int32.Parse(label5.Text))
+                        throw new ArgumentOutOfRangeException("Загальна кількість продукту з даною вагою перевищує допустиму.");
+
+                    //foreach (var item in invoice)
+                    //{
+                    //    if (item.Product == element.Product & item.Weight == element.Weight)
+                    //    {
+                    //        if (item.Count + element.Count > Int32.Parse(label5.Text))
+                    //            throw new ArgumentOutOfRangeException("Загальна кількість продукту з даною вагою перевищує допустиму.");
+                    //    }
+                    //}
+                }
                 if ((invoice.FirstOrDefault(elemInvoice => (
                     elemInvoice.Product == element.Product)
                     & (elemInvoice.Weight == element.Weight)
                     & (elemInvoice.UnitOfMeasurement == element.UnitOfMeasurement)
-                )) != null)
-                {
-                    foreach (var item in invoice)
-                    {
-                        if (item.Product == element.Product & item.Weight == element.Weight)
-                        {
-                            if (item.Count + element.Count > Int32.Parse(label5.Text))
-                                throw new ArgumentOutOfRangeException("Загальна кількість продукту з даною вагою перевищує допустиму.");
-                        }
-                    }
-                }
-                if ((invoice.FirstOrDefault(elemInvoice => (
-                    elemInvoice.Product == element.Product) 
-                    & (elemInvoice.Weight == element.Weight) 
-                    & (elemInvoice.UnitOfMeasurement == element.UnitOfMeasurement)
+                    & (elemInvoice.Price == element.Price)
                 )) != null)
                 {
                     listBox1.Items.Clear();
                     foreach (var item in invoice)
                     {
-                        if (item.Product == element.Product & item.Weight == element.Weight)
+                        if (item.Product == element.Product & item.Weight == element.Weight & item.UnitOfMeasurement == element.UnitOfMeasurement)
                         {
                             item.Count += element.Count;
                         }
@@ -219,11 +227,11 @@ namespace InventarizatorUI.Forms
                         // №
                         sheet.Range["A"+ (startProductPosition + i)].Value = i + 1;
                         // Назва
-                        sheet.Range["E" + (startProductPosition + i)].Value = element.Product;
+                        sheet.Range["E" + (startProductPosition + i)].Value = element.Product + " " + ((element.UnitOfMeasurement == "шт") ? element.Weight.ToString() :"");
                         // Одиниці виміру
                         sheet.Range["AD" + (startProductPosition + i)].Value = element.UnitOfMeasurement;
                         // Кількість
-                        sheet.Range["AJ" + (startProductPosition + i)].Value = element.Count * element.Weight;
+                        sheet.Range["AJ" + (startProductPosition + i)].Value = (element.UnitOfMeasurement == "кг")? (element.Count * element.Weight) : element.Count;
                         // Ціна
                         sheet.Range["AP" + (startProductPosition + i)].Value = element.Price;
                         i++;
@@ -235,7 +243,7 @@ namespace InventarizatorUI.Forms
                         sheetRemove.Range["A" + i].Value = element.Product;
                         sheetRemove.Range["B" + i].Value = element.Count;
                         sheetRemove.Range["C" + i].Value = element.Weight;
-                        sheetRemove.Range['D' + i].Value = element.UnitOfMeasurement;
+                        sheetRemove.Range["D" + i].Value = element.UnitOfMeasurement;
                         i++;
                     }
                     sheetRemove.Range["E1"].Value = dateTimePicker1.Value.ToString("dd.MM.yyyy");

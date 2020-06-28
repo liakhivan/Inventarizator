@@ -56,7 +56,7 @@ namespace InventarizatorUI.Forms
 
                 sheet = invoiceFile.Sheets[2];
 
-                string dateString = sheet.Range["D1"].Value;
+                string dateString = sheet.Range["E1"].Value;
                 var massDate = dateString.Split('.');
 
                 date = new DateTime(Int32.Parse(massDate[2]), Int32.Parse(massDate[1]), Int32.Parse(massDate[0]));
