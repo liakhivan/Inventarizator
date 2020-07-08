@@ -13,13 +13,25 @@ namespace InventarizatorUI
     {
         Point position;
         Dictionary<Ingredient, double> recept = new Dictionary<Ingredient, double>();
+
+        BindingSource bsIngredientCollection;
+        List<string> ingredientCollection;
+
         public Create()
         {
             InitializeComponent();
             position = panel3.Location;
             IngredientRepository source = new IngredientRepository();
-            comboBox1.DataSource = source.GetDataSource();
-            comboBox1.SelectedIndex = -1;
+
+            ingredientCollection = source.GetDataSource().Select(n => n.ToString()).ToList();
+            bsIngredientCollection = new BindingSource();
+            bsIngredientCollection.DataSource = ingredientCollection;
+            comboBox1.DataSource = bsIngredientCollection;
+            comboBox1.SelectedItem = null;
+
+            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.None;
+            comboBox1.IntegralHeight = false;
         }
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
@@ -30,9 +42,12 @@ namespace InventarizatorUI
                 panel2.Enabled = true;
                 panel2.Visible = true;
                 panel3.Location = position;
+
                 IngredientRepository source = new IngredientRepository();
-                comboBox1.DataSource = source.GetDataSource();
-                comboBox1.SelectedIndex = -1;
+                ingredientCollection = source.GetDataSource().Select(n => n.ToString()).ToList();
+                bsIngredientCollection.DataSource = ingredientCollection;
+                comboBox1.DataSource = bsIngredientCollection;
+                comboBox1.SelectedItem = null;
                 maskedTextBox1.Text = textBox1.Text = "";
                 recept.Clear();
                 listBox1.DataSource = null;
@@ -124,6 +139,24 @@ namespace InventarizatorUI
                 recept.Remove(removeElement.Key);
                 listBox1.DataSource = recept.Select(someElement => $"{someElement.Key}  {String.Format("{0:f3}", someElement.Value)} кг.").ToList();
             }
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            string searchString = comboBox1.Text;
+            Cursor prevCursor = this.Cursor;
+            bsIngredientCollection.DataSource = ingredientCollection.Where(x => x.ToUpper().Contains(searchString.ToUpper())).ToList();
+            if (bsIngredientCollection.Count != 0)
+                comboBox1.DroppedDown = false;
+            comboBox1.DroppedDown = true;
+            comboBox1.SelectedItem = null;
+
+            comboBox1.Text = searchString;
+
+            // Перенесення курсора в кінець поля вводу.
+            comboBox1.Select(searchString.Length, 0);
+
+            this.Cursor = prevCursor;
         }
     }
 }

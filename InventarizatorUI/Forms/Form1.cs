@@ -202,7 +202,6 @@ namespace InventarizatorUI
 
         private void addProductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             var form = new AddProducts(UpdateDataGridWiew);
             form.ShowDialog();
         }

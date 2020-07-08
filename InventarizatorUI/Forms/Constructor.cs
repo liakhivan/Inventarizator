@@ -17,10 +17,26 @@ namespace InventarizatorUI.Forms
         private string path;
         private string newFileName;
         private List<ElementOfInvoice> invoice;
+
+        private BindingSource bsProductCollection;
+        private List<string> productCollection;
+
         public Constructor()
         {
             InitializeComponent();
             invoice = new List<ElementOfInvoice>();
+
+            ProductRepository productRepository = new ProductRepository();
+
+            productCollection = productRepository.GetDataSource().Select(n => n.ToString()).ToList();
+            bsProductCollection = new BindingSource();
+            bsProductCollection.DataSource = productCollection;
+            comboBox1.DataSource = bsProductCollection;
+            comboBox1.SelectedItem = null;
+
+            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.None;
+            comboBox1.IntegralHeight = false;
         }
 
         private string Mounth(int number)
@@ -293,13 +309,13 @@ namespace InventarizatorUI.Forms
         private void Constructor_Load(object sender, EventArgs e)
         {
             radioButton1.Checked = true;
-            ProductRepository productRepository = new ProductRepository();
-            comboBox1.DataSource = productRepository.GetDataSource();
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ProductRepository productRepository = new ProductRepository();
+            if (comboBox1.SelectedItem == null)
+                return;
             comboBox2.DataSource = productRepository.GetProductConteinerDataSource().
                 Where(element => element.Name == comboBox1.SelectedValue.ToString()).
                 Select(n => n.Weight.ToString()).ToList();
@@ -350,6 +366,32 @@ namespace InventarizatorUI.Forms
         {
             if (radioButton2.Checked)
                 radioButton1.Checked = false;
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) || Char.IsControl(e.KeyChar))
+                return;
+
+            e.Handled = true;
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            string searchString = comboBox1.Text;
+            Cursor prevCursor = this.Cursor;
+            bsProductCollection.DataSource = productCollection.Where(x => x.ToUpper().Contains(searchString.ToUpper())).ToList();
+            if (bsProductCollection.Count != 0)
+                comboBox1.DroppedDown = false;
+            comboBox1.DroppedDown = true;
+            comboBox1.SelectedItem = null;
+
+            comboBox1.Text = searchString;
+
+            // Перенесення курсора в кінець поля вводу.
+            comboBox1.Select(searchString.Length, 0);
+
+            this.Cursor = prevCursor;
         }
     }
 }

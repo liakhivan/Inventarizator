@@ -21,6 +21,12 @@ namespace InventarizatorUI.Forms
         public delegate void Upd();
         private event Upd updateInformation;
 
+        private List<string> objectCollection;
+        private BindingSource bsObjectCollection;
+
+        private List<string> ingredientForReceiptCollection;
+        private BindingSource bsIngredientForReceiptCollection;
+
         public Edit(Upd eventUpdate)
         {
             updateInformation += eventUpdate;
@@ -28,25 +34,61 @@ namespace InventarizatorUI.Forms
             position = button1.Location;
             IngredientRepository source = new IngredientRepository();
             ProductRepository productRepository = new ProductRepository();
-            comboBox1.DataSource = source.GetDataSource().Select(n => n.Name).ToList();
-            comboBox1.DataSource = source.GetDataSource();
-            comboBox1.SelectedIndex = -1;
-            comboBox2.DataSource = productRepository.GetDataSource().Select(n => n.Name).ToList();
+            ingredientForReceiptCollection = source.GetDataSource().Select(n => n.Name).ToList();
+
+            bsObjectCollection = new BindingSource();
+
+            bsIngredientForReceiptCollection = new BindingSource();
+            bsIngredientForReceiptCollection.DataSource = ingredientForReceiptCollection;
+            comboBox1.DataSource = bsIngredientForReceiptCollection;
+            comboBox1.SelectedItem = null;
+
+            comboBox1.DropDownStyle = comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBox1.AutoCompleteMode = comboBox2.AutoCompleteMode = AutoCompleteMode.None;
+            comboBox1.IntegralHeight = comboBox1.IntegralHeight = false;
+
+            radioButton1_CheckedChanged(this, null);
         }
-        
+
+        private void SearchInComboBox(List<string> coll, ref BindingSource bs, ref ComboBox comboBox)
+        {
+            string searchString = comboBox.Text;
+            Cursor prevCursor = this.Cursor;
+            bs.DataSource = coll.Where(x => x.ToUpper().Contains(searchString.ToUpper())).ToList();
+            if (bs.Count != 0)
+                comboBox.DroppedDown = false;
+            comboBox.DroppedDown = true;
+            //comboBox.SelectedItem = null;
+
+            comboBox.Text = searchString;
+
+            // Перенесення курсора в кінець поля вводу.
+            comboBox.Select(searchString.Length, 0);
+
+            this.Cursor = prevCursor;
+        }
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
             {
                 ProductRepository productRepository = new ProductRepository();
-                comboBox2.DataSource = productRepository.GetDataSource().Select(n => n.Name).ToList();
+                objectCollection = productRepository.GetDataSource().Select(n => n.Name).ToList();
+                bsObjectCollection.DataSource = objectCollection;
+                comboBox2.DataSource = bsObjectCollection;
+                comboBox2.SelectedItem = null;
+
                 this.Height = 280;
                 panel2.Enabled = true;
                 panel2.Visible = true;
                 button1.Location = position;
                 IngredientRepository source = new IngredientRepository();
-                comboBox1.DataSource = source.GetDataSource();
-                comboBox1.SelectedIndex = -1;
+                ingredientForReceiptCollection = source.GetDataSource().Select(n => n.Name).ToList();
+
+                bsIngredientForReceiptCollection.DataSource = ingredientForReceiptCollection;
+                comboBox1.DataSource = bsIngredientForReceiptCollection;
+                comboBox1.SelectedItem = null;
+
                 maskedTextBox1.Text = textBox1.Text = "";
                 listBox1.DataSource = null;
                 listBox1.Items.Clear();
@@ -55,7 +97,12 @@ namespace InventarizatorUI.Forms
             else
             {
                 IngredientRepository ingredientRepository = new IngredientRepository();
-                comboBox2.DataSource = ingredientRepository.GetDataSource().Select(n => n.Name).ToList();
+
+                objectCollection = ingredientRepository.GetDataSource().Select(n => n.Name).ToList();
+                bsObjectCollection.DataSource = objectCollection;
+                comboBox2.DataSource = bsObjectCollection;
+                comboBox2.SelectedItem = null;
+
                 this.Height = 158;
                 panel2.Enabled = panel2.Visible = false;
                 button1.Location = panel2.Location;
@@ -153,6 +200,9 @@ namespace InventarizatorUI.Forms
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBox2.SelectedItem == null)
+                return;
+
             if (radioButton1.Checked)
             {
                 ProductRepository productRepository = new ProductRepository();
@@ -182,6 +232,16 @@ namespace InventarizatorUI.Forms
             {
                 textBox1.Text = comboBox2.SelectedItem.ToString();
             }
+        }
+
+        private void comboBox2_TextUpdate(object sender, EventArgs e)
+        {
+            SearchInComboBox(objectCollection, ref bsObjectCollection, ref comboBox2);
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            SearchInComboBox(ingredientForReceiptCollection, ref bsIngredientForReceiptCollection, ref comboBox1);
         }
     }
 }

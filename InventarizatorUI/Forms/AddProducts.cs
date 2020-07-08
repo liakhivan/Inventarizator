@@ -23,6 +23,13 @@ namespace InventarizatorUI.Forms
 
         private List<IngredientsForProduct> receipt;
 
+        private List<string> productCollection;
+        private BindingSource bsProductCollection;
+
+
+        private List<string> conteinersForRemakingCollection;
+        private BindingSource bsConteinersForRemakingCollection;
+
 
 
         public AddProducts(Upd eventUpdate)
@@ -35,13 +42,38 @@ namespace InventarizatorUI.Forms
 
             entryProductsContainerCollection = new List<Conteiner>();
 
-            comboBox1.DataSource = repos.GetDataSource().Select(element => element.Name).ToList();
+            productCollection = repos.GetDataSource().Select(element => element.Name).ToList();
+
+
+            bsProductCollection = new BindingSource();
+            bsProductCollection.DataSource = productCollection;
+            comboBox1.DataSource = bsProductCollection;
+            comboBox1.IntegralHeight = false;
+
             groupBox2.Visible = groupBox2.Enabled = false;
 
 
             panel1PositionProductWithoutRemake = panel1.Location = new Point(3, 163);
             panel1PositionProductWithRemake = new Point(3, 307);
             dateTimePicker1.MaxDate = DateTime.Today;
+        }
+
+        private void SearchInComboBox(List<string> coll, ref BindingSource bs, ref ComboBox comboBox)
+        {
+            string searchString = comboBox.Text;
+            Cursor prevCursor = this.Cursor;
+            bs.DataSource = coll.Where(x => x.ToUpper().Contains(searchString.ToUpper())).ToList();
+            if (bs.Count != 0)
+                comboBox.DroppedDown = false;
+            comboBox.DroppedDown = true;
+            //comboBox.SelectedItem = null;
+
+            comboBox.Text = searchString;
+
+            // Перенесення курсора в кінець поля вводу.
+            comboBox.Select(searchString.Length, 0);
+
+            this.Cursor = prevCursor;
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -90,18 +122,22 @@ namespace InventarizatorUI.Forms
         {
             try
             {
+                if (comboBox2.SelectedItem == null)
+                    return;
                 var productRepository = new ProductRepository();
                 defProductForRemaking = productRepository.GetProductConteinerDataSource().
                     First(element => element.ToString() == comboBox2.SelectedItem.ToString());
                 label7.Text = defProductForRemaking.Amount.ToString();
+            numericUpDown2.Minimum = 1;
+            numericUpDown2.Maximum = Int32.Parse(label7.Text);
 
             }
             catch (NullReferenceException)
             {
                 label7.Text = @"0";
+                numericUpDown2.Minimum = 0;
+                numericUpDown2.Maximum = 0;
             }
-            numericUpDown2.Minimum = 1;
-            numericUpDown2.Maximum = Int32.Parse(label7.Text);
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -117,6 +153,8 @@ namespace InventarizatorUI.Forms
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedItem == null)
+                return;
             ProductRepository productRepository = new ProductRepository();
             IngredientRepository ingredientRepository = new IngredientRepository();
             IngredientsForProductRepository receiptRepository = new IngredientsForProductRepository();
@@ -162,6 +200,8 @@ namespace InventarizatorUI.Forms
 
             checkBox1.Checked = false;
             comboBox2.Text = "";
+
+            productsForRemaking.Clear();
             entryProductsContainerCollection.Clear();
             UpdateListBoxProduct();
         }
@@ -214,11 +254,11 @@ namespace InventarizatorUI.Forms
 
                 Conteiner entryProductConteiner = new Conteiner(productId, weight, amount);
 
-                var isOwn = entryProductsContainerCollection.Where(n => n.ProductId == entryProductConteiner.ProductId && n.Weight == entryProductConteiner.Weight).FirstOrDefault() != null;
+                bool isOwn = entryProductsContainerCollection.Where(n => n.ProductId == entryProductConteiner.ProductId && n.Weight == entryProductConteiner.Weight).FirstOrDefault() != null;
 
                 if(isOwn)
                 {
-                    entryProductsContainerCollection.Where(n => n.ProductId == entryProductConteiner.ProductId).First().Amount++;
+                    entryProductsContainerCollection.Where(n => n.ProductId == entryProductConteiner.ProductId).First().Amount += amount;
                 }
                 else
                 {
@@ -242,6 +282,7 @@ namespace InventarizatorUI.Forms
             groupBox2.Visible = groupBox2.Enabled = checkBox1.Checked;
             maskedTextBox1.Text = "";
             numericUpDown1.Value = 1;
+            productsForRemaking.Clear();
 
 
             elementForRemaking = null;
@@ -250,6 +291,8 @@ namespace InventarizatorUI.Forms
                 Height = heightProductsWithRemake;
                 panel1.Location = panel1PositionProductWithRemake;
                 comboBox2.Enabled = checkBox1.Checked;
+                bsConteinersForRemakingCollection = new BindingSource();
+                comboBox2.IntegralHeight = false;
                 numericUpDown2.Value = 1;
                 listBox1.Items.Clear();
 
@@ -267,14 +310,17 @@ namespace InventarizatorUI.Forms
                     ////////Where(elem => elem.Name.Contains(name) & elem.Amount != 0 & elem.Weight <= 6).
                     ////////Select(element => $"{element.Name} {element.Weight}").ToList();
 
-                    List<string> data = repos.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6).Select(n => n.ToString()).ToList();
-                    if (data.Count == 0)
+                    conteinersForRemakingCollection = repos.GetProductConteinerDataSource().Where(elem => elem.Amount != 0 & elem.Weight <= 6).Select(n => n.ToString()).ToList();
+                    if (conteinersForRemakingCollection.Count == 0)
                     {
                         checkBox1.Checked = false;
                         MessageBox.Show(@"Продукту для переробки не існує", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
-                        comboBox2.DataSource = data;
+                    {
+                        bsConteinersForRemakingCollection.DataSource = conteinersForRemakingCollection;
+                        comboBox2.DataSource = bsConteinersForRemakingCollection;
+                    }
                 }
                 catch (Exception)
                 {
@@ -291,9 +337,18 @@ namespace InventarizatorUI.Forms
             numericUpDown1.Value = 1;
         }
 
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            SearchInComboBox(productCollection, ref bsProductCollection, ref comboBox1);
+        }
+
+        private void comboBox2_TextUpdate(object sender, EventArgs e)
+        {
+            SearchInComboBox(conteinersForRemakingCollection, ref bsConteinersForRemakingCollection, ref comboBox2);
+        }
+
         private void RemoveProductsForRemaking()
         {
-
             ProductRepository productRepository = new ProductRepository();
 
             ConteinerRepository conteinerRepository = new ConteinerRepository();
@@ -368,8 +423,8 @@ namespace InventarizatorUI.Forms
                         return;
                     }
 
-                    RemoveProductsForRemaking();
                     conteinerRepository.AddCollectionContainers(entryProductsContainerCollection, dateTimePicker1.Value, weightBatch);
+                    RemoveProductsForRemaking();
                 }
                 else
                 {
@@ -389,15 +444,15 @@ namespace InventarizatorUI.Forms
                         return;
                     }
 
-                    RemoveProductsForRemaking();
                     conteinerRepository.AddCollectionContainers(entryProductsContainerCollection, dateTimePicker1.Value, 0);
+                    RemoveProductsForRemaking();
+                    productsForRemaking.Clear();
                 }
                 checkBox1.Checked = false;
 
                 UpdateListBoxProduct();
-                updateInformation();
                 
-                        MessageBox.Show($"Операція успішно виконана.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Операція успішно виконана.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
             }
 
@@ -408,6 +463,10 @@ namespace InventarizatorUI.Forms
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                updateInformation();
             }
         }
     }
