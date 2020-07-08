@@ -243,5 +243,13 @@ namespace InventarizatorUI.Forms
         {
             SearchInComboBox(ingredientForReceiptCollection, ref bsIngredientForReceiptCollection, ref comboBox1);
         }
+
+        private void comboBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textBox1.Focus();
+            }
+        }
     }
 }

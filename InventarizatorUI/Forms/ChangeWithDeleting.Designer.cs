@@ -43,6 +43,7 @@
             this.comboBox1.Size = new System.Drawing.Size(205, 21);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
+            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
             // 
             // label1
             // 

@@ -372,7 +372,7 @@ namespace InventarizatorUI.Forms
 
         private void comboBox3_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 maskedTextBox2.Focus();
             }
@@ -380,7 +380,7 @@ namespace InventarizatorUI.Forms
 
         private void maskedTextBox2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 maskedTextBox3.Focus();
             }
@@ -388,6 +388,10 @@ namespace InventarizatorUI.Forms
 
         private void maskedTextBox3_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
             if (checkBox1.Checked)
             {
                 comboBox2.Focus();

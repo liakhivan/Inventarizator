@@ -63,6 +63,7 @@
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             this.comboBox1.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
+            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
             // 
             // label2
             // 
@@ -142,6 +143,7 @@
             this.maskedTextBox1.Size = new System.Drawing.Size(42, 20);
             this.maskedTextBox1.TabIndex = 7;
             this.maskedTextBox1.ValidatingType = typeof(int);
+            this.maskedTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskedTextBox1_KeyDown);
             // 
             // label4
             // 

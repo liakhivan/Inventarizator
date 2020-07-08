@@ -242,6 +242,7 @@
             this.comboBox2.TabIndex = 22;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             this.comboBox2.TextUpdate += new System.EventHandler(this.comboBox2_TextUpdate);
+            this.comboBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox2_KeyDown);
             // 
             // Edit
             // 

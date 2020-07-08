@@ -344,6 +344,8 @@ namespace InventarizatorUI.Forms
             numericUpDown1.Maximum = productRepository.GetProductConteinerDataSource().First(n => n.Name == comboBox1.SelectedItem.ToString() & n.Weight == Double.Parse(comboBox2.SelectedItem.ToString())).Amount;
             numericUpDown1.Value = 1;
             label5.Text = numericUpDown1.Maximum.ToString();
+
+            textBox1.Focus();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -392,6 +394,14 @@ namespace InventarizatorUI.Forms
             comboBox1.Select(searchString.Length, 0);
 
             this.Cursor = prevCursor;
+        }
+
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                comboBox2.Focus();
+            }
         }
     }
 }

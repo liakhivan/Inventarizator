@@ -136,5 +136,21 @@ namespace InventarizatorUI
 
             this.Cursor = prevCursor;
         }
+
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                maskedTextBox1.Focus();
+            }
+        }
+
+        private void maskedTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1.Focus();
+            }
+        }
     }
 }

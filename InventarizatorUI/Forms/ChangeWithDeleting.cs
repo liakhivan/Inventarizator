@@ -81,5 +81,13 @@ namespace InventarizatorUI.Forms
 
             this.Cursor = prevCursor;
         }
+
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1.Focus();
+            }
+        }
     }
 }
