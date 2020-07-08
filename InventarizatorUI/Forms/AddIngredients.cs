@@ -81,7 +81,6 @@ namespace InventarizatorUI.Forms
 
         private void maskedTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Enter)
                 button1.Focus();
         }

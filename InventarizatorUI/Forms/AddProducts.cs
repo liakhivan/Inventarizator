@@ -347,6 +347,57 @@ namespace InventarizatorUI.Forms
             SearchInComboBox(conteinersForRemakingCollection, ref bsConteinersForRemakingCollection, ref comboBox2);
         }
 
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+            if (radioButton1.Checked)
+            {
+                comboBox3.Focus();
+            }
+            else
+            {
+                if (checkBox1.Checked)
+                {
+                    comboBox2.Focus();
+                }
+                else
+                {
+                    maskedTextBox1.Focus();
+                }
+            }
+        }
+
+        private void comboBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                maskedTextBox2.Focus();
+            }
+        }
+
+        private void maskedTextBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                maskedTextBox3.Focus();
+            }
+        }
+
+        private void maskedTextBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                comboBox2.Focus();
+            }
+            else
+            {
+                maskedTextBox1.Focus();
+            }
+        }
+
         private void RemoveProductsForRemaking()
         {
             ProductRepository productRepository = new ProductRepository();

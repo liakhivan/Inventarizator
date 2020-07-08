@@ -101,6 +101,7 @@
             this.maskedTextBox2.Size = new System.Drawing.Size(81, 20);
             this.maskedTextBox2.TabIndex = 19;
             this.maskedTextBox2.ValidatingType = typeof(int);
+            this.maskedTextBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskedTextBox2_KeyDown);
             // 
             // comboBox3
             // 
@@ -111,6 +112,7 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(247, 21);
             this.comboBox3.TabIndex = 18;
+            this.comboBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox3_KeyDown);
             // 
             // label10
             // 
@@ -326,6 +328,7 @@
             this.comboBox1.TabIndex = 24;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             this.comboBox1.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
+            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
             // 
             // groupBox1
             // 
@@ -351,6 +354,7 @@
             this.maskedTextBox3.Size = new System.Drawing.Size(90, 20);
             this.maskedTextBox3.TabIndex = 29;
             this.maskedTextBox3.ValidatingType = typeof(int);
+            this.maskedTextBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskedTextBox3_KeyDown);
             // 
             // groupBox2
             // 
