@@ -13,6 +13,7 @@ namespace InventarizatorLI.Model
         public DbSet<IngredientsForProduct> IngredientsForProducts { get; set; }
         public DbSet<IngredStatElement> IngredientStatistics { get; set; }
         public DbSet<ProdStatElement> ProductStatistics { get; set; }
-
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Tare> Tares { get; set; }
     }
 }

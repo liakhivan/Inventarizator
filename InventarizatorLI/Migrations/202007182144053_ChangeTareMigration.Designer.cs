@@ -7,13 +7,13 @@ namespace InventarizatorLI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class MigrationStorageDBTwo : IMigrationMetadata
+    public sealed partial class ChangeTareMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MigrationStorageDBTwo));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeTareMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911102243046_MigrationStorageDBTwo"; }
+            get { return "202007182144053_ChangeTareMigration"; }
         }
         
         string IMigrationMetadata.Source

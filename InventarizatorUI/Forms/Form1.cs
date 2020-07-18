@@ -38,12 +38,20 @@ namespace InventarizatorUI
                     }
                 dataGridView1.DataSource = dataSource;
             }
-            else
+            else if(radioButton2.Checked)
             {
                 var Ingredients = new IngredientRepository();
                 var dataSource = Ingredients.GetIngredientPackageDataSource();
                 if (textBox1.Text != "")
                     dataSource = dataSource.Where(ingredient => ingredient.Name.ToUpper().Contains(textBox1.Text.ToUpper())).ToList();
+                dataGridView1.DataSource = dataSource;
+            }
+            else
+            {
+                var tareColl = new TareRepository();
+                var dataSource = tareColl.GetDataSource();
+                if (textBox1.Text != "")
+                    dataSource = dataSource.Where(tare => tare.Name.ToUpper().Contains(textBox1.Text.ToUpper())).ToList();
                 dataGridView1.DataSource = dataSource;
             }
         }
@@ -62,7 +70,7 @@ namespace InventarizatorUI
                 dataGridView1.Columns[1].HeaderText = @"Вага";
                 dataGridView1.Columns[2].HeaderText = @"Кількість";
             }
-            else
+            else if(radioButton2.Checked)
             {
                 IngredientRepository repos = new IngredientRepository();
                 UpdateDataGridWiew();
@@ -72,6 +80,16 @@ namespace InventarizatorUI
 
                 dataGridView1.Columns[0].HeaderText = @"Назва";
                 dataGridView1.Columns[1].HeaderText = @"Вага";
+            }
+            else
+            {
+                TareRepository repos = new TareRepository();
+                UpdateDataGridWiew();
+                panel1.Visible = false;
+                maskedTextBox1.Text = " ,";
+
+                dataGridView1.Columns[0].HeaderText = @"Назва";
+                dataGridView1.Columns[1].HeaderText = @"Кількість";
             }
         }
 
@@ -105,10 +123,16 @@ namespace InventarizatorUI
                 dataGridView1.DataSource = repository.GetProductConteinerDataSource().OrderBy(n => n.Name).ToList();
                 dataGridView1.AutoResizeColumns();
             }
-            else
+            else if(radioButton2.Checked)
             {
                 IngredientRepository repos = new IngredientRepository();
                 dataGridView1.DataSource = repos.GetIngredientPackageDataSource().OrderBy(n => n.Name).ToList();
+                dataGridView1.AutoResizeColumns();
+            }
+            else
+            {
+                TareRepository repos = new TareRepository();
+                dataGridView1.DataSource = repos.GetDataSource().OrderBy(n => n.Name).ToList();
                 dataGridView1.AutoResizeColumns();
             }
         }
@@ -169,9 +193,9 @@ namespace InventarizatorUI
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UpdateDataGridWiew();
-            comboBox1.SelectedIndex = 0;
-            dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
-            dataGridView1.RowHeadersVisible = false;
+            //comboBox1.SelectedIndex = 0;
+            //dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
+            //dataGridView1.RowHeadersVisible = false;
             radioButton1.Checked = true;
         }
 
@@ -210,6 +234,11 @@ namespace InventarizatorUI
         {
             var form = new AddIngradients(UpdateDataGridWiew);
             form.ShowDialog();
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton1_CheckedChanged(this, null);
         }
     }
 }
