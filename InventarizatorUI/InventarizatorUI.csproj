@@ -97,6 +97,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AddTare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddTare.Designer.cs">
+      <DependentUpon>AddTare.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddIngredients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     <Compile Include="Forms\Remove.Designer.cs">
       <DependentUpon>Remove.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\AddTare.resx">
+      <DependentUpon>AddTare.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddIngredients.resx">
       <DependentUpon>AddIngredients.cs</DependentUpon>
     </EmbeddedResource>

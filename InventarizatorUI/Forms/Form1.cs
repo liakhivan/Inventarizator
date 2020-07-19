@@ -253,7 +253,8 @@ namespace InventarizatorUI
 
         private void тараToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var form = new AddTare(UpdateDataGridWiew);
+            form.ShowDialog();
         }
     }
 }
