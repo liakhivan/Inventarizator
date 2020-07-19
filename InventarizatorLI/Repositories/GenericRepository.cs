@@ -64,6 +64,8 @@ namespace InventarizatorLI.Repositories
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE IngredientsForProducts");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Conteiners");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Packages");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Tares");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Clients");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"DELETE FROM Ingredients WHERE ID != -1");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"DELETE FROM Products WHERE ID != -1");
             }
