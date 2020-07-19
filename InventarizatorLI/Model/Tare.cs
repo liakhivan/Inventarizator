@@ -17,7 +17,7 @@ namespace InventarizatorLI.Model
 
         public Tare(string name, int amount)
         {
-            if (amount <= 0)
+            if (amount < 0)
                 throw new Exception("Кількість тари не коректна.");
 
             Name = name ?? throw new ArgumentNullException("Не вказано назву тари.");

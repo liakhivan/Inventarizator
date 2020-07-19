@@ -132,7 +132,11 @@ namespace InventarizatorUI
             else
             {
                 TareRepository repos = new TareRepository();
-                dataGridView1.DataSource = repos.GetDataSource().OrderBy(n => n.Name).ToList();
+                dataGridView1.DataSource = repos.GetDataSource().Select(n => new 
+                {
+                    n.Name,
+                    n.Amount
+                }).ToList().OrderBy(n => n.Name).ToList();
                 dataGridView1.AutoResizeColumns();
             }
         }
@@ -239,6 +243,17 @@ namespace InventarizatorUI
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             radioButton1_CheckedChanged(this, null);
+        }
+
+        private void тараToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = new CreateTare();
+            form.ShowDialog();
+        }
+
+        private void тараToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

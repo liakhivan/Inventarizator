@@ -10,6 +10,32 @@ namespace InventarizatorLI.Repositories
 {
     public class TareRepository : GenericRepository<Tare>
     {
+        public void Create(Tare tare)
+        {
+            using (StorageDbContext dbContext = new StorageDbContext())
+            {
+                using (var transaction = dbContext.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        if (dbContext.Tares.FirstOrDefault(n => n.Name == tare.Name) != null)
+                        {
+                            throw new Exception();
+                        }
+                            dbContext.Tares.Add(tare);
+
+                        dbContext.SaveChanges();
+                        transaction.Commit();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception(ex.Message);
+                    }
+                }
+            }
+        }
         public void Add(Tare tare)
         {
             using (StorageDbContext dbContext = new StorageDbContext())
@@ -18,14 +44,7 @@ namespace InventarizatorLI.Repositories
                 {
                     try
                     {
-                        if (dbContext.Tares.FirstOrDefault(n => n.Name == tare.Name) == null)
-                        {
-                            dbContext.Tares.Add(tare);
-                        }
-                        else
-                        {
-                            dbContext.Tares.First(n => n.Name == tare.Name).Amount += tare.Amount;
-                        }
+                        dbContext.Tares.First(n => n.Name == tare.Name).Amount += tare.Amount;
 
                         dbContext.SaveChanges();
                         transaction.Commit();
