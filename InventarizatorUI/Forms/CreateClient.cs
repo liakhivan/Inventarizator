@@ -12,27 +12,23 @@ using System.Windows.Forms;
 
 namespace InventarizatorUI.Forms
 {
-    public partial class CreateTare : Form
-    {
-        public delegate void Upd();
-        private event Upd updateInformation;
-        public CreateTare(Upd updateEvent)
+    public partial class CreateClient : Form
+    { 
+        public CreateClient()
         {
-            updateInformation += updateEvent;
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TareRepository tareRepository = new TareRepository();
+            ClientRepository clientRepository = new ClientRepository();
 
             try
             {
-                Tare newTare = new Tare(textBox1.Text, 0);
+                Client newClient = new Client(textBox1.Text);
 
-                tareRepository.Create(newTare);
+                clientRepository.Create(newClient);
 
-                updateInformation();
 
                 MessageBox.Show("Операція успішно виконана.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             } catch (Exception ex)

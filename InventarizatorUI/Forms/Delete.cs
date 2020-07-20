@@ -31,10 +31,15 @@ namespace InventarizatorUI
                 IngredientRepository repos = new IngredientRepository();
                 listBox1.DataSource = repos.GetDataSource();
             }
-            else
+            else if(radioButton3.Checked)
             {
                 TareRepository tareRepository = new TareRepository();
                 listBox1.DataSource = tareRepository.GetDataSource().Select(n => n.Name ).ToList<string>();
+            }
+            else
+            {
+                ClientRepository clientRepository = new ClientRepository();
+                listBox1.DataSource = clientRepository.GetDataSource().Select(n => n.Name).ToList();
             }
         }
 
@@ -74,7 +79,7 @@ namespace InventarizatorUI
 
                     RadioButton1_CheckedChanged(this, null);
                 } 
-                else
+                else if(radioButton3.Checked)
                 {
                     TareRepository tareRepository = new TareRepository();
 
@@ -83,6 +88,18 @@ namespace InventarizatorUI
                     tareRepository.DeleteById(tareForDeleting.Id);
 
                     updateInformation();
+                    MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    RadioButton1_CheckedChanged(this, null);
+                }
+                else
+                {
+                    ClientRepository clientRepository = new ClientRepository();
+
+                    Client clientForDeleting = clientRepository.GetDataSource().First(n => n.Name == listBox1.SelectedItem.ToString());
+
+                    clientRepository.DeleteById(clientForDeleting.Id);
+
                     MessageBox.Show(@"Видалення успішне.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     RadioButton1_CheckedChanged(this, null);

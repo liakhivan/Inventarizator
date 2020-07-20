@@ -1,6 +1,6 @@
 ﻿namespace InventarizatorUI.Forms
 {
-    partial class CreateTare
+    partial class CreateClient
     {
         /// <summary>
         /// Required designer variable.
@@ -65,7 +65,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // CreateTare
+            // CreateClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -73,8 +73,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "CreateTare";
-            this.Text = "CreateTare";
+            this.Name = "CreateClient";
+            this.Text = "Створення клієнта";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -256,5 +256,11 @@ namespace InventarizatorUI
             var form = new AddTare(UpdateDataGridWiew);
             form.ShowDialog();
         }
+
+        private void clientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CreateClient();
+            form.ShowDialog();
+        }
     }
 }
