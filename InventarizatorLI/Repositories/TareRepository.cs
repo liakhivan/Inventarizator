@@ -128,6 +128,8 @@ namespace InventarizatorLI.Repositories
 
                         context.ChangeTracker.DetectChanges();
                         context.SaveChanges();
+
+                        transaction.Commit();
                     }
                     catch (Exception ex)
                     {
