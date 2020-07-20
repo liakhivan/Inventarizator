@@ -15,5 +15,6 @@ namespace InventarizatorLI.Model
         public DbSet<ProdStatElement> ProductStatistics { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Tare> Tares { get; set; }
+        public DbSet<Security> Securities { get; set; }
     }
 }

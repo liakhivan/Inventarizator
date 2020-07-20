@@ -76,12 +76,14 @@
     <Compile Include="Model\Package.cs" />
     <Compile Include="Model\ProdStatElement.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Security.cs" />
     <Compile Include="Model\Tare.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\IngredientsForProductRepository.cs" />
     <Compile Include="Repositories\IngredStatisticsRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ProdStatisticsRepository.cs" />
+    <Compile Include="Repositories\SecurityRepository.cs" />
     <Compile Include="Repositories\TableJoin\IngredientPackage.cs" />
     <Compile Include="Repositories\TableJoin\IngredientStatistics.cs" />
     <Compile Include="Repositories\TableJoin\ProductConteiner.cs" />

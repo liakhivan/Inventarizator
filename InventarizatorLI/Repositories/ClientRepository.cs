@@ -18,6 +18,10 @@ namespace InventarizatorLI.Repositories
                 {
                     try
                     {
+                        Client newEntryClient = dbContext.Clients.FirstOrDefault(n => n.Name == client.Name);
+
+                        if (newEntryClient != null)
+                            throw new Exception("Даний клієнт вже існує.");
                         dbContext.Clients.Add(client);
 
                         dbContext.SaveChanges();
@@ -74,6 +78,8 @@ namespace InventarizatorLI.Repositories
 
                         context.ChangeTracker.DetectChanges();
                         context.SaveChanges();
+
+                        transaction.Commit();
                     }
                     catch (Exception ex)
                     {

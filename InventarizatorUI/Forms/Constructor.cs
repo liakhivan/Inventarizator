@@ -21,22 +21,34 @@ namespace InventarizatorUI.Forms
         private BindingSource bsProductCollection;
         private List<string> productCollection;
 
+        private BindingSource bsClientCollection;
+        private List<string> clientCollection;
+
         public Constructor()
         {
             InitializeComponent();
             invoice = new List<ElementOfInvoice>();
 
             ProductRepository productRepository = new ProductRepository();
+            ClientRepository clientRepository = new ClientRepository();
 
             productCollection = productRepository.GetDataSource().Select(n => n.ToString()).ToList();
             bsProductCollection = new BindingSource();
             bsProductCollection.DataSource = productCollection;
+
+            clientCollection = clientRepository.GetDataSource().Select(n => n.Name).ToList();
+            bsClientCollection = new BindingSource();
+            bsClientCollection.DataSource = clientCollection;
+
             comboBox1.DataSource = bsProductCollection;
             comboBox1.SelectedItem = null;
 
-            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            comboBox1.AutoCompleteMode = AutoCompleteMode.None;
-            comboBox1.IntegralHeight = false;
+            comboBox3.DataSource = bsClientCollection;
+            comboBox3.SelectedItem = null;
+
+            comboBox1.DropDownStyle = comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBox1.AutoCompleteMode = comboBox3.AutoCompleteMode = AutoCompleteMode.None;
+            comboBox1.IntegralHeight = comboBox3.IntegralHeight = false;
         }
 
         private string Mounth(int number)
@@ -218,7 +230,7 @@ namespace InventarizatorUI.Forms
                         throw new ArgumentException("№ накладної повинен бути числом!!!");
                     }
                     // Генерація імені накладної.
-                    newFileName = textBox3.Text + "_" + textBox2.Text + "_" + dateTimePicker1.Value.ToString("dd-MM-yyyy") + ".xlsx";
+                    newFileName = comboBox3.SelectedItem.ToString() + "_" + textBox2.Text + "_" + dateTimePicker1.Value.ToString("dd-MM-yyyy") + ".xlsx";
                     // Копіювання файлу з корінної папки в потрібну.
                     FileInfo currFileInfo = new FileInfo(Directory.GetCurrentDirectory() + currentFileName);
                     currFileInfo.CopyTo(path + currentFileName, true);
@@ -232,7 +244,7 @@ namespace InventarizatorUI.Forms
                     Excel.Worksheet sheetRemove = invoiceFile.Sheets[2];
 
                     //Заповнення накладної.
-                    sheet.Range["H17"].Value = textBox3.Text;
+                    sheet.Range["H17"].Value = comboBox3.SelectedItem.ToString();
                     sheet.Range["AJ5"].Value = textBox2.Text;
                     sheet.Range["AJ10"].Value = dateTimePicker1.Value.Day;
                     sheet.Range["AM10"].Value = Mounth(dateTimePicker1.Value.Month) + " " + dateTimePicker1.Value.Year;
@@ -402,6 +414,24 @@ namespace InventarizatorUI.Forms
             {
                 comboBox2.Focus();
             }
+        }
+
+        private void comboBox3_TextUpdate(object sender, EventArgs e)
+        {
+            string searchString = comboBox3.Text;
+            Cursor prevCursor = this.Cursor;
+            bsClientCollection.DataSource = clientCollection.Where(x => x.ToUpper().Contains(searchString.ToUpper())).ToList();
+            if (bsClientCollection.Count != 0)
+                comboBox3.DroppedDown = false;
+            comboBox3.DroppedDown = true;
+            comboBox3.SelectedItem = null;
+
+            comboBox3.Text = searchString;
+
+            // Перенесення курсора в кінець поля вводу.
+            comboBox3.Select(searchString.Length, 0);
+
+            this.Cursor = prevCursor;
         }
     }
 }
