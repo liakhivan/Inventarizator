@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using InventarizatorLI.Model;
 using InventarizatorLI.Repositories;
 
 namespace InventarizatorUI
@@ -40,7 +41,7 @@ namespace InventarizatorUI
                     var conteiner = conteinerRepository.GetDataSource().First(elem => elem.ProductId == product.Id & elem.Weight == productConteiner.Weight);
                     conteinerRepository.Remove(conteiner.Id, dateTimePicker1.Value, 1, Decimal.ToInt32(numericUpDown1.Value));
                 }
-                else
+                else if (radioButton2.Checked)
                 {
                     var ingredientRepository = new IngredientRepository();
                     var packageRepository = new PackageRepository();
@@ -49,6 +50,15 @@ namespace InventarizatorUI
                     var ingredient = ingredientRepository.GetDataSource().First(element => element.Name == ingredientPackage.Name);
                     var conteiner = packageRepository.GetDataSource().First(elem => elem.IngredientId == ingredient.Id & elem.Weight == ingredientPackage.Weight);
                     packageRepository.Remove(conteiner.Id, dateTimePicker1.Value, Double.Parse(maskedTextBox1.Text));
+                } 
+                else
+                {
+                    TareRepository tareRepository = new TareRepository();
+                    Tare tareForRemoving = tareRepository.GetDataSource().
+                           First(elem => $"{elem.Name}   {elem.Amount}" == comboBox1.SelectedItem.ToString());
+                    tareForRemoving.Amount = Decimal.ToInt32(numericUpDown1.Value);
+
+                    tareRepository.Remove(tareForRemoving);
                 }
                 RadioButton1_CheckedChanged(null, null);
 
@@ -82,8 +92,9 @@ namespace InventarizatorUI
                 numericUpDown1.Visible = numericUpDown1.Enabled = true;
                 numericUpDown1.Value = 1;
             }
-            else
+            else if (radioButton2.Checked)
             {
+                label1.Text = @"Інгредієнти:";
                 var ingredientRepository = new IngredientRepository();
 
                 bsObjectForRemowingCollection = new BindingSource();
@@ -100,6 +111,26 @@ namespace InventarizatorUI
                 maskedTextBox1.Visible = maskedTextBox1.Enabled = true;
                 numericUpDown1.Visible = numericUpDown1.Enabled = false;
                 maskedTextBox1.Text = "";
+            } 
+            else
+            {
+                label1.Text = @"Тара:";
+                var tareRepository = new TareRepository();
+
+                bsObjectForRemowingCollection = new BindingSource();
+                objectForRemowingCollection = tareRepository.GetDataSource().
+                    Select(elem => $"{elem.Name}   {elem.Amount}").ToList();
+                bsObjectForRemowingCollection.DataSource = objectForRemowingCollection;
+                comboBox1.DataSource = bsObjectForRemowingCollection;
+                comboBox1.SelectedItem = null;
+
+                comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+                comboBox1.AutoCompleteMode = AutoCompleteMode.None;
+                comboBox1.IntegralHeight = false;
+
+                maskedTextBox1.Visible = maskedTextBox1.Enabled = false;
+                numericUpDown1.Visible = numericUpDown1.Enabled = true;
+                numericUpDown1.Value = 1;
             }
         }
 
@@ -151,6 +182,11 @@ namespace InventarizatorUI
             {
                 button1.Focus();
             }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton1_CheckedChanged(this, null);
         }
     }
 }

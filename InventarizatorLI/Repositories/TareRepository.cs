@@ -20,7 +20,7 @@ namespace InventarizatorLI.Repositories
                     {
                         if (dbContext.Tares.FirstOrDefault(n => n.Name == tare.Name) != null)
                         {
-                            throw new Exception();
+                            throw new Exception("Така тара вже існує.");
                         }
                             dbContext.Tares.Add(tare);
 

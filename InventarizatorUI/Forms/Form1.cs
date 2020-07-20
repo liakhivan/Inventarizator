@@ -196,11 +196,11 @@ namespace InventarizatorUI
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            radioButton1.Checked = true;
             UpdateDataGridWiew();
             //comboBox1.SelectedIndex = 0;
             //dataGridView1.Columns["Weight"].DefaultCellStyle.Format = "#0.00";
             //dataGridView1.RowHeadersVisible = false;
-            radioButton1.Checked = true;
         }
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
@@ -247,7 +247,7 @@ namespace InventarizatorUI
 
         private void тараToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            var form = new CreateTare();
+            var form = new CreateTare(UpdateDataGridWiew);
             form.ShowDialog();
         }
 

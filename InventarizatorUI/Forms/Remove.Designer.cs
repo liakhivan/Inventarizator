@@ -39,6 +39,7 @@
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +58,7 @@
             this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(138, 9);
+            this.comboBox1.Location = new System.Drawing.Point(155, 9);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(184, 21);
             this.comboBox1.TabIndex = 1;
@@ -76,7 +77,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(138, 33);
+            this.numericUpDown1.Location = new System.Drawing.Point(155, 33);
             this.numericUpDown1.Minimum = new decimal(new int[] {
             1,
             0,
@@ -93,9 +94,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(2, 58);
+            this.button1.Location = new System.Drawing.Point(91, 58);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(320, 35);
+            this.button1.Size = new System.Drawing.Size(248, 35);
             this.button1.TabIndex = 4;
             this.button1.Text = "Списати";
             this.button1.UseVisualStyleBackColor = true;
@@ -103,11 +104,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Location = new System.Drawing.Point(2, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(83, 58);
+            this.groupBox1.Size = new System.Drawing.Size(83, 93);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
@@ -120,6 +122,7 @@
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Text = "Інгредієнти";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -136,7 +139,7 @@
             // 
             // maskedTextBox1
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(138, 33);
+            this.maskedTextBox1.Location = new System.Drawing.Point(155, 33);
             this.maskedTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.maskedTextBox1.Mask = "00.000";
             this.maskedTextBox1.Name = "maskedTextBox1";
@@ -148,7 +151,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(197, 35);
+            this.label4.Location = new System.Drawing.Point(214, 35);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
@@ -158,7 +161,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(236, 33);
+            this.dateTimePicker1.Location = new System.Drawing.Point(253, 33);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.MaxDate = new System.DateTime(2020, 6, 1, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
@@ -166,11 +169,21 @@
             this.dateTimePicker1.TabIndex = 9;
             this.dateTimePicker1.Value = new System.DateTime(2019, 11, 19, 0, 0, 0, 0);
             // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(3, 56);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(50, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.Text = "Тара";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
             // Remove
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 96);
+            this.ClientSize = new System.Drawing.Size(341, 96);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.maskedTextBox1);
@@ -205,5 +218,6 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.RadioButton radioButton3;
     }
 }

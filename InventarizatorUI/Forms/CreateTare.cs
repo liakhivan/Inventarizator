@@ -14,8 +14,11 @@ namespace InventarizatorUI.Forms
 {
     public partial class CreateTare : Form
     {
-        public CreateTare()
+        public delegate void Upd();
+        private event Upd updateInformation;
+        public CreateTare(Upd updateEvent)
         {
+            updateInformation += updateEvent;
             InitializeComponent();
         }
 
@@ -29,6 +32,7 @@ namespace InventarizatorUI.Forms
 
                 tareRepository.Create(newTare);
 
+                updateInformation();
 
                 MessageBox.Show("Операція успішно виконана.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
             } catch (Exception ex)
