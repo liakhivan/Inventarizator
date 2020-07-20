@@ -8,7 +8,7 @@ using InventarizatorLI.Repositories;
 
 namespace InventarizatorLI.Repositories
 {
-    public class SecurityRepository : GenericRepository<Security>
+    public class SecurityRepository
     {
 
         public void Edit(string newPassStr)
@@ -37,9 +37,15 @@ namespace InventarizatorLI.Repositories
             }
         }
 
-        public override List<Security> GetDataSource()
+        public bool VerifyPassword(string password)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (StorageDbContext dbContext = new StorageDbContext())
+            {
+                result = dbContext.Securities.First().Pass == password.GetHashCode();
+            }
+
+            return result;
         }
     }
 }
