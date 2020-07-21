@@ -2,10 +2,27 @@
 
 namespace InventarizatorLI.Model
 {
+    class ContextInitializer : DropCreateDatabaseAlways<StorageDbContext>
+    {
+        protected override void Seed(StorageDbContext db)
+        {
+            Security defSecurity = new Security();
+
+            db.Securities.Add(defSecurity);
+            db.SaveChanges();
+        }
+    }
+
     public class StorageDbContext : DbContext
     {
+        //static StorageDbContext()
+        //{
+        //    Database.SetInitializer<StorageDbContext>(new ContextInitializer());
+        //}
+
         public StorageDbContext() : base("StorageDBConnection")
         {}
+
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<Product> Products { get; set; }

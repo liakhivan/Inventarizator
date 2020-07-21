@@ -42,7 +42,15 @@ namespace InventarizatorLI.Repositories
             bool result = false;
             using (StorageDbContext dbContext = new StorageDbContext())
             {
-                result = dbContext.Securities.First().Pass == password.GetHashCode();
+                Security currPassword = dbContext.Securities.FirstOrDefault();
+
+                if (currPassword == null)
+                {
+                    dbContext.Securities.Add(new Security());
+                    currPassword = dbContext.Securities.FirstOrDefault();
+                }
+
+                result = currPassword.Pass == password.GetHashCode();
             }
 
             return result;

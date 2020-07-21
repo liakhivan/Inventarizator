@@ -143,14 +143,35 @@ namespace InventarizatorUI
 
         private void BackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form6 = new Backup();
-            form6.ShowDialog();
+            try
+            {
+                VerifyPass verifyPass = new VerifyPass();
+                verifyPass.ShowDialog();
+
+                var form6 = new Backup();
+                form6.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void RecoveryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form7 = new Restore(UpdateDataGridWiew);
-            form7.ShowDialog();
+
+            try
+            {
+                VerifyPass verifyPass = new VerifyPass();
+                verifyPass.ShowDialog();
+
+                var form7 = new Restore(UpdateDataGridWiew);
+                form7.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void MaskedTextBox1_TextChanged(object sender, EventArgs e)
@@ -205,12 +226,28 @@ namespace InventarizatorUI
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Edit edit = new Edit(UpdateDataGridWiew);
-            edit.ShowDialog();
+            try
+            {
+                VerifyPass verifyPass = new VerifyPass();
+                verifyPass.ShowDialog();
+
+                Edit edit = new Edit(UpdateDataGridWiew);
+                edit.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void FormatingDBToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                VerifyPass verifyPass = new VerifyPass();
+                verifyPass.ShowDialog();
+
             Thread threadForFormatingDB = new Thread(new ThreadStart(ProductRepository.FormatingAllData));
 
             DialogResult dialogResult = MessageBox.Show(@"Ви дійсно хочете очистити базу даних?", "Sucsess", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -226,6 +263,13 @@ namespace InventarizatorUI
             this.Cursor = Cursors.Default;
 
             UpdateDataGridWiew();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void addProductsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -260,6 +304,13 @@ namespace InventarizatorUI
         private void clientToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new CreateClient();
+            form.ShowDialog();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var form = new ChangePassword();
             form.ShowDialog();
         }
     }

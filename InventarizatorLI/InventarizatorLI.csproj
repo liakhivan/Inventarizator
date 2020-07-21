@@ -66,6 +66,10 @@
     <Compile Include="Migrations\202007182144053_ChangeTareMigration.Designer.cs">
       <DependentUpon>202007182144053_ChangeTareMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007210704231_AddSecurityTableMigration.cs" />
+    <Compile Include="Migrations\202007210704231_AddSecurityTableMigration.Designer.cs">
+      <DependentUpon>202007210704231_AddSecurityTableMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Conteiner.cs" />
@@ -111,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007182144053_ChangeTareMigration.resx">
       <DependentUpon>202007182144053_ChangeTareMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007210704231_AddSecurityTableMigration.resx">
+      <DependentUpon>202007210704231_AddSecurityTableMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,7 +14,7 @@ namespace InventarizatorLI.Model
 
         public Security() 
         {
-            Pass = @"1111".GetHashCode();
+            Pass = "1111".GetHashCode();
         }
         public Security(string pasStr)
         {
