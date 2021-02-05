@@ -158,5 +158,16 @@ namespace InventarizatorUI
 
             this.Cursor = prevCursor;
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (radioButton1.Checked)
+                    comboBox1.Focus();
+                else
+                    button1.Focus();
+            }
+        }
     }
 }

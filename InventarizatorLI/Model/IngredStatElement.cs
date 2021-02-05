@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventarizatorLI.Model
 {
-    [Table("IngredientStatistics")]
+    [Table("IngredientStatistic")]
     public class IngredStatElement
     {
         public int Id { get; set; }

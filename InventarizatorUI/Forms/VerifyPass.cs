@@ -13,6 +13,7 @@ namespace InventarizatorUI.Forms
 {
     public partial class VerifyPass : Form
     {
+        private bool isPassCorrect = false;
         public VerifyPass()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace InventarizatorUI.Forms
         {
             SecurityRepository securityRepository = new SecurityRepository();
 
-            bool isPassCorrect = securityRepository.VerifyPassword(textBox1.Text.ToString());
+            isPassCorrect = securityRepository.VerifyPassword(textBox1.Text.ToString());
 
             try
             {
@@ -38,15 +39,29 @@ namespace InventarizatorUI.Forms
                 {
                     throw new Exception("Введено неправильний пароль.");
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
             finally
             {
-                this.Close();   
+                this.Close(); 
             }
 
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                throw new Exception("Пароль не підтверджено.");
+            } 
+            finally
+            {
+                this.Close();
+            }
         }
     }
 }

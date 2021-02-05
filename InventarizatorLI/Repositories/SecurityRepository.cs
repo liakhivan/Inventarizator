@@ -22,7 +22,7 @@ namespace InventarizatorLI.Repositories
                         if (newPassStr.Length < 4)
                             throw new Exception("Пароль занадто короткий. Він має бути не менше 4 символів.");
 
-                        dbContext.Securities.FirstOrDefault().Pass = newPassStr.GetHashCode();
+                        dbContext.Securities.FirstOrDefault().Pass = Security.GetHashPass(newPassStr);
 
                         dbContext.SaveChanges();
                         transaction.Commit();
@@ -50,7 +50,7 @@ namespace InventarizatorLI.Repositories
                     currPassword = dbContext.Securities.FirstOrDefault();
                 }
 
-                result = currPassword.Pass == password.GetHashCode();
+                result = currPassword.Pass == Security.GetHashPass(password);
             }
 
             return result;

@@ -313,5 +313,11 @@ namespace InventarizatorUI
             var form = new ChangePassword();
             form.ShowDialog();
         }
+
+        private void продуктиІнгредієнтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Create form2 = new Create();
+            form2.ShowDialog();
+        }
     }
 }

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +41,7 @@
             this.manyallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.тараToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +50,8 @@
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recoveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FormatingDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,9 +72,7 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.продуктиІнгредієнтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -123,21 +124,21 @@
             // addProductsToolStripMenuItem
             // 
             this.addProductsToolStripMenuItem.Name = "addProductsToolStripMenuItem";
-            this.addProductsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addProductsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.addProductsToolStripMenuItem.Text = "Продукти";
             this.addProductsToolStripMenuItem.Click += new System.EventHandler(this.addProductsToolStripMenuItem_Click);
             // 
             // addIngredientsToolStripMenuItem
             // 
             this.addIngredientsToolStripMenuItem.Name = "addIngredientsToolStripMenuItem";
-            this.addIngredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addIngredientsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.addIngredientsToolStripMenuItem.Text = "Інгредієнти";
             this.addIngredientsToolStripMenuItem.Click += new System.EventHandler(this.addIngredientsToolStripMenuItem_Click);
             // 
             // тараToolStripMenuItem
             // 
             this.тараToolStripMenuItem.Name = "тараToolStripMenuItem";
-            this.тараToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.тараToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.тараToolStripMenuItem.Text = "Тара";
             this.тараToolStripMenuItem.Click += new System.EventHandler(this.тараToolStripMenuItem_Click);
             // 
@@ -153,14 +154,14 @@
             // invoiceToolStripMenuItem
             // 
             this.invoiceToolStripMenuItem.Name = "invoiceToolStripMenuItem";
-            this.invoiceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.invoiceToolStripMenuItem.Text = "По о накладній";
+            this.invoiceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.invoiceToolStripMenuItem.Text = "По накладній";
             this.invoiceToolStripMenuItem.Click += new System.EventHandler(this.InvoiceToolStripMenuItem_Click);
             // 
             // manyallyToolStripMenuItem
             // 
             this.manyallyToolStripMenuItem.Name = "manyallyToolStripMenuItem";
-            this.manyallyToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.manyallyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.manyallyToolStripMenuItem.Text = "Вручну";
             this.manyallyToolStripMenuItem.Click += new System.EventHandler(this.ManyallyToolStripMenuItem_Click);
             // 
@@ -168,11 +169,11 @@
             // 
             this.createToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.тараToolStripMenuItem1,
-            this.clientToolStripMenuItem});
+            this.clientToolStripMenuItem,
+            this.продуктиІнгредієнтиToolStripMenuItem});
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
             this.createToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.createToolStripMenuItem.Text = "Створити";
-            this.createToolStripMenuItem.Click += new System.EventHandler(this.CreateToolStripMenuItem_Click);
             // 
             // тараToolStripMenuItem1
             // 
@@ -180,6 +181,13 @@
             this.тараToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.тараToolStripMenuItem1.Text = "Тара";
             this.тараToolStripMenuItem1.Click += new System.EventHandler(this.тараToolStripMenuItem1_Click);
+            // 
+            // clientToolStripMenuItem
+            // 
+            this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
+            this.clientToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientToolStripMenuItem.Text = "Клієнти";
+            this.clientToolStripMenuItem.Click += new System.EventHandler(this.clientToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -241,6 +249,21 @@
             this.FormatingDBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.FormatingDBToolStripMenuItem.Text = "Форматувати БД";
             this.FormatingDBToolStripMenuItem.Click += new System.EventHandler(this.FormatingDBToolStripMenuItem_Click);
+            // 
+            // securityToolStripMenuItem
+            // 
+            this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changePasswordToolStripMenuItem});
+            this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
+            this.securityToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.securityToolStripMenuItem.Text = "Безпека";
+            // 
+            // changePasswordToolStripMenuItem
+            // 
+            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.changePasswordToolStripMenuItem.Text = "Змінити пароль";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // statisticsToolStripMenuItem
             // 
@@ -444,25 +467,25 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(148, 2);
@@ -490,27 +513,12 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(625, 351);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // clientToolStripMenuItem
+            // продуктиІнгредієнтиToolStripMenuItem
             // 
-            this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-            this.clientToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.clientToolStripMenuItem.Text = "Клієнти";
-            this.clientToolStripMenuItem.Click += new System.EventHandler(this.clientToolStripMenuItem_Click);
-            // 
-            // securityToolStripMenuItem
-            // 
-            this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changePasswordToolStripMenuItem});
-            this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            this.securityToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.securityToolStripMenuItem.Text = "Безпека";
-            // 
-            // changePasswordToolStripMenuItem
-            // 
-            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.changePasswordToolStripMenuItem.Text = "Змінити пароль";
-            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            this.продуктиІнгредієнтиToolStripMenuItem.Name = "продуктиІнгредієнтиToolStripMenuItem";
+            this.продуктиІнгредієнтиToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.продуктиІнгредієнтиToolStripMenuItem.Text = "Продукти/Інгредієнти";
+            this.продуктиІнгредієнтиToolStripMenuItem.Click += new System.EventHandler(this.продуктиІнгредієнтиToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -585,6 +593,7 @@
         private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem securityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem продуктиІнгредієнтиToolStripMenuItem;
     }
 }
 

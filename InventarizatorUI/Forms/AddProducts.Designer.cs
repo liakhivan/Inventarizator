@@ -60,6 +60,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -181,7 +182,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(9, 116);
+            this.button1.Location = new System.Drawing.Point(9, 147);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(368, 33);
@@ -424,12 +425,26 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox2);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(3, 312);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(383, 155);
+            this.panel1.Size = new System.Drawing.Size(383, 186);
             this.panel1.TabIndex = 37;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox2.Location = new System.Drawing.Point(8, 117);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(324, 21);
+            this.checkBox2.TabIndex = 37;
+            this.checkBox2.Text = "Друкувати штрих-коди  для списку продуктів";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -468,7 +483,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 470);
+            this.ClientSize = new System.Drawing.Size(388, 500);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
@@ -493,6 +508,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
@@ -537,5 +553,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

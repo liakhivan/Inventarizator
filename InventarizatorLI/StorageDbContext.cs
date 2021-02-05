@@ -2,7 +2,7 @@
 
 namespace InventarizatorLI.Model
 {
-    class ContextInitializer : DropCreateDatabaseAlways<StorageDbContext>
+    class ContextInitializer : CreateDatabaseIfNotExists<StorageDbContext>
     {
         protected override void Seed(StorageDbContext db)
         {
@@ -15,13 +15,11 @@ namespace InventarizatorLI.Model
 
     public class StorageDbContext : DbContext
     {
-        //static StorageDbContext()
-        //{
-        //    Database.SetInitializer<StorageDbContext>(new ContextInitializer());
-        //}
 
         public StorageDbContext() : base("StorageDBConnection")
-        {}
+        {
+            Database.SetInitializer<StorageDbContext>(new ContextInitializer());
+        }
 
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Package> Packages { get; set; }

@@ -30,7 +30,7 @@ namespace InventarizatorUI.Forms
                 {
                     throw new Exception("Вказано неправильний пароль.");
                 }
-                if (textBox2.Text == textBox3.Text)
+                if (textBox2.Text != textBox3.Text)
                 {
                     throw new Exception("Новий пароль не збігається з вказаним.");
                 }

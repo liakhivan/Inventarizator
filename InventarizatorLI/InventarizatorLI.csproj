@@ -54,23 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201911101535539_InitialCreate.cs" />
-    <Compile Include="Migrations\201911101535539_InitialCreate.Designer.cs">
-      <DependentUpon>201911101535539_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202007181354106_AddTareAndClientMigration.cs" />
-    <Compile Include="Migrations\202007181354106_AddTareAndClientMigration.Designer.cs">
-      <DependentUpon>202007181354106_AddTareAndClientMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202007182144053_ChangeTareMigration.cs" />
-    <Compile Include="Migrations\202007182144053_ChangeTareMigration.Designer.cs">
-      <DependentUpon>202007182144053_ChangeTareMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202007210704231_AddSecurityTableMigration.cs" />
-    <Compile Include="Migrations\202007210704231_AddSecurityTableMigration.Designer.cs">
-      <DependentUpon>202007210704231_AddSecurityTableMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Conteiner.cs" />
     <Compile Include="Model\ElementOfInvoice.cs" />
@@ -105,20 +88,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911101535539_InitialCreate.resx">
-      <DependentUpon>201911101535539_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007181354106_AddTareAndClientMigration.resx">
-      <DependentUpon>202007181354106_AddTareAndClientMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007182144053_ChangeTareMigration.resx">
-      <DependentUpon>202007182144053_ChangeTareMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007210704231_AddSecurityTableMigration.resx">
-      <DependentUpon>202007210704231_AddSecurityTableMigration.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

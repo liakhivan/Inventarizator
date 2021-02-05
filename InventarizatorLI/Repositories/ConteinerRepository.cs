@@ -80,21 +80,6 @@ namespace InventarizatorLI.Repositories
                     {
                         int productId = newConteiners[0].ProductId;
                         var prodStat = new ProdStatisticsRepository();
-                        foreach (var element in newConteiners)
-                        {
-                            Conteiner dbconteiner = context.Conteiners.FirstOrDefault(n =>
-                                 n.ProductId == element.ProductId & n.Weight == element.Weight);
-
-                            if (dbconteiner != null)
-                            {
-                                dbconteiner.Amount += element.Amount;
-                            }
-                            else
-                            {
-                                context.Conteiners.Add(element);
-                            }
-                            prodStat.Add(element.ProductId, 0, element.Weight * element.Amount, dateAdd);
-                        }
 
                         if (weightBatch > 0)
                         {
@@ -126,6 +111,24 @@ namespace InventarizatorLI.Repositories
                             if (amountOfDontRemovedIngredients != 0)
                                 throw new ArgumentException();
                         }
+
+
+                        foreach (var element in newConteiners)
+                        {
+                            Conteiner dbconteiner = context.Conteiners.FirstOrDefault(n =>
+                                 n.ProductId == element.ProductId & n.Weight == element.Weight);
+
+                            if (dbconteiner != null)
+                            {
+                                dbconteiner.Amount += element.Amount;
+                            }
+                            else
+                            {
+                                context.Conteiners.Add(element);
+                            }
+                            prodStat.Add(element.ProductId, 0, element.Weight * element.Amount, dateAdd);
+                        }
+
                         context.SaveChanges();
                         transaction.Commit();
                     }

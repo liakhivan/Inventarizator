@@ -6,13 +6,14 @@ using InventarizatorLI.Model;
 using InventarizatorLI.Repositories;
 using InventarizatorLI.Repositories.TableJoin;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 
 namespace InventarizatorUI.Forms
 {
     public partial class AddProducts : Form
     {
         Point panel1PositionProductWithoutRemake, panel1PositionProductWithRemake;
-        int heightProductsWithoutRemake = 358, heightProductsWithRemake = 500;
+        int heightProductsWithoutRemake = 396, heightProductsWithRemake = 538;
         public delegate void Upd();
         private event Upd updateInformation;
         private List<ProductConteiner> productsForRemaking;
@@ -30,7 +31,9 @@ namespace InventarizatorUI.Forms
         private List<string> conteinersForRemakingCollection;
         private BindingSource bsConteinersForRemakingCollection;
 
+        private List<Conteiner> addedConteiners;
 
+        private PrintDocument printDocument1 = new PrintDocument();
 
         public AddProducts(Upd eventUpdate)
         {
@@ -56,6 +59,14 @@ namespace InventarizatorUI.Forms
             panel1PositionProductWithoutRemake = panel1.Location = new Point(3, 163);
             panel1PositionProductWithRemake = new Point(3, 307);
             dateTimePicker1.MaxDate = DateTime.Today;
+
+
+
+            PaperSize pS = new PaperSize("Custom Size", 160, 95);
+            printDocument1.DefaultPageSettings.PaperSize = pS;
+            printDocument1.PrinterSettings.PrinterName = "Xprinter XP-237B";
+            printDocument1.PrinterSettings.DefaultPageSettings.PaperSize = pS;
+            printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
         }
 
         private void SearchInComboBox(List<string> coll, ref BindingSource bs, ref ComboBox comboBox)
@@ -456,7 +467,7 @@ namespace InventarizatorUI.Forms
 
                     if (weight <= 0)
                     {
-                        MessageBox.Show(@"Некоректна вага інгредієнту - ключа на 1 заміс", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(@"Некоректна вага інгредієнту-ключа на 1 заміс", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 
@@ -503,6 +514,23 @@ namespace InventarizatorUI.Forms
                     RemoveProductsForRemaking();
                     productsForRemaking.Clear();
                 }
+
+                // Друк штрих-кодів
+                if (checkBox2.Checked)
+                {
+                    addedConteiners = new List<Conteiner>();
+                    ConteinerRepository conteinerRepository = new ConteinerRepository();
+                    var data = conteinerRepository.GetDataSource();
+                    foreach (var item in entryProductsContainerCollection)
+                    {
+                        var oneProduct = data.First(n => n.ProductId == item.ProductId && n.Weight == item.Weight);
+                        oneProduct.Amount = item.Amount;
+                        addedConteiners.Add(oneProduct);
+                    }
+
+                    printDocument1.Print();
+                }
+
                 checkBox1.Checked = false;
 
                 UpdateListBoxProduct();
@@ -522,6 +550,25 @@ namespace InventarizatorUI.Forms
             finally
             {
                 updateInformation();
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            ProductRepository productRepository = new ProductRepository();
+            foreach (var item in addedConteiners)
+            {
+                for (int i = 0; i < item.Amount; i++)
+                {
+                    IronBarCode.GeneratedBarcode MyBarCode = IronBarCode.BarcodeWriter.CreateBarcode(item.Id.ToString(), IronBarCode.BarcodeWriterEncoding.Code128);
+
+                    string productName = productRepository.GetDataSource().First(n => n.Id == item.ProductId).Name + " " + item.Weight + " кг.";
+                    MyBarCode.ResizeTo(120, 40).SetMargins(10, 0, -5, 0);
+                    e.Graphics.DrawImage(MyBarCode.ToBitmap(), 10, 0);
+                    if (productName.Length > 30)
+                        productName = productName.Insert(31, "\n");
+                    e.Graphics.DrawString(productName, new Font(new FontFamily("Arial"), 9, FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.Black), 0, 60);
+                }
             }
         }
     }
