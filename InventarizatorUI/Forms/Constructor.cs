@@ -390,11 +390,6 @@ namespace InventarizatorUI.Forms
         {
             string searchString = comboBox1.Text;
 
-            if(searchString.Contains("■"))
-            {
-                MessageBox.Show("Заєбісь");
-            }
-
             Cursor prevCursor = this.Cursor;
             bsProductCollection.DataSource = productCollection.Where(x => x.ToUpper().Contains(searchString.ToUpper())).ToList();
             if (bsProductCollection.Count != 0)
@@ -434,6 +429,33 @@ namespace InventarizatorUI.Forms
             comboBox3.Select(searchString.Length, 0);
 
             this.Cursor = prevCursor;
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (textBox3.Text.Contains("№"))
+                {
+                    int cantainerId = Int32.Parse(textBox3.Text.Split('?')[1].Split('№')[0]);
+                    ConteinerRepository conteinerRepository = new ConteinerRepository();
+                    ProductRepository productRepository = new ProductRepository();
+
+                    Conteiner currConteiner = conteinerRepository.GetDataSource().First(n => n.Id == cantainerId);
+                    Product currProduct = productRepository.GetDataSource().First(n => n.Id == currConteiner.ProductId);
+                    string productName = currProduct.Name;
+                    double productWidth = currConteiner.Weight;
+                    int productCount = 1;
+                    double price = Double.Parse(textBox1.Text);
+                    AddProductContainer(productName, productWidth, productCount, price);
+
+                    textBox3.Text = "";
+                }
+
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

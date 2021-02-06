@@ -28,7 +28,7 @@ namespace InventarizatorLI.Repositories
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             IronBarCode.GeneratedBarcode MyBarCode = IronBarCode.BarcodeWriter.CreateBarcode(
-                "&" + item.Id + "&",
+                "?" + item.Id + "№",
                 IronBarCode.BarcodeWriterEncoding.Code128);
 
             MyBarCode.ResizeTo(120, 40).SetMargins(10, 0, -5, 0);

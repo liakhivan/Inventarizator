@@ -31,6 +31,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.create = new System.Windows.Forms.Button();
@@ -61,7 +62,9 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -69,6 +72,7 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -92,6 +96,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.deleteAll);
             this.panel1.Controls.Add(this.delete);
@@ -118,11 +123,20 @@
             this.panel4.Controls.Add(this.textBox2);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Location = new System.Drawing.Point(2, 171);
+            this.panel4.Location = new System.Drawing.Point(2, 208);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(279, 152);
             this.panel4.TabIndex = 13;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(82, 51);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(188, 23);
+            this.comboBox3.TabIndex = 18;
+            this.comboBox3.TextUpdate += new System.EventHandler(this.comboBox3_TextUpdate);
             // 
             // label11
             // 
@@ -464,14 +478,34 @@
             this.listBox1.TabIndex = 1;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
-            // comboBox3
+            // panel6
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(82, 51);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(188, 23);
-            this.comboBox3.TabIndex = 18;
-            this.comboBox3.TextUpdate += new System.EventHandler(this.comboBox3_TextUpdate);
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.textBox3);
+            this.panel6.Controls.Add(this.label13);
+            this.panel6.Location = new System.Drawing.Point(2, 168);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(281, 35);
+            this.panel6.TabIndex = 14;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(4, 9);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(153, 15);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Додавання сканером:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(162, 6);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(111, 21);
+            this.textBox3.TabIndex = 9;
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // Constructor
             // 
@@ -495,6 +529,8 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -535,5 +571,8 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
