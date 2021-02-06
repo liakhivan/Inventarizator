@@ -33,7 +33,6 @@ namespace InventarizatorUI.Forms
 
         private List<Conteiner> addedConteiners;
 
-        private PrintDocument printDocument1 = new PrintDocument();
 
         public AddProducts(Upd eventUpdate)
         {
@@ -59,14 +58,6 @@ namespace InventarizatorUI.Forms
             panel1PositionProductWithoutRemake = panel1.Location = new Point(3, 163);
             panel1PositionProductWithRemake = new Point(3, 307);
             dateTimePicker1.MaxDate = DateTime.Today;
-
-
-
-            PaperSize pS = new PaperSize("Custom Size", 160, 95);
-            printDocument1.DefaultPageSettings.PaperSize = pS;
-            printDocument1.PrinterSettings.PrinterName = "Xprinter XP-237B";
-            printDocument1.PrinterSettings.DefaultPageSettings.PaperSize = pS;
-            printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
         }
 
         private void SearchInComboBox(List<string> coll, ref BindingSource bs, ref ComboBox comboBox)
@@ -139,8 +130,8 @@ namespace InventarizatorUI.Forms
                 defProductForRemaking = productRepository.GetProductConteinerDataSource().
                     First(element => element.ToString() == comboBox2.SelectedItem.ToString());
                 label7.Text = defProductForRemaking.Amount.ToString();
-            numericUpDown2.Minimum = 1;
-            numericUpDown2.Maximum = Int32.Parse(label7.Text);
+                numericUpDown2.Minimum = 1;
+                numericUpDown2.Maximum = Int32.Parse(label7.Text);
 
             }
             catch (NullReferenceException)
@@ -193,7 +184,7 @@ namespace InventarizatorUI.Forms
             IngredientsForProductRepository receiptRepository = new IngredientsForProductRepository();
 
             groupBox1.Enabled = radioButton1.Checked;
-            if(!radioButton1.Checked)
+            if (!radioButton1.Checked)
             {
                 ClearBatch();
             }
@@ -267,7 +258,7 @@ namespace InventarizatorUI.Forms
 
                 bool isOwn = entryProductsContainerCollection.Where(n => n.ProductId == entryProductConteiner.ProductId && n.Weight == entryProductConteiner.Weight).FirstOrDefault() != null;
 
-                if(isOwn)
+                if (isOwn)
                 {
                     entryProductsContainerCollection.Where(n => n.ProductId == entryProductConteiner.ProductId).First().Amount += amount;
                 }
@@ -278,11 +269,11 @@ namespace InventarizatorUI.Forms
 
                 UpdateListBoxProduct();
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 MessageBox.Show(@"Введено некоректні дані продукту.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -436,7 +427,7 @@ namespace InventarizatorUI.Forms
         {
             try
             {
-                if(radioButton1.Checked)
+                if (radioButton1.Checked)
                 {
 
                     ConteinerRepository conteinerRepository = new ConteinerRepository();
@@ -455,11 +446,12 @@ namespace InventarizatorUI.Forms
                         ingredients,
                         elem => elem.IngredientId,
                         ingr => ingr.Id,
-                        (elem, ingr) => new {
+                        (elem, ingr) => new
+                        {
                             ingr.Name,
                             elem.Weight
                         }).ToList();
-                    
+
                     double weightIngredientKeyOnOneKilo = detailReceipt.First(n => n.Name == comboBox3.SelectedItem.ToString()).Weight;
 
                     double weightBatch = weightIngredientKeyBatch / weightIngredientKeyOnOneKilo;
@@ -470,7 +462,7 @@ namespace InventarizatorUI.Forms
                         MessageBox.Show(@"Некоректна вага інгредієнту-ключа на 1 заміс", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                
+
                     if (amount <= 0)
                     {
                         MessageBox.Show(@"Некоректна кількість замісів", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -515,6 +507,8 @@ namespace InventarizatorUI.Forms
                     productsForRemaking.Clear();
                 }
 
+                UpdateListBoxProduct();
+
                 // Друк штрих-кодів
                 if (checkBox2.Checked)
                 {
@@ -528,15 +522,23 @@ namespace InventarizatorUI.Forms
                         addedConteiners.Add(oneProduct);
                     }
 
-                    printDocument1.Print();
+
+                    ProductRepository productRepository = new ProductRepository();
+                    PrintBarcode printBarcode = new PrintBarcode();
+                    foreach (var item in addedConteiners)
+                    {
+                        for (int i = 0; i < item.Amount; i++)
+                        {
+                            string productName = productRepository.GetDataSource().First(n => n.Id == item.ProductId).Name + " " + item.Weight + " кг.";
+                            printBarcode.Print(item, productName);
+                        }
+                    }
                 }
 
                 checkBox1.Checked = false;
 
-                UpdateListBoxProduct();
-                
                 MessageBox.Show($"Операція успішно виконана.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
             }
 
             catch (NullReferenceException)
@@ -550,25 +552,6 @@ namespace InventarizatorUI.Forms
             finally
             {
                 updateInformation();
-            }
-        }
-
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            ProductRepository productRepository = new ProductRepository();
-            foreach (var item in addedConteiners)
-            {
-                for (int i = 0; i < item.Amount; i++)
-                {
-                    IronBarCode.GeneratedBarcode MyBarCode = IronBarCode.BarcodeWriter.CreateBarcode(item.Id.ToString(), IronBarCode.BarcodeWriterEncoding.Code128);
-
-                    string productName = productRepository.GetDataSource().First(n => n.Id == item.ProductId).Name + " " + item.Weight + " кг.";
-                    MyBarCode.ResizeTo(120, 40).SetMargins(10, 0, -5, 0);
-                    e.Graphics.DrawImage(MyBarCode.ToBitmap(), 10, 0);
-                    if (productName.Length > 30)
-                        productName = productName.Insert(31, "\n");
-                    e.Graphics.DrawString(productName, new Font(new FontFamily("Arial"), 9, FontStyle.Regular, GraphicsUnit.Pixel), new SolidBrush(Color.Black), 0, 60);
-                }
             }
         }
     }

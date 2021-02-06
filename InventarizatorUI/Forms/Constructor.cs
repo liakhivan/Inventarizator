@@ -100,19 +100,25 @@ namespace InventarizatorUI.Forms
 
         private void Add_Click(object sender, EventArgs e)
         {
+            string nameSomeProduct = comboBox1.SelectedItem.ToString();
+            double weightSomeProduct = Double.Parse(comboBox2.Text.ToString());
+            int countSomeProduct = Decimal.ToInt32(numericUpDown1.Value);
+            double priceSomeProduct = Double.Parse(textBox1.Text);
+            AddProductContainer(nameSomeProduct, weightSomeProduct, countSomeProduct, priceSomeProduct);
+
+        }
+
+        private void AddProductContainer(string nameSomeProduct, double weightSomeProduct, int countSomeProduct, double priceSomeProduct)
+        {
             try
             {
-                var nameSomeProduct = comboBox1.SelectedItem.ToString();
-                var weightSomeProduct = Double.Parse(comboBox2.Text.ToString());
-                var countSomeProduct = Decimal.ToInt32(numericUpDown1.Value);
-                var priceSomeProduct = Double.Parse(textBox1.Text);
                 ElementOfInvoice element = new ElementOfInvoice(nameSomeProduct, weightSomeProduct, countSomeProduct, priceSomeProduct, (radioButton1.Checked) ? "кг" : "шт");
-                //var currProductInInvoice = invoice.Where(elemInvoice => (elemInvoice.Product == element.Product)).ToList();
+                
                 var currProductInInvoice = invoice.Where(n => n.UnitOfMeasurement == element.UnitOfMeasurement & n.Product == element.Product).ToList();
                 if (currProductInInvoice.Count != 0)
                 {
-                    if(element.UnitOfMeasurement == "шт")
-                        if(currProductInInvoice[0].Price != priceSomeProduct & currProductInInvoice[0].Weight == element.Weight)
+                    if (element.UnitOfMeasurement == "шт")
+                        if (currProductInInvoice[0].Price != priceSomeProduct & currProductInInvoice[0].Weight == element.Weight)
                             throw new ArgumentException("Ціна даного продукту не співпадає з наявним продуктом.");
 
                     if (currProductInInvoice[0].Price != priceSomeProduct)
@@ -126,15 +132,6 @@ namespace InventarizatorUI.Forms
 
                     if (countOfCurrProductContainers + element.Count > Int32.Parse(label5.Text))
                         throw new ArgumentOutOfRangeException("Загальна кількість продукту з даною вагою перевищує допустиму.");
-
-                    //foreach (var item in invoice)
-                    //{
-                    //    if (item.Product == element.Product & item.Weight == element.Weight)
-                    //    {
-                    //        if (item.Count + element.Count > Int32.Parse(label5.Text))
-                    //            throw new ArgumentOutOfRangeException("Загальна кількість продукту з даною вагою перевищує допустиму.");
-                    //    }
-                    //}
                 }
                 if ((invoice.FirstOrDefault(elemInvoice => (
                     elemInvoice.Product == element.Product)
@@ -172,7 +169,6 @@ namespace InventarizatorUI.Forms
             {
                 MessageBox.Show(@"Введено некоректні дані.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void Create_Click(object sender, EventArgs e)
@@ -393,6 +389,12 @@ namespace InventarizatorUI.Forms
         private void comboBox1_TextUpdate(object sender, EventArgs e)
         {
             string searchString = comboBox1.Text;
+
+            if(searchString.Contains("■"))
+            {
+                MessageBox.Show("Заєбісь");
+            }
+
             Cursor prevCursor = this.Cursor;
             bsProductCollection.DataSource = productCollection.Where(x => x.ToUpper().Contains(searchString.ToUpper())).ToList();
             if (bsProductCollection.Count != 0)

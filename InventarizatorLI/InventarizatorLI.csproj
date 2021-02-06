@@ -43,9 +43,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="IronBarCode, Version=2020.12.2.0, Culture=neutral, PublicKeyToken=b971bb3971bdf306, processorArchitecture=MSIL">
+      <HintPath>..\packages\BarCode.2020.12.2\lib\net40\IronBarCode.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +74,9 @@
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\IngredientsForProductRepository.cs" />
     <Compile Include="Repositories\IngredStatisticsRepository.cs" />
+    <Compile Include="Repositories\PrintBarcode.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ProdStatisticsRepository.cs" />
     <Compile Include="Repositories\SecurityRepository.cs" />
