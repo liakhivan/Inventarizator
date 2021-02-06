@@ -188,5 +188,30 @@ namespace InventarizatorUI
         {
             RadioButton1_CheckedChanged(this, null);
         }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (radioButton1.Checked && comboBox1.Text.Contains("№"))
+                {
+                    int cantainerId = Int32.Parse(comboBox1.Text.Split('?')[1].Split('№')[0]);
+                    ConteinerRepository conteinerRepository = new ConteinerRepository();
+
+                    Conteiner currConteiner = conteinerRepository.GetDataSource().First(n => n.Id == cantainerId);
+                    conteinerRepository.Remove(currConteiner.Id, dateTimePicker1.Value, 1, 1);
+
+                    //MessageBox.Show(@"Об'єкт успішно списано.", "Sucsess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    updateInformation();
+
+                    comboBox1.Text = "";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
