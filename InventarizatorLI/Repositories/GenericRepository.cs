@@ -59,13 +59,14 @@ namespace InventarizatorLI.Repositories
         {
             using (var context = new StorageDbContext())
             {
-                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE ProductStatistics");
-                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE IngredientStatistics");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE ProductStatistic");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE IngredientStatistic");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE IngredientsForProducts");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Conteiners");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Packages");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Tares");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Clients");
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "TRUNCATE TABLE Securities");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"DELETE FROM Ingredients WHERE ID != -1");
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"DELETE FROM Products WHERE ID != -1");
             }
