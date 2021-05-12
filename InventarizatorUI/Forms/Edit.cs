@@ -225,7 +225,7 @@ namespace InventarizatorUI.Forms
 
                 var ingredientsForProduct = ingredientsForProductRepository.GetDataSource().Where(n => n.ProductId == currProduct.Id).ToList();
 
-                listBox1.DataSource = receipt.Select(element => element.Key.ToString() + " " + String.Format("{0:f3}", element.Value)).ToList();
+                listBox1.DataSource = receipt.Select(element => element.Key.ToString() + " " + String.Format("{0:f9}", element.Value)).ToList();
 
             }
             else
@@ -251,5 +251,6 @@ namespace InventarizatorUI.Forms
                 textBox1.Focus();
             }
         }
+
     }
 }
