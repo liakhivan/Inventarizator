@@ -73,11 +73,14 @@ namespace InventarizatorUI
                 {
                     if (recept.Count == 0)
                         throw new ArgumentException("Відсутній рецепт.");
-                    else if (Math.Abs(recept.Sum(n => n.Value)-1) > 0.0001)
-                        throw new ArgumentException("Сумарна вага інгредієнтів не  = 1 кг.");
                     ProductRepository repos = new ProductRepository();
                     Product product = new Product(textBox1.Text);
-                    repos.Create(product, recept);
+
+                    double productWeight = recept.Sum(n => n.Value);
+
+                    var receptList = recept.Select(n => new KeyValuePair<Ingredient, double>(n.Key, n.Value / productWeight)).ToList();
+
+                    repos.Create(product, receptList.ToDictionary(n => n.Key, n => n.Value));
                 }
                 else
                 {
