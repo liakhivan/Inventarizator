@@ -4,9 +4,9 @@
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
 "ProjectName" = "8:Setup"
-"LanguageId" = "3:1049"
-"CodePage" = "3:1251"
-"UILanguageId" = "3:1049"
+"LanguageId" = "3:1033"
+"CodePage" = "3:1252"
+"UILanguageId" = "3:1033"
 "SccProjectName" = "8:"
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
@@ -21,7 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AC26F93D76CBA940569B7A23EA77ED0F"
+        "MsmKey" = "8:_733D01A9094B219E1717BE8BA5C64776"
+        "OwnerKey" = "8:_DDDC3BFC406211F28ED9F58E2A4E8C7F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_733D01A9094B219E1717BE8BA5C64776"
         "OwnerKey" = "8:_EEE34C8B35C24353894058932B05F383"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -34,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_B889FCF0C043F56AB1EA16CEB007E0FE"
-        "OwnerKey" = "8:_AC26F93D76CBA940569B7A23EA77ED0F"
+        "OwnerKey" = "8:_DDDC3BFC406211F28ED9F58E2A4E8C7F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -63,14 +69,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EEE34C8B35C24353894058932B05F383"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_DDDC3BFC406211F28ED9F58E2A4E8C7F"
+        "OwnerKey" = "8:_EEE34C8B35C24353894058932B05F383"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_ACC220C32A60AC10E321DBD0468DDF20"
+        "MsmKey" = "8:_EEE34C8B35C24353894058932B05F383"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -82,19 +88,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DDDC3BFC406211F28ED9F58E2A4E8C7F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_50F6729B0299A6FDFF211859598DB0DE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AC26F93D76CBA940569B7A23EA77ED0F"
+        "OwnerKey" = "8:_B889FCF0C043F56AB1EA16CEB007E0FE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B889FCF0C043F56AB1EA16CEB007E0FE"
+        "OwnerKey" = "8:_733D01A9094B219E1717BE8BA5C64776"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_ACC220C32A60AC10E321DBD0468DDF20"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -152,6 +170,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -212,20 +246,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AC26F93D76CBA940569B7A23EA77ED0F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_733D01A9094B219E1717BE8BA5C64776"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:InventarizatorLI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:IronBarCode, Version=2020.12.2.0, Culture=neutral, PublicKeyToken=b971bb3971bdf306, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AC26F93D76CBA940569B7A23EA77ED0F"
+                    "_733D01A9094B219E1717BE8BA5C64776"
                     {
-                    "Name" = "8:InventarizatorLI.dll"
+                    "Name" = "8:IronBarCode.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:InventarizatorLI.dll"
+            "SourcePath" = "8:IronBarCode.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2458056506D4F55AA823B1EDD68BB3D"
@@ -345,6 +379,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DDDC3BFC406211F28ED9F58E2A4E8C7F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:InventarizatorLI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_DDDC3BFC406211F28ED9F58E2A4E8C7F"
+                    {
+                    "Name" = "8:InventarizatorLI.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:InventarizatorLI.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C2458056506D4F55AA823B1EDD68BB3D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -386,7 +451,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_C2458056506D4F55AA823B1EDD68BB3D"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -405,22 +470,22 @@
         }
         "MsiBootstrapper"
         {
-        "LangId" = "3:1049"
+        "LangId" = "3:1033"
         "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Inventarizator Setup"
-        "ProductCode" = "8:{C645F2AD-E850-4C98-968D-66A0BA40E300}"
-        "PackageCode" = "8:{F74B568D-D3C3-4E56-AE2E-4D8A0EC6173D}"
+        "ProductName" = "8:Inventarizator"
+        "ProductCode" = "8:{3FAB36AB-C982-4EEC-AEF2-F4CDA739585A}"
+        "PackageCode" = "8:{760A26B0-2965-4598-8F18-9776D1D49C0C}"
         "UpgradeCode" = "8:{44BF5511-6EB8-4753-86CD-6996C0643BA9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:Invent Inc."
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -428,13 +493,13 @@
         "Subject" = "8:"
         "ARPCONTACT" = "8:Invent Inc."
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:App Installer"
+        "ARPCOMMENTS" = "8:Inventarizator Installer"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:_C829233414B642178ABED75A54D3F701"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -586,7 +651,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_E1F0DD361DB444CF8472515F6C39F561"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Готово"
+                    "DisplayName" = "8:Finished"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdFinishedDlg.wid"
@@ -630,7 +695,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_2875E10950D54660AC068537A23299C6"
                     {
                     "Sequence" = "3:200"
-                    "DisplayName" = "8:Папка установки"
+                    "DisplayName" = "8:Installation Folder"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdFolderDlg.wid"
@@ -665,7 +730,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_2D7D8687C9F240BFA50B17BD70B813AA"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Добро пожаловать!"
+                    "DisplayName" = "8:Welcome"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdWelcomeDlg.wid"
@@ -713,7 +778,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_42189BC27C364ABBACFC878EA83FB375"
                     {
                     "Sequence" = "3:300"
-                    "DisplayName" = "8:Подтверждение установки"
+                    "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
@@ -744,7 +809,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_19997457644045738711FFB6EE57A15F"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Готово"
+                    "DisplayName" = "8:Finished"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFinishedDlg.wid"
@@ -775,7 +840,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_7D3961A563CF462096AC0FD012132A2B"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Добро пожаловать!"
+                    "DisplayName" = "8:Welcome"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminWelcomeDlg.wid"
@@ -823,7 +888,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_8EAF5FF4849D4DBFAFAD613FFFCF2203"
                     {
                     "Sequence" = "3:200"
-                    "DisplayName" = "8:Папка установки"
+                    "DisplayName" = "8:Installation Folder"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFolderDlg.wid"
@@ -845,7 +910,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_9527A8EDFF7C4345986B8524700D7234"
                     {
                     "Sequence" = "3:300"
-                    "DisplayName" = "8:Подтверждение установки"
+                    "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminConfirmDlg.wid"
@@ -876,7 +941,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_CDB9A862434E4F9080D119C1E5014696"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Ход выполнения"
+                    "DisplayName" = "8:Progress"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdProgressDlg.wid"
@@ -920,7 +985,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_69FD266928F3404F841513343D879194"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Ход выполнения"
+                    "DisplayName" = "8:Progress"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminProgressDlg.wid"
@@ -962,7 +1027,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EEE34C8B35C24353894058932B05F383"
             {
-            "SourcePath" = "8:..\\InventarizatorUI\\obj\\Debug\\Inventarizator.exe"
+            "SourcePath" = "8:..\\InventarizatorUI\\obj\\Release\\Inventarizator.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2458056506D4F55AA823B1EDD68BB3D"
