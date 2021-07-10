@@ -9,7 +9,35 @@ namespace InventarizatorLI.Repositories
 {
     public class ProductRepository : GenericRepository<Product>
     {
-        public void Create(Product newProduct, Dictionary<Ingredient, double> receipt)
+        public void CreateWithoutRecipe(Product newProduct)
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                context.Configuration.AutoDetectChangesEnabled = false;
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var product = context.Products.Where(element => element.Name == newProduct.Name);
+                        if (!product.Any())
+                        {
+                            context.Products.Add(newProduct);
+                            context.ChangeTracker.DetectChanges();
+                            context.SaveChanges();
+                            transaction.Commit();
+                        }
+                        else throw new ArgumentException("Цей продукт вже існує.");
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        throw new ArgumentException(e.Message);
+                    }
+                }
+            }
+        }
+
+        public void CreateWithRecipe(Product newProduct, Dictionary<Ingredient, double> receipt)
         {
             using (StorageDbContext context = new StorageDbContext())
             {

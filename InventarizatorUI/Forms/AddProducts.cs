@@ -33,10 +33,13 @@ namespace InventarizatorUI.Forms
 
         private List<Conteiner> addedConteiners;
 
+        private bool isSkipRecipes;
 
-        public AddProducts(Upd eventUpdate)
+
+        public AddProducts(Upd eventUpdate, bool isSkipRecipes = false)
         {
             updateInformation += eventUpdate;
+            this.isSkipRecipes = isSkipRecipes;
             productsForRemaking = new List<ProductConteiner>();
             InitializeComponent();
             Height = heightProductsWithoutRemake;
@@ -53,7 +56,7 @@ namespace InventarizatorUI.Forms
             comboBox1.IntegralHeight = false;
 
             groupBox2.Visible = groupBox2.Enabled = false;
-
+            groupBox1.Enabled = radioButton1.Checked & !isSkipRecipes;
 
             panel1PositionProductWithoutRemake = panel1.Location = new Point(3, 163);
             panel1PositionProductWithRemake = new Point(3, 307);
@@ -183,7 +186,7 @@ namespace InventarizatorUI.Forms
             IngredientRepository ingredientRepository = new IngredientRepository();
             IngredientsForProductRepository receiptRepository = new IngredientsForProductRepository();
 
-            groupBox1.Enabled = radioButton1.Checked;
+            groupBox1.Enabled = radioButton1.Checked & !isSkipRecipes;
             if (!radioButton1.Checked)
             {
                 ClearBatch();
@@ -227,8 +230,8 @@ namespace InventarizatorUI.Forms
 
         private void UpdateListBoxProduct()
         {
-            int lemght = comboBox1.SelectedItem.ToString().Split('\"').Length;
-            listBox2.DataSource = entryProductsContainerCollection.Select(n => $"\"{comboBox1.SelectedItem.ToString().Split('\"')[lemght - 2]}\" {n.Amount} шт.  по  {String.Format("{0:f2}", n.Weight)} кг.").ToList();
+            int lenght = comboBox1.SelectedItem.ToString().Split('\"').Length;
+            listBox2.DataSource = entryProductsContainerCollection.Select(n => $"\"{comboBox1.SelectedItem.ToString().Split('\"')[lenght - 2]}\" {n.Amount} шт.  по  {String.Format("{0:f2}", n.Weight)} кг.").ToList();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -427,84 +430,120 @@ namespace InventarizatorUI.Forms
         {
             try
             {
-                if (radioButton1.Checked)
+                if (!isSkipRecipes)
                 {
+                    if (radioButton1.Checked)
+                    {
 
-                    ConteinerRepository conteinerRepository = new ConteinerRepository();
-                    IngredientsForProductRepository receiptRepository = new IngredientsForProductRepository();
-                    IngredientRepository ingredientRepository = new IngredientRepository();
+                        ConteinerRepository conteinerRepository = new ConteinerRepository();
+                        IngredientsForProductRepository receiptRepository = new IngredientsForProductRepository();
+                        IngredientRepository ingredientRepository = new IngredientRepository();
 
-                    double weight = Double.Parse(maskedTextBox2.Text);
-                    double amount = Double.Parse(maskedTextBox3.Text);
-                    double weightIngredientKeyBatch = weight * amount;
-                    double weightAllProducts = entryProductsContainerCollection.Sum(n => n.Amount * n.Weight);
-                    double weightForRemaking = 0;
+                        double weight = Double.Parse(maskedTextBox2.Text);
+                        double amount = Double.Parse(maskedTextBox3.Text);
+                        double weightIngredientKeyBatch = weight * amount;
+                        double weightAllProducts = entryProductsContainerCollection.Sum(n => n.Amount * n.Weight);
+                        double weightForRemaking = 0;
 
 
-                    var ingredients = ingredientRepository.GetDataSource();
-                    var detailReceipt = receipt.Join(
-                        ingredients,
-                        elem => elem.IngredientId,
-                        ingr => ingr.Id,
-                        (elem, ingr) => new
+                        var ingredients = ingredientRepository.GetDataSource();
+                        var detailReceipt = receipt.Join(
+                            ingredients,
+                            elem => elem.IngredientId,
+                            ingr => ingr.Id,
+                            (elem, ingr) => new
+                            {
+                                ingr.Name,
+                                elem.Weight
+                            }).ToList();
+
+                        double weightIngredientKeyOnOneKilo = detailReceipt.First(n => n.Name == comboBox3.SelectedItem.ToString()).Weight;
+
+                        double weightBatch = weightIngredientKeyBatch / weightIngredientKeyOnOneKilo;
+
+
+                        if (weight <= 0)
                         {
-                            ingr.Name,
-                            elem.Weight
-                        }).ToList();
+                            MessageBox.Show(@"Некоректна вага інгредієнту-ключа на 1 заміс", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
 
-                    double weightIngredientKeyOnOneKilo = detailReceipt.First(n => n.Name == comboBox3.SelectedItem.ToString()).Weight;
+                        if (amount <= 0)
+                        {
+                            MessageBox.Show(@"Некоректна кількість замісів", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
 
-                    double weightBatch = weightIngredientKeyBatch / weightIngredientKeyOnOneKilo;
+                        if (checkBox1.Checked)
+                        {
+                            weightForRemaking = productsForRemaking.Sum(n => n.Amount * n.Weight);
+                        }
 
+                        if (weightAllProducts > weightBatch + weightForRemaking || weightAllProducts == 0)
+                        {
 
-                    if (weight <= 0)
-                    {
-                        MessageBox.Show(@"Некоректна вага інгредієнту-ключа на 1 заміс", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                            MessageBox.Show($"Некоректна вага всіх продуктів.\nВидаліть зайві продукти, збільшіть кількість замісів,\nабо додайте переробку.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        conteinerRepository.AddCollectionContainers(entryProductsContainerCollection, dateTimePicker1.Value, weightBatch);
+                        RemoveProductsForRemaking();
                     }
-
-                    if (amount <= 0)
+                    else
                     {
-                        MessageBox.Show(@"Некоректна кількість замісів", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        ConteinerRepository conteinerRepository = new ConteinerRepository();
+
+                        double weightAllProducts = entryProductsContainerCollection.Sum(n => n.Amount * n.Weight);
+                        double weightForRemaking = 0;
+
+                        if (checkBox1.Checked)
+                        {
+                            weightForRemaking = productsForRemaking.Sum(n => n.Amount * n.Weight);
+                        }
+
+                        if (weightAllProducts > weightForRemaking || weightAllProducts == 0)
+                        {
+                            MessageBox.Show($"Некоректна вага всіх продуктів.\nВидаліть зайві продукти, збільшіть кількість замісів,\nабо додайте переробку.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        conteinerRepository.AddCollectionContainers(entryProductsContainerCollection, dateTimePicker1.Value, 0);
+                        RemoveProductsForRemaking();
+                        productsForRemaking.Clear();
                     }
-
-                    if (checkBox1.Checked)
-                    {
-                        weightForRemaking = productsForRemaking.Sum(n => n.Amount * n.Weight);
-                    }
-
-                    if (weightAllProducts > weightBatch + weightForRemaking || weightAllProducts == 0)
-                    {
-
-                        MessageBox.Show($"Некоректна вага всіх продуктів.\nВидаліть зайві продукти, збільшіть кількість замісів,\nабо додайте переробку.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    conteinerRepository.AddCollectionContainers(entryProductsContainerCollection, dateTimePicker1.Value, weightBatch);
-                    RemoveProductsForRemaking();
-                }
+                } 
                 else
                 {
-                    ConteinerRepository conteinerRepository = new ConteinerRepository();
-
-                    double weightAllProducts = entryProductsContainerCollection.Sum(n => n.Amount * n.Weight);
-                    double weightForRemaking = 0;
-
-                    if (checkBox1.Checked)
+                    if (radioButton1.Checked)
                     {
-                        weightForRemaking = productsForRemaking.Sum(n => n.Amount * n.Weight);
-                    }
 
-                    if (weightAllProducts > weightForRemaking || weightAllProducts == 0)
+                        ConteinerRepository conteinerRepository = new ConteinerRepository();
+                        foreach(var item in entryProductsContainerCollection)
+                            conteinerRepository.AddWithoutRecipes(item, dateTimePicker1.Value);
+                        RemoveProductsForRemaking();
+                    }
+                    else
                     {
-                        MessageBox.Show($"Некоректна вага всіх продуктів.\nВидаліть зайві продукти, збільшіть кількість замісів,\nабо додайте переробку.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                        ConteinerRepository conteinerRepository = new ConteinerRepository();
 
-                    conteinerRepository.AddCollectionContainers(entryProductsContainerCollection, dateTimePicker1.Value, 0);
-                    RemoveProductsForRemaking();
-                    productsForRemaking.Clear();
+                        double weightAllProducts = entryProductsContainerCollection.Sum(n => n.Amount * n.Weight);
+                        double weightForRemaking = 0;
+
+                        if (checkBox1.Checked)
+                        {
+                            weightForRemaking = productsForRemaking.Sum(n => n.Amount * n.Weight);
+                        }
+
+                        if (weightAllProducts > weightForRemaking || weightAllProducts == 0)
+                        {
+                            MessageBox.Show($"Некоректна вага всіх продуктів.\nВидаліть зайві продукти, збільшіть кількість замісів,\nабо додайте переробку.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        conteinerRepository.AddCollectionContainers(entryProductsContainerCollection, dateTimePicker1.Value, 0);
+                        RemoveProductsForRemaking();
+                        productsForRemaking.Clear();
+                    }
                 }
 
                 UpdateListBoxProduct();

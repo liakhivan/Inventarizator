@@ -16,8 +16,9 @@ namespace InventarizatorUI
 
         BindingSource bsIngredientCollection;
         List<string> ingredientCollection;
+        bool isSkipRecipes;
 
-        public Create()
+        public Create(bool isSkipRecipes = false)
         {
             InitializeComponent();
             position = panel3.Location;
@@ -32,11 +33,13 @@ namespace InventarizatorUI
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBox1.AutoCompleteMode = AutoCompleteMode.None;
             comboBox1.IntegralHeight = false;
+
+            this.isSkipRecipes = isSkipRecipes;
         }
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton1.Checked)
+            if(radioButton1.Checked && !isSkipRecipes)
             {
                 this.Height = 295;
                 panel2.Enabled = true;
@@ -69,7 +72,15 @@ namespace InventarizatorUI
             {
                 if (textBox1.Text == "")
                     throw new ArgumentNullException();
-                if (radioButton1.Checked)
+                if (radioButton1.Checked && isSkipRecipes)
+                {
+                    ProductRepository repos = new ProductRepository();
+                    Product product = new Product(textBox1.Text);
+
+                    repos.CreateWithoutRecipe(product);
+                }
+                else
+                 if (radioButton1.Checked)
                 {
                     if (recept.Count == 0)
                         throw new ArgumentException("Відсутній рецепт.");
@@ -80,7 +91,7 @@ namespace InventarizatorUI
 
                     var receptList = recept.Select(n => new KeyValuePair<Ingredient, double>(n.Key, n.Value / productWeight)).ToList();
 
-                    repos.Create(product, receptList.ToDictionary(n => n.Key, n => n.Value));
+                    repos.CreateWithRecipe(product, receptList.ToDictionary(n => n.Key, n => n.Value));
                 }
                 else
                 {

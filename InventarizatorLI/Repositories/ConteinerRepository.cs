@@ -9,6 +9,36 @@ namespace InventarizatorLI.Repositories
 {
     public class ConteinerRepository : GenericRepository<Conteiner>
     {
+        public void AddWithoutRecipes(Conteiner newConteiner, DateTime dateAdd)
+        {
+            using (StorageDbContext context = new StorageDbContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Conteiner dbconteiner = context.Conteiners.FirstOrDefault(n =>
+                             n.ProductId == newConteiner.ProductId & n.Weight == newConteiner.Weight);
+                        if (dbconteiner != null)
+                            dbconteiner.Amount += newConteiner.Amount;
+                        else
+                            context.Conteiners.Add(newConteiner);
+
+                        context.SaveChanges();
+
+                        var prodStat = new ProdStatisticsRepository();
+                        prodStat.Add(newConteiner.ProductId, 0, newConteiner.Weight * newConteiner.Amount, dateAdd);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw new ArgumentException("Немає/недостатньо інгредієнтів.");
+                    }
+                }
+            }
+        }
         public void Add(Conteiner newConteiner, DateTime dateAdd, double remake = 0, bool washer = false)
         {
             using (StorageDbContext context = new StorageDbContext())

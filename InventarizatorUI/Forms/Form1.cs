@@ -274,7 +274,7 @@ namespace InventarizatorUI
 
         private void addProductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new AddProducts(UpdateDataGridWiew);
+            var form = new AddProducts(UpdateDataGridWiew, isSkipRecipes.Checked);
             form.ShowDialog();
         }
 
@@ -316,7 +316,7 @@ namespace InventarizatorUI
 
         private void продуктиІнгредієнтиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Create form2 = new Create();
+            Create form2 = new Create(this.isSkipRecipes.Checked);
             form2.ShowDialog();
         }
     }
