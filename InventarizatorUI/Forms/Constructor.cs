@@ -226,7 +226,11 @@ namespace InventarizatorUI.Forms
                         throw new ArgumentException("№ накладної повинен бути числом!!!");
                     }
                     // Генерація імені накладної.
-                    newFileName = comboBox3.SelectedItem.ToString() + "_" + textBox2.Text + "_" + dateTimePicker1.Value.ToString("dd-MM-yyyy") + ".xlsx";
+                    newFileName = comboBox3.SelectedItem.ToString()
+                        .Replace(' ', '_')
+                        .Replace('.', '_')
+                        .Replace('\"', '_') 
+                        + "_" + textBox2.Text + "_" + dateTimePicker1.Value.ToString("dd-MM-yyyy") + ".xlsx";
                     // Копіювання файлу з корінної папки в потрібну.
                     FileInfo currFileInfo = new FileInfo(Directory.GetCurrentDirectory() + currentFileName);
                     currFileInfo.CopyTo(path + currentFileName, true);
